@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse Prime Power Leasing's current inventory of premium vehicles and exceptional properties available for immediate lease.">
+  <meta name="keywords" content="luxury vehicle leasing, real estate leasing, premium leasing, available assets, lease inventory">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Available Assets | Prime Power Leasing">
+  <meta property="og:description" content="Browse Prime Power Leasing's current inventory of premium vehicles and exceptional properties available for immediate lease.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.primepowerleasing.com/assets">
+  <meta property="og:site_name" content="Prime Power Leasing">
+
+  <title>Available Assets | Prime Power Leasing</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* Tablet 2-column override for listings grid */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .listings-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" aria-label="Prime Power Leasing - Home">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="38" height="38" rx="6" fill="none" stroke="#C9A961" stroke-width="1.5"/>
+              <text x="7" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961">P</text>
+              <text x="20" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961" opacity="0.6">P</text>
+            </svg>
+          </div>
+          <div class="nav-logo-text">
+            PRIME POWER
+            <span>Leasing, LLC</span>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="assets.html" class="active">Available Assets</a>
+          <a href="quote.html">Get a Quote</a>
+          <a href="contact.html">Contact</a>
+          <a href="quote.html" class="nav-cta">Get a Quote</a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="page-hero" aria-label="Page hero">
+      <div class="container">
+        <div class="hero-content fade-in">
+          <span class="section-label">INVENTORY</span>
+          <h1>Explore Our Current Inventory</h1>
+          <p>Premium vehicles and exceptional properties available for immediate lease. All listings are verified, professionally maintained, and ready for you.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FILTER BAR & ASSET LISTINGS
+         ============================================ -->
+    <section class="section bg-cream" aria-labelledby="listings-heading">
+      <div class="container">
+
+        <!-- Filter Bar -->
+        <div class="filter-bar fade-in" id="filters">
+          <div class="filter-row">
+            <div class="filter-group">
+              <label for="filter-type">Asset Type</label>
+              <select id="filter-type" data-filter="type">
+                <option value="all">All Assets</option>
+                <option value="vehicle">Vehicles</option>
+                <option value="realestate">Real Estate</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="filter-category">Category</label>
+              <select id="filter-category" data-filter="category">
+                <option value="all">All Categories</option>
+                <option value="sedan">Luxury Sedans</option>
+                <option value="suv">SUVs</option>
+                <option value="sports">Sports Cars</option>
+                <option value="exotic">Exotic</option>
+                <option value="condo">Condos</option>
+                <option value="home">Homes</option>
+                <option value="vacation">Vacation Properties</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="filter-duration">Lease Duration</label>
+              <select id="filter-duration" data-filter="duration">
+                <option value="all">Any Duration</option>
+                <option value="short">Short-Term (1-6 months)</option>
+                <option value="long">Long-Term (6+ months)</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="filter-price">Price Range</label>
+              <select id="filter-price" data-filter="price">
+                <option value="all">Any Price</option>
+                <option value="under2000">Under $2,000/mo</option>
+                <option value="2000-4000">$2,000-$4,000/mo</option>
+                <option value="4000-6000">$4,000-$6,000/mo</option>
+                <option value="6000plus">$6,000+/mo</option>
+              </select>
+            </div>
+            <button class="btn btn-primary filter-btn">Apply Filters</button>
+          </div>
+        </div>
+
+        <!-- Results Count -->
+        <p class="results-count fade-in" style="font-size:0.9rem; color:var(--dark-gray); margin-bottom:24px;">Showing 8 listings</p>
+
+        <!-- Listings Grid -->
+        <div class="grid-3 listings-grid" id="listings-heading">
+
+          <!-- ========== VEHICLE LISTINGS ========== -->
+
+          <!-- 1. Mercedes-Benz S-Class -->
+          <div class="listing-card fade-in" data-type="vehicle" data-category="sedan" data-duration="long" data-price="2200">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 42h54M10 42l4-12h36l4 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14 30l2-7h32l2 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="17" cy="42" r="4"/>
+                  <circle cx="47" cy="42" r="4"/>
+                  <path d="M10 42v5H7v-5M57 42v5h-3v-5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 35h20" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-vehicle">Vehicle</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>2024 Mercedes-Benz S-Class</h3>
+              <p class="listing-card-meta">Luxury Sedan | Available Now</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  6-36 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  15,000 mi/yr
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Obsidian Black
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$2,200<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Porsche 911 Carrera S -->
+          <div class="listing-card fade-in" data-type="vehicle" data-category="sports" data-duration="short" data-price="3800">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 42h54M10 42l4-12h36l4 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14 30l2-7h32l2 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="17" cy="42" r="4"/>
+                  <circle cx="47" cy="42" r="4"/>
+                  <path d="M10 42v5H7v-5M57 42v5h-3v-5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 35h20" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-vehicle">Vehicle</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>2024 Porsche 911 Carrera S</h3>
+              <p class="listing-card-meta">Sports Car | Available Now</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  3-24 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  12,000 mi/yr
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  GT Silver
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$3,800<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Range Rover Autobiography -->
+          <div class="listing-card fade-in" data-type="vehicle" data-category="suv" data-duration="long" data-price="2800">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 42h54M10 42l4-12h36l4 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14 30l2-7h32l2 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="17" cy="42" r="4"/>
+                  <circle cx="47" cy="42" r="4"/>
+                  <path d="M10 42v5H7v-5M57 42v5h-3v-5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 35h20" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-vehicle">Vehicle</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>2024 Range Rover Autobiography</h3>
+              <p class="listing-card-meta">Premium SUV | Available Now</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  6-48 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  15,000 mi/yr
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Santorini Black
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$2,800<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Ferrari Roma -->
+          <div class="listing-card fade-in" data-type="vehicle" data-category="exotic" data-duration="short" data-price="5500">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 42h54M10 42l4-12h36l4 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14 30l2-7h32l2 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="17" cy="42" r="4"/>
+                  <circle cx="47" cy="42" r="4"/>
+                  <path d="M10 42v5H7v-5M57 42v5h-3v-5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 35h20" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-vehicle">Vehicle</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>2024 Ferrari Roma</h3>
+              <p class="listing-card-meta">Exotic | Limited Availability</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  3-12 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  8,000 mi/yr
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Rosso Corsa
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$5,500<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========== REAL ESTATE LISTINGS ========== -->
+
+          <!-- 5. Downtown Penthouse Condo -->
+          <div class="listing-card fade-in" data-type="realestate" data-category="condo" data-duration="long" data-price="4500">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M10 56V16l22-10 22 10v40H10z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 56h44" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M27 56V46h10v10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-realestate">Real Estate</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>Downtown Penthouse Condo</h3>
+              <p class="listing-card-meta">3 Bed / 2.5 Bath | Marina District</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  12-24 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="3" x2="12" y2="21" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  2,200 sq ft
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 10l10-7 10 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Furnished
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$4,500<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Malibu Beachfront Villa -->
+          <div class="listing-card fade-in" data-type="realestate" data-category="vacation" data-duration="short" data-price="8200">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M10 56V16l22-10 22 10v40H10z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 56h44" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M27 56V46h10v10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-realestate">Real Estate</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>Malibu Beachfront Villa</h3>
+              <p class="listing-card-meta">4 Bed / 3 Bath | Malibu Coast</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  1-6 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="3" x2="12" y2="21" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  3,400 sq ft
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 10l10-7 10 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Furnished
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$8,200<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Midtown Executive Apartment -->
+          <div class="listing-card fade-in" data-type="realestate" data-category="condo" data-duration="long" data-price="3200">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M10 56V16l22-10 22 10v40H10z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 56h44" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M27 56V46h10v10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-realestate">Real Estate</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>Midtown Executive Apartment</h3>
+              <p class="listing-card-meta">2 Bed / 2 Bath | Financial District</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  6-24 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="3" x2="12" y2="21" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  1,400 sq ft
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 10l10-7 10 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Furnished
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$3,200<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Suburban Family Home -->
+          <div class="listing-card fade-in" data-type="realestate" data-category="home" data-duration="long" data-price="5800">
+            <div class="listing-card-img">
+              <div class="img-placeholder" style="height:220px">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M10 56V16l22-10 22 10v40H10z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 56h44" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="22" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="20" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="38" y="34" width="6" height="6" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M27 56V46h10v10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="listing-badge badge-realestate">Real Estate</span>
+            </div>
+            <div class="listing-card-body">
+              <h3>Suburban Family Home</h3>
+              <p class="listing-card-meta">5 Bed / 3.5 Bath | Westchester</p>
+              <div class="listing-card-specs">
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  12-36 months
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="3" x2="12" y2="21" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  4,100 sq ft
+                </span>
+                <span class="listing-spec">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 10l10-7 10 7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Unfurnished
+                </span>
+              </div>
+              <div class="listing-card-footer">
+                <div class="listing-price">$5,800<span>/month</span></div>
+                <a href="quote.html" class="btn btn-sm btn-primary">Request Quote</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CUSTOM REQUEST CTA
+         ============================================ -->
+    <section class="section bg-white" aria-labelledby="custom-request-heading">
+      <div class="container text-center">
+        <div class="fade-in">
+          <span class="section-label">CAN'T FIND WHAT YOU'RE LOOKING FOR?</span>
+          <div class="gold-line centered"></div>
+          <h2 class="section-title" id="custom-request-heading">Submit a Custom Request</h2>
+          <p class="section-subtitle" style="margin:0 auto 32px;">We're constantly adding new inventory and have access to exclusive listings not yet published. Contact us with your specific needs, and we'll find the perfect match.</p>
+          <a href="quote.html" class="btn btn-primary btn-lg">Submit a Custom Request</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Column 1: Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" aria-label="Prime Power Leasing - Home">
+            <div class="nav-logo-icon">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="38" height="38" rx="6" fill="none" stroke="#C9A961" stroke-width="1.5"/>
+                <text x="7" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961">P</text>
+                <text x="20" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961" opacity="0.6">P</text>
+              </svg>
+            </div>
+            <div class="nav-logo-text">
+              PRIME POWER
+              <span>Leasing, LLC</span>
+            </div>
+          </a>
+          <p>Premium vehicle and real estate leasing for individuals who demand excellence. Flexible terms, transparent pricing, exceptional service.</p>
+          <div class="footer-social">
+            <!-- Facebook -->
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="0"/>
+                <path d="M16 3.13a6 6 0 0 1 4.87 4.87M2 17.13V6.87A4.87 4.87 0 0 1 6.87 2h10.26A4.87 4.87 0 0 1 22 6.87v10.26A4.87 4.87 0 0 1 17.13 22H6.87A4.87 4.87 0 0 1 2 17.13z" fill="none"/>
+                <path d="M2 6.87A4.87 4.87 0 0 1 6.87 2h10.26A4.87 4.87 0 0 1 22 6.87v10.26A4.87 4.87 0 0 1 17.13 22H6.87A4.87 4.87 0 0 1 2 17.13V6.87z"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="#060E1A" stroke-width="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="#060E1A"/>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="assets.html">Available Assets</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Services -->
+        <div>
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Vehicle Leasing</a></li>
+            <li><a href="services.html">Real Estate Leasing</a></li>
+            <li><a href="services.html">Short-Term Leases</a></li>
+            <li><a href="services.html">Long-Term Leases</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact -->
+        <div>
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>(555) 123-4567</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="22,6 12,13 2,6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>info@primepowerleasing.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="12 6 12 12 16 14" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Mon-Fri 9AM-7PM EST<br>Sat 10AM-4PM EST</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <span>&copy; 2025 Prime Power Leasing, LLC. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+
+  <script>
+  // Asset Filtering
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtn = document.querySelector('.filter-btn');
+    const cards = document.querySelectorAll('.listing-card');
+
+    if (filterBtn) {
+      filterBtn.addEventListener('click', () => {
+        const assetType = document.querySelector('[data-filter="type"]').value;
+        const category = document.querySelector('[data-filter="category"]').value;
+        const duration = document.querySelector('[data-filter="duration"]').value;
+        const price = document.querySelector('[data-filter="price"]').value;
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          let show = true;
+          const cardType = card.dataset.type;
+          const cardCategory = card.dataset.category;
+          const cardDuration = card.dataset.duration;
+          const cardPrice = parseInt(card.dataset.price);
+
+          if (assetType && assetType !== 'all' && cardType !== assetType) show = false;
+          if (category && category !== 'all' && cardCategory !== category) show = false;
+          if (duration && duration !== 'all' && cardDuration !== duration) show = false;
+
+          if (price && price !== 'all') {
+            if (price === 'under2000' && cardPrice >= 2000) show = false;
+            if (price === '2000-4000' && (cardPrice < 2000 || cardPrice > 4000)) show = false;
+            if (price === '4000-6000' && (cardPrice < 4000 || cardPrice > 6000)) show = false;
+            if (price === '6000plus' && cardPrice < 6000) show = false;
+          }
+
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+
+        // Update count
+        const countEl = document.querySelector('.results-count');
+        if (countEl) countEl.textContent = 'Showing ' + visibleCount + ' listing' + (visibleCount !== 1 ? 's' : '');
+      });
+    }
+  });
+  </script>
+
+</body>
+</html>

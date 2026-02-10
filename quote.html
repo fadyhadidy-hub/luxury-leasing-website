@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Request a custom vehicle or real estate leasing quote from Prime Power Leasing. Personalized proposals delivered within 24 hours. Flexible terms, transparent pricing.">
+  <meta name="keywords" content="leasing quote, vehicle lease quote, real estate lease quote, custom leasing proposal, Prime Power Leasing">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Get a Quote | Prime Power Leasing">
+  <meta property="og:description" content="Request a personalized leasing proposal for luxury vehicles or premium real estate. Most quotes delivered within 24 hours.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.primepowerleasing.com/quote">
+  <meta property="og:site_name" content="Prime Power Leasing">
+
+  <title>Get a Quote | Prime Power Leasing</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" aria-label="Prime Power Leasing - Home">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="38" height="38" rx="6" fill="none" stroke="#C9A961" stroke-width="1.5"/>
+              <text x="7" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961">P</text>
+              <text x="20" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961" opacity="0.6">P</text>
+            </svg>
+          </div>
+          <div class="nav-logo-text">
+            PRIME POWER
+            <span>Leasing, LLC</span>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="assets.html">Available Assets</a>
+          <a href="quote.html" class="active">Get a Quote</a>
+          <a href="contact.html">Contact</a>
+          <a href="quote.html" class="nav-cta">Get a Quote</a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="page-hero" aria-label="Page hero">
+      <div class="container">
+        <div class="fade-in">
+          <span class="section-label">GET A QUOTE</span>
+          <h1>Request Your Custom Leasing Quote</h1>
+          <p>Tell us what you're looking for, and we'll create a personalized leasing proposal tailored to your needs and budget. Most quotes are delivered within 24 hours.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         QUOTE FORM SECTION
+         ============================================ -->
+    <section class="section bg-white" aria-labelledby="quote-form-heading">
+      <div class="container-narrow">
+
+        <form data-validate novalidate>
+
+          <!-- Interest Selection -->
+          <div class="form-group fade-in">
+            <label class="form-label">What are you interested in leasing? <span aria-hidden="true">*</span></label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="interest" value="vehicle" id="interest-vehicle" required>
+                <span>Vehicle</span>
+              </label>
+              <label>
+                <input type="radio" name="interest" value="realestate" id="interest-realestate">
+                <span>Real Estate</span>
+              </label>
+              <label>
+                <input type="radio" name="interest" value="both" id="interest-both">
+                <span>Both</span>
+              </label>
+            </div>
+            <span class="form-error">This field is required.</span>
+          </div>
+
+          <!-- Vehicle Details (conditional) -->
+          <div id="vehicle-section" data-conditional style="display:none;">
+            <h3 class="fade-in">Vehicle Details</h3>
+            <div class="gold-line fade-in"></div>
+
+            <div class="form-row fade-in">
+              <div class="form-group">
+                <label class="form-label" for="vehicle-type">Preferred Vehicle Type <span aria-hidden="true">*</span></label>
+                <select class="form-select" id="vehicle-type" name="vehicle-type" data-required="true">
+                  <option value="">Select Type</option>
+                  <option value="luxury-sedan">Luxury Sedan</option>
+                  <option value="suv">SUV</option>
+                  <option value="sports-car">Sports Car</option>
+                  <option value="exotic">Exotic</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="form-error">This field is required.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="vehicle-make-model">Specific Make/Model</label>
+                <input type="text" class="form-input" id="vehicle-make-model" name="vehicle-make-model" placeholder="e.g., Mercedes S-Class">
+              </div>
+            </div>
+
+            <div class="form-row fade-in">
+              <div class="form-group">
+                <label class="form-label" for="vehicle-duration">Preferred Lease Duration <span aria-hidden="true">*</span></label>
+                <select class="form-select" id="vehicle-duration" name="vehicle-duration" data-required="true">
+                  <option value="">Select Duration</option>
+                  <option value="3-6">3-6 Months</option>
+                  <option value="6-12">6-12 Months</option>
+                  <option value="1-2y">1-2 Years</option>
+                  <option value="2-5y">2-5 Years</option>
+                </select>
+                <span class="form-error">This field is required.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="vehicle-budget">Estimated Monthly Budget</label>
+                <input type="text" class="form-input" id="vehicle-budget" name="vehicle-budget" placeholder="e.g., $2,000 - $4,000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Estate Details (conditional) -->
+          <div id="realestate-section" data-conditional style="display:none;">
+            <h3 class="fade-in">Real Estate Details</h3>
+            <div class="gold-line fade-in"></div>
+
+            <div class="form-row fade-in">
+              <div class="form-group">
+                <label class="form-label" for="property-type">Property Type <span aria-hidden="true">*</span></label>
+                <select class="form-select" id="property-type" name="property-type" data-required="true">
+                  <option value="">Select Type</option>
+                  <option value="condo">Condo/Apartment</option>
+                  <option value="single-family">Single-Family Home</option>
+                  <option value="vacation">Vacation Property</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="form-error">This field is required.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="preferred-location">Preferred Location</label>
+                <input type="text" class="form-input" id="preferred-location" name="preferred-location" placeholder="e.g., Miami, Los Angeles">
+              </div>
+            </div>
+
+            <div class="form-row fade-in">
+              <div class="form-group">
+                <label class="form-label" for="bedrooms">Bedrooms Needed <span aria-hidden="true">*</span></label>
+                <select class="form-select" id="bedrooms" name="bedrooms" data-required="true">
+                  <option value="">Select Bedrooms</option>
+                  <option value="studio">Studio</option>
+                  <option value="1">1 Bedroom</option>
+                  <option value="2">2 Bedrooms</option>
+                  <option value="3">3 Bedrooms</option>
+                  <option value="4+">4+ Bedrooms</option>
+                </select>
+                <span class="form-error">This field is required.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="re-duration">Preferred Lease Duration <span aria-hidden="true">*</span></label>
+                <select class="form-select" id="re-duration" name="re-duration" data-required="true">
+                  <option value="">Select Duration</option>
+                  <option value="1-3">1-3 Months</option>
+                  <option value="3-6">3-6 Months</option>
+                  <option value="6-12">6-12 Months</option>
+                  <option value="1y+">1+ Years</option>
+                </select>
+                <span class="form-error">This field is required.</span>
+              </div>
+            </div>
+
+            <div class="form-row fade-in">
+              <div class="form-group">
+                <label class="form-label" for="furnished">Furnished or Unfurnished</label>
+                <select class="form-select" id="furnished" name="furnished">
+                  <option value="either">Either</option>
+                  <option value="furnished">Furnished</option>
+                  <option value="unfurnished">Unfurnished</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="re-budget">Estimated Monthly Budget</label>
+                <input type="text" class="form-input" id="re-budget" name="re-budget" placeholder="e.g., $3,000 - $5,000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Your Information -->
+          <h3 class="fade-in">Your Information</h3>
+          <div class="gold-line fade-in"></div>
+
+          <div class="form-row fade-in">
+            <div class="form-group">
+              <label class="form-label" for="full-name">Full Name <span aria-hidden="true">*</span></label>
+              <input type="text" class="form-input" id="full-name" name="full-name" required>
+              <span class="form-error">This field is required.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address <span aria-hidden="true">*</span></label>
+              <input type="email" class="form-input" id="email" name="email" required>
+              <span class="form-error">This field is required.</span>
+            </div>
+          </div>
+
+          <div class="form-row fade-in">
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number <span aria-hidden="true">*</span></label>
+              <input type="tel" class="form-input" id="phone" name="phone" required>
+              <span class="form-error">This field is required.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-method">Preferred Contact Method</label>
+              <select class="form-select" id="contact-method" name="contact-method">
+                <option value="either">Either</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group fade-in">
+            <label class="form-label" for="best-time">Best Time to Reach You</label>
+            <input type="text" class="form-input" id="best-time" name="best-time" placeholder="e.g., Weekdays after 5 PM">
+          </div>
+
+          <!-- Additional Details -->
+          <h3 class="fade-in">Additional Details</h3>
+          <div class="gold-line fade-in"></div>
+
+          <div class="form-group fade-in">
+            <label class="form-label" for="additional-details">Tell us more about your needs...</label>
+            <textarea class="form-textarea" id="additional-details" name="additional-details" rows="5" placeholder="Timeline, special requirements, questions, etc."></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-group fade-in">
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Get My Custom Quote</button>
+            <p class="form-note">Your information is confidential and will never be shared. We'll respond within 24 hours with a personalized leasing proposal.</p>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         TRUST STRIP
+         ============================================ -->
+    <section class="section-sm bg-cream" aria-label="Trust indicators">
+      <div class="container">
+        <div class="stats fade-in">
+          <div class="stat-item">
+            <div class="stat-number">24hr</div>
+            <div class="stat-label">Response Time</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">No</div>
+            <div class="stat-label">Hidden Fees</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Confidential</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CTA BANNER
+         ============================================ -->
+    <section class="cta-banner" aria-label="Call to action">
+      <div class="container">
+        <h2 class="fade-in">Prefer to Talk to Someone?</h2>
+        <p class="fade-in delay-1">Our leasing specialists are available to discuss your needs directly.</p>
+        <a href="tel:5551234567" class="btn btn-primary btn-lg fade-in delay-2">Call (555) 123-4567</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Column 1: Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" aria-label="Prime Power Leasing - Home">
+            <div class="nav-logo-icon">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="38" height="38" rx="6" fill="none" stroke="#C9A961" stroke-width="1.5"/>
+                <text x="7" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961">P</text>
+                <text x="20" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961" opacity="0.6">P</text>
+              </svg>
+            </div>
+            <div class="nav-logo-text">
+              PRIME POWER
+              <span>Leasing, LLC</span>
+            </div>
+          </a>
+          <p>Premium vehicle and real estate leasing for individuals who demand excellence. Flexible terms, transparent pricing, exceptional service.</p>
+          <div class="footer-social">
+            <!-- Facebook -->
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="0"/>
+                <path d="M16 3.13a6 6 0 0 1 4.87 4.87M2 17.13V6.87A4.87 4.87 0 0 1 6.87 2h10.26A4.87 4.87 0 0 1 22 6.87v10.26A4.87 4.87 0 0 1 17.13 22H6.87A4.87 4.87 0 0 1 2 17.13z" fill="none"/>
+                <path d="M2 6.87A4.87 4.87 0 0 1 6.87 2h10.26A4.87 4.87 0 0 1 22 6.87v10.26A4.87 4.87 0 0 1 17.13 22H6.87A4.87 4.87 0 0 1 2 17.13V6.87z"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="#060E1A" stroke-width="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="#060E1A"/>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="assets.html">Available Assets</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Services -->
+        <div>
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Vehicle Leasing</a></li>
+            <li><a href="services.html">Real Estate Leasing</a></li>
+            <li><a href="services.html">Short-Term Leases</a></li>
+            <li><a href="services.html">Long-Term Leases</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact -->
+        <div>
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>(555) 123-4567</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="22,6 12,13 2,6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>info@primepowerleasing.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="12 6 12 12 16 14" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Mon-Fri 9AM-7PM EST<br>Sat 10AM-4PM EST</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <span>&copy; 2025 Prime Power Leasing, LLC. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+
+  <script>
+  // Show/hide conditional form sections based on interest selection
+  document.addEventListener('DOMContentLoaded', () => {
+    const radios = document.querySelectorAll('input[name="interest"]');
+    const vehicleSection = document.getElementById('vehicle-section');
+    const realestateSection = document.getElementById('realestate-section');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const value = radio.value;
+
+        if (value === 'vehicle') {
+          vehicleSection.style.display = 'block';
+          realestateSection.style.display = 'none';
+          // Remove required from hidden fields
+          realestateSection.querySelectorAll('[required]').forEach(f => f.removeAttribute('required'));
+          vehicleSection.querySelectorAll('select').forEach(f => {
+            if (f.dataset.required === 'true') f.setAttribute('required', '');
+          });
+        } else if (value === 'realestate') {
+          vehicleSection.style.display = 'none';
+          realestateSection.style.display = 'block';
+          vehicleSection.querySelectorAll('[required]').forEach(f => f.removeAttribute('required'));
+          realestateSection.querySelectorAll('select').forEach(f => {
+            if (f.dataset.required === 'true') f.setAttribute('required', '');
+          });
+        } else if (value === 'both') {
+          vehicleSection.style.display = 'block';
+          realestateSection.style.display = 'block';
+          vehicleSection.querySelectorAll('select').forEach(f => {
+            if (f.dataset.required === 'true') f.setAttribute('required', '');
+          });
+          realestateSection.querySelectorAll('select').forEach(f => {
+            if (f.dataset.required === 'true') f.setAttribute('required', '');
+          });
+        }
+      });
+    });
+  });
+  </script>
+
+</body>
+</html>
