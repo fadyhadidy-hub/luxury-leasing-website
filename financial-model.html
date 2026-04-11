@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprehensive Dallas vs London relocation financial model. Compare salary, commission, taxes (federal, FICA, PAYE, NI), cost of living, and take-home pay side by side.">
+  <meta name="keywords" content="Dallas London comparison, relocation calculator, UK US tax comparison, take home pay, cost of living calculator">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Dallas vs London Financial Model | Prime Power Leasing">
+  <meta property="og:description" content="Side-by-side relocation calculator: salary, commission, taxes, and cost of living between Dallas, Texas and London, UK.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.primepowerleasing.com/financial-model">
+  <meta property="og:site_name" content="Prime Power Leasing">
+
+  <title>Dallas vs London Financial Model | Prime Power Leasing</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/financial-model.css">
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" aria-label="Prime Power Leasing - Home">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="38" height="38" rx="6" fill="none" stroke="#C9A961" stroke-width="1.5"/>
+              <text x="7" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961">P</text>
+              <text x="20" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961" opacity="0.6">P</text>
+            </svg>
+          </div>
+          <div class="nav-logo-text">
+            PRIME POWER
+            <span>Leasing, LLC</span>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="assets.html">Available Assets</a>
+          <a href="financial-model.html" class="active">Financial Model</a>
+          <a href="quote.html">Get a Quote</a>
+          <a href="contact.html">Contact</a>
+          <a href="quote.html" class="nav-cta">Get a Quote</a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="page-hero" aria-label="Page hero">
+      <div class="container">
+        <div class="fade-in">
+          <span class="section-label">RELOCATION ANALYSIS</span>
+          <div class="gold-line"></div>
+          <h1>Dallas <span class="gold-accent">vs</span> London</h1>
+          <p class="hero-lede">A comprehensive, side-by-side financial model comparing salary, commission,
+            taxes, and living costs between Dallas, Texas and London, United Kingdom. Built for
+            executives and sales professionals evaluating a transatlantic move.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         MODEL SHELL
+         ============================================ -->
+    <section class="section bg-cream">
+      <div class="container">
+
+        <!-- GLOBAL CONTROLS -->
+        <div class="fm-card fade-in">
+          <div class="fm-card-head">
+            <h2>Global Assumptions</h2>
+            <p>Filing status, exchange rate, and reporting currency apply to both sides of the comparison.</p>
+          </div>
+          <div class="fm-grid fm-grid-4">
+            <div class="fm-field">
+              <label for="filing">US Filing Status</label>
+              <select id="filing">
+                <option value="single">Single</option>
+                <option value="mfj">Married Filing Jointly</option>
+              </select>
+              <span class="fm-hint">Drives US federal brackets, standard deduction &amp; Additional Medicare threshold.</span>
+            </div>
+            <div class="fm-field">
+              <label for="fxRate">GBP → USD Exchange Rate</label>
+              <input id="fxRate" type="number" step="0.001" value="1.27" min="0.5" max="3">
+              <span class="fm-hint">Used to normalise London figures into USD for the comparison panel.</span>
+            </div>
+            <div class="fm-field">
+              <label for="displayCurrency">Comparison Currency</label>
+              <select id="displayCurrency">
+                <option value="USD">USD ($)</option>
+                <option value="GBP">GBP (£)</option>
+              </select>
+              <span class="fm-hint">Everything in the comparison panel is shown in this currency.</span>
+            </div>
+            <div class="fm-field">
+              <label for="londonWeighting">London COL Preset</label>
+              <select id="londonWeighting">
+                <option value="zone12">Zone 1–2 (Central)</option>
+                <option value="zone23">Zone 2–3 (Inner)</option>
+                <option value="zone34">Zone 3–4 (Outer)</option>
+              </select>
+              <span class="fm-hint">Loads default rent &amp; transport figures for that band.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TWO-COLUMN INPUT PANEL -->
+        <div class="fm-split fade-in delay-1">
+
+          <!-- ========== DALLAS INPUTS ========== -->
+          <div class="fm-card fm-dallas">
+            <div class="fm-card-head">
+              <span class="fm-flag">Dallas, TX · USA</span>
+              <h3>Dallas Inputs <span class="fm-currency-chip">USD</span></h3>
+            </div>
+
+            <h4 class="fm-subhead">Compensation (annual)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="d_baseSalary">Base Salary</label>
+                <input id="d_baseSalary" type="number" value="180000" min="0" step="1000">
+              </div>
+              <div class="fm-field">
+                <label for="d_commission">Commission (OTE)</label>
+                <input id="d_commission" type="number" value="60000" min="0" step="1000">
+              </div>
+              <div class="fm-field">
+                <label for="d_bonus">Annual Bonus</label>
+                <input id="d_bonus" type="number" value="20000" min="0" step="1000">
+              </div>
+              <div class="fm-field">
+                <label for="d_k401Pct">401(k) Contribution %</label>
+                <input id="d_k401Pct" type="number" value="10" min="0" max="100" step="0.5">
+                <span class="fm-hint">Capped at $23,500 (2025 elective deferral limit).</span>
+              </div>
+              <div class="fm-field">
+                <label for="d_k401MatchPct">Employer Match % of Salary</label>
+                <input id="d_k401MatchPct" type="number" value="5" min="0" max="25" step="0.5">
+              </div>
+              <div class="fm-field">
+                <label for="d_healthPremium">Health Premium (monthly)</label>
+                <input id="d_healthPremium" type="number" value="350" min="0" step="25">
+                <span class="fm-hint">Employee share of employer-sponsored plan. Pre-tax (Section 125).</span>
+              </div>
+              <div class="fm-field">
+                <label for="d_hsa">HSA Contribution (annual)</label>
+                <input id="d_hsa" type="number" value="0" min="0" step="100">
+              </div>
+            </div>
+
+            <h4 class="fm-subhead">Housing &amp; Utilities (monthly)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="d_rent">Rent</label>
+                <input id="d_rent" type="number" value="2600" min="0" step="50">
+                <span class="fm-hint">2BR Uptown / Knox-Henderson / M-Streets.</span>
+              </div>
+              <div class="fm-field">
+                <label for="d_utilities">Electric / Gas / Water</label>
+                <input id="d_utilities" type="number" value="220" min="0" step="10">
+                <span class="fm-hint">Summer AC load; winters are mild.</span>
+              </div>
+              <div class="fm-field">
+                <label for="d_internet">Internet</label>
+                <input id="d_internet" type="number" value="75" min="0" step="5">
+              </div>
+              <div class="fm-field">
+                <label for="d_mobile">Mobile Phone</label>
+                <input id="d_mobile" type="number" value="85" min="0" step="5">
+              </div>
+            </div>
+
+            <h4 class="fm-subhead">Transport (monthly)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="d_carPayment">Car Payment / Lease</label>
+                <input id="d_carPayment" type="number" value="650" min="0" step="25">
+              </div>
+              <div class="fm-field">
+                <label for="d_carInsurance">Auto Insurance</label>
+                <input id="d_carInsurance" type="number" value="180" min="0" step="10">
+                <span class="fm-hint">TX rates run ~35% above US average.</span>
+              </div>
+              <div class="fm-field">
+                <label for="d_fuel">Fuel</label>
+                <input id="d_fuel" type="number" value="220" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="d_transitPass">DART Transit Pass</label>
+                <input id="d_transitPass" type="number" value="0" min="0" step="5">
+              </div>
+            </div>
+
+            <h4 class="fm-subhead">Food &amp; Lifestyle (monthly)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="d_groceries">Groceries</label>
+                <input id="d_groceries" type="number" value="650" min="0" step="25">
+              </div>
+              <div class="fm-field">
+                <label for="d_dining">Dining &amp; Takeout</label>
+                <input id="d_dining" type="number" value="550" min="0" step="25">
+              </div>
+              <div class="fm-field">
+                <label for="d_gym">Gym / Fitness</label>
+                <input id="d_gym" type="number" value="75" min="0" step="5">
+              </div>
+              <div class="fm-field">
+                <label for="d_entertainment">Entertainment / Subscriptions</label>
+                <input id="d_entertainment" type="number" value="200" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="d_personalCare">Personal Care</label>
+                <input id="d_personalCare" type="number" value="120" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="d_clothing">Clothing</label>
+                <input id="d_clothing" type="number" value="180" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="d_travel">Travel / Vacations</label>
+                <input id="d_travel" type="number" value="400" min="0" step="25">
+              </div>
+              <div class="fm-field">
+                <label for="d_childcare">Childcare</label>
+                <input id="d_childcare" type="number" value="0" min="0" step="50">
+                <span class="fm-hint">~$1,500/mo per child for full-time daycare.</span>
+              </div>
+              <div class="fm-field">
+                <label for="d_miscOther">Miscellaneous</label>
+                <input id="d_miscOther" type="number" value="250" min="0" step="25">
+              </div>
+            </div>
+          </div>
+
+          <!-- ========== LONDON INPUTS ========== -->
+          <div class="fm-card fm-london">
+            <div class="fm-card-head">
+              <span class="fm-flag">London · United Kingdom</span>
+              <h3>London Inputs <span class="fm-currency-chip">GBP</span></h3>
+            </div>
+
+            <h4 class="fm-subhead">Compensation (annual)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="l_baseSalary">Base Salary</label>
+                <input id="l_baseSalary" type="number" value="120000" min="0" step="1000">
+              </div>
+              <div class="fm-field">
+                <label for="l_commission">Commission (OTE)</label>
+                <input id="l_commission" type="number" value="40000" min="0" step="1000">
+              </div>
+              <div class="fm-field">
+                <label for="l_bonus">Annual Bonus</label>
+                <input id="l_bonus" type="number" value="15000" min="0" step="1000">
+              </div>
+              <div class="fm-field">
+                <label for="l_pensionPct">Employee Pension %</label>
+                <input id="l_pensionPct" type="number" value="5" min="0" max="100" step="0.5">
+                <span class="fm-hint">Auto-enrolment minimum is 5% employee / 3% employer.</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_employerPensionPct">Employer Pension %</label>
+                <input id="l_employerPensionPct" type="number" value="5" min="0" max="50" step="0.5">
+              </div>
+              <div class="fm-field">
+                <label for="l_salarySacrificeOther">Other Salary Sacrifice</label>
+                <input id="l_salarySacrificeOther" type="number" value="0" min="0" step="100">
+                <span class="fm-hint">Cycle-to-work, EV scheme, childcare vouchers, etc.</span>
+              </div>
+            </div>
+
+            <h4 class="fm-subhead">Housing &amp; Utilities (monthly)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="l_rent">Rent</label>
+                <input id="l_rent" type="number" value="2900" min="0" step="50">
+                <span class="fm-hint">2-bed flat, Zone 1–2 (Clapham / Islington / Canary Wharf).</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_councilTax">Council Tax</label>
+                <input id="l_councilTax" type="number" value="170" min="0" step="5">
+                <span class="fm-hint">Band D average across London boroughs.</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_utilities">Gas / Electric / Water</label>
+                <input id="l_utilities" type="number" value="230" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="l_internet">Internet / Broadband</label>
+                <input id="l_internet" type="number" value="35" min="0" step="5">
+              </div>
+              <div class="fm-field">
+                <label for="l_mobile">Mobile</label>
+                <input id="l_mobile" type="number" value="25" min="0" step="5">
+              </div>
+              <div class="fm-field">
+                <label for="l_tvLicence">TV Licence</label>
+                <input id="l_tvLicence" type="number" value="14" min="0" step="1">
+                <span class="fm-hint">£169.50/year statutory BBC licence.</span>
+              </div>
+            </div>
+
+            <h4 class="fm-subhead">Transport (monthly)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="l_travelcard">Zones 1–2 Travelcard</label>
+                <input id="l_travelcard" type="number" value="172" min="0" step="5">
+                <span class="fm-hint">Monthly cap via Oyster / contactless.</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_rideshare">Rideshare / Black Cab</label>
+                <input id="l_rideshare" type="number" value="80" min="0" step="5">
+              </div>
+              <div class="fm-field">
+                <label for="l_carCosts">Car Costs (if owned)</label>
+                <input id="l_carCosts" type="number" value="0" min="0" step="25">
+                <span class="fm-hint">Most Londoners don't own a car. Includes ULEZ &amp; congestion charge.</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_privateHealth">Private Health Top-up</label>
+                <input id="l_privateHealth" type="number" value="60" min="0" step="5">
+                <span class="fm-hint">Optional — NHS is covered via taxes/NI.</span>
+              </div>
+            </div>
+
+            <h4 class="fm-subhead">Food &amp; Lifestyle (monthly)</h4>
+            <div class="fm-grid fm-grid-2">
+              <div class="fm-field">
+                <label for="l_groceries">Groceries</label>
+                <input id="l_groceries" type="number" value="420" min="0" step="25">
+              </div>
+              <div class="fm-field">
+                <label for="l_dining">Dining &amp; Pubs</label>
+                <input id="l_dining" type="number" value="500" min="0" step="25">
+              </div>
+              <div class="fm-field">
+                <label for="l_gym">Gym / Fitness</label>
+                <input id="l_gym" type="number" value="70" min="0" step="5">
+              </div>
+              <div class="fm-field">
+                <label for="l_entertainment">Entertainment / Subscriptions</label>
+                <input id="l_entertainment" type="number" value="160" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="l_personalCare">Personal Care</label>
+                <input id="l_personalCare" type="number" value="100" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="l_clothing">Clothing</label>
+                <input id="l_clothing" type="number" value="160" min="0" step="10">
+              </div>
+              <div class="fm-field">
+                <label for="l_travel">Travel / Holidays</label>
+                <input id="l_travel" type="number" value="450" min="0" step="25">
+                <span class="fm-hint">Europe on the doorstep — budgets often run higher.</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_childcare">Childcare</label>
+                <input id="l_childcare" type="number" value="0" min="0" step="50">
+                <span class="fm-hint">~£1,800/mo per child for central London nursery.</span>
+              </div>
+              <div class="fm-field">
+                <label for="l_miscOther">Miscellaneous</label>
+                <input id="l_miscOther" type="number" value="220" min="0" step="25">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CALCULATE BUTTON -->
+        <div class="fm-actions fade-in delay-2">
+          <button type="button" id="fm-calc" class="btn btn-primary btn-lg">Run Comparison</button>
+          <button type="button" id="fm-reset" class="btn btn-secondary">Reset Defaults</button>
+        </div>
+
+        <!-- ============================================
+             RESULTS
+             ============================================ -->
+        <div id="fm-results" class="fm-results fade-in delay-3" hidden>
+
+          <!-- Headline verdict -->
+          <div class="fm-headline">
+            <div class="fm-headline-item">
+              <span class="fm-headline-label">Dallas Net Savings (annual)</span>
+              <span id="h-dallas-save" class="fm-headline-value">$0</span>
+            </div>
+            <div class="fm-headline-divider"></div>
+            <div class="fm-headline-item">
+              <span class="fm-headline-label">London Net Savings (annual)</span>
+              <span id="h-london-save" class="fm-headline-value">£0</span>
+            </div>
+            <div class="fm-headline-divider"></div>
+            <div class="fm-headline-item fm-headline-verdict">
+              <span class="fm-headline-label">Advantage</span>
+              <span id="h-verdict" class="fm-headline-value">—</span>
+              <span id="h-delta" class="fm-headline-sub">—</span>
+            </div>
+          </div>
+
+          <!-- Side-by-side detail -->
+          <div class="fm-split">
+            <!-- DALLAS RESULT -->
+            <div class="fm-card fm-dallas">
+              <div class="fm-card-head">
+                <span class="fm-flag">Dallas, TX · USA</span>
+                <h3>Dallas Breakdown</h3>
+              </div>
+
+              <h4 class="fm-subhead">Compensation</h4>
+              <ul class="fm-line-items" id="d-comp"></ul>
+
+              <h4 class="fm-subhead">Pre-tax Deductions</h4>
+              <ul class="fm-line-items" id="d-pretax"></ul>
+
+              <h4 class="fm-subhead">Taxes</h4>
+              <ul class="fm-line-items" id="d-taxes"></ul>
+
+              <h4 class="fm-subhead">Take-home</h4>
+              <ul class="fm-line-items fm-highlight" id="d-takehome"></ul>
+
+              <h4 class="fm-subhead">Living Costs</h4>
+              <ul class="fm-line-items" id="d-costs"></ul>
+
+              <h4 class="fm-subhead">Net Position</h4>
+              <ul class="fm-line-items fm-highlight" id="d-net"></ul>
+            </div>
+
+            <!-- LONDON RESULT -->
+            <div class="fm-card fm-london">
+              <div class="fm-card-head">
+                <span class="fm-flag">London · United Kingdom</span>
+                <h3>London Breakdown</h3>
+              </div>
+
+              <h4 class="fm-subhead">Compensation</h4>
+              <ul class="fm-line-items" id="l-comp"></ul>
+
+              <h4 class="fm-subhead">Pre-tax Deductions</h4>
+              <ul class="fm-line-items" id="l-pretax"></ul>
+
+              <h4 class="fm-subhead">Taxes</h4>
+              <ul class="fm-line-items" id="l-taxes"></ul>
+
+              <h4 class="fm-subhead">Take-home</h4>
+              <ul class="fm-line-items fm-highlight" id="l-takehome"></ul>
+
+              <h4 class="fm-subhead">Living Costs</h4>
+              <ul class="fm-line-items" id="l-costs"></ul>
+
+              <h4 class="fm-subhead">Net Position</h4>
+              <ul class="fm-line-items fm-highlight" id="l-net"></ul>
+            </div>
+          </div>
+
+          <!-- Apples-to-apples comparison table -->
+          <div class="fm-card fm-compare">
+            <div class="fm-card-head">
+              <h3>Apples-to-apples comparison
+                <span id="fm-currency-label" class="fm-currency-chip">USD</span></h3>
+              <p>Every row is normalised into the chosen comparison currency so you can read the delta at a glance.</p>
+            </div>
+            <div class="fm-table-wrap">
+              <table class="fm-table">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Dallas</th>
+                    <th>London</th>
+                    <th>Δ (London − Dallas)</th>
+                  </tr>
+                </thead>
+                <tbody id="fm-compare-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Assumptions / footnotes -->
+          <div class="fm-card fm-notes">
+            <div class="fm-card-head">
+              <h3>Model Assumptions &amp; Caveats</h3>
+            </div>
+            <ul class="fm-notes-list">
+              <li><strong>US federal tax:</strong> 2025 brackets, standard deduction of
+                $15,000 (single) / $30,000 (MFJ). Itemised deductions, ACA PTC, child tax credit,
+                and state-source adjustments are not modelled.</li>
+              <li><strong>FICA:</strong> 6.2% Social Security on wages up to $176,100 and
+                1.45% Medicare (unlimited). An additional 0.9% Medicare surtax applies to
+                earnings over $200,000 single / $250,000 MFJ.</li>
+              <li><strong>Texas:</strong> No state income tax. Dallas combined sales tax is
+                8.25% — the model estimates the burden on taxable discretionary spend
+                (groceries are largely exempt in TX).</li>
+              <li><strong>401(k):</strong> Employee deferral is pre-tax for income tax but
+                NOT for FICA. The 2025 elective deferral limit is $23,500 and the model caps
+                contributions accordingly.</li>
+              <li><strong>UK income tax:</strong> 2025/26 rates and bands for England,
+                Wales &amp; Northern Ireland (Scotland has different bands). Personal
+                allowance tapers £1-for-£2 above £100,000 — creating a 60% effective marginal
+                rate between £100,000 and £125,140.</li>
+              <li><strong>National Insurance:</strong> Class 1 employee, 8% between the
+                primary threshold (£12,570) and UEL (£50,270), then 2% above.</li>
+              <li><strong>UK workplace pension:</strong> Modelled as salary sacrifice —
+                contributions reduce income tax and NI base (most employers run plans this
+                way).</li>
+              <li><strong>Healthcare:</strong> Dallas assumes employer-sponsored plan with
+                employee premium contributions pre-tax via Section 125. London assumes NHS
+                coverage funded through NI/general taxation, with optional private top-up.</li>
+              <li><strong>VAT:</strong> London prices are inclusive of 20% VAT by law.
+                The model surfaces embedded VAT on standard-rated discretionary spend for
+                transparency only — it is already captured in the monthly cost figures.</li>
+              <li><strong>No tax equalization:</strong> Per requirements, the model does
+                NOT apply any employer tax equalization or hypothetical-tax policy. Each
+                city's gross is taxed under that country's domestic regime.</li>
+              <li><strong>Not modelled:</strong> Social Security / NI totalization agreement
+                mechanics, state unemployment tax, FBAR / FATCA compliance costs, US worldwide
+                taxation on foreign earned income (FEIE / foreign tax credit), stamp duty on
+                home purchase, inheritance tax, capital gains, ISA vs Roth optimisation,
+                health FSA, dependent care FSA, and cross-border pension portability.</li>
+              <li><strong>All figures are illustrative.</strong> Verify every number with a
+                cross-border tax advisor before making a relocation decision.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Column 1: Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" aria-label="Prime Power Leasing - Home">
+            <div class="nav-logo-icon">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="38" height="38" rx="6" fill="none" stroke="#C9A961" stroke-width="1.5"/>
+                <text x="7" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961">P</text>
+                <text x="20" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="20" fill="#C9A961" opacity="0.6">P</text>
+              </svg>
+            </div>
+            <div class="nav-logo-text">
+              PRIME POWER
+              <span>Leasing, LLC</span>
+            </div>
+          </a>
+          <p>Premium vehicle and real estate leasing for individuals who demand excellence. Flexible terms, transparent pricing, exceptional service.</p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="assets.html">Available Assets</a></li>
+            <li><a href="financial-model.html">Financial Model</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Tools -->
+        <div>
+          <h4>Tools</h4>
+          <ul class="footer-links">
+            <li><a href="financial-model.html">Dallas vs London</a></li>
+            <li><a href="quote.html">Lease Quote</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact -->
+        <div>
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <span>(555) 123-4567</span>
+          </div>
+          <div class="footer-contact-item">
+            <span>info@primepowerleasing.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <span>Mon-Fri 9AM-7PM EST</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <span>&copy; 2026 Prime Power Leasing, LLC. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/financial-model.js"></script>
+  <script src="js/financial-model-ui.js"></script>
+
+</body>
+</html>
