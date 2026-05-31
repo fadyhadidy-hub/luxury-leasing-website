@@ -3,1511 +3,1128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moody's · Underwriting Sales Hub</title>
+<title>Insurance Sales Intelligence Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --dark:    #1A1A2E;
-    --red:     #CC0000;
-    --navy:    #1B3A6B;
-    --dblue:   #2C5282;
-    --mblue:   #3182CE;
-    --lblue:   #BEE3F8;
-    --pblue:   #EBF8FF;
-    --green:   #276749;
-    --lgreen:  #C6F6D5;
-    --pgreen:  #F0FFF4;
-    --amber:   #B7791F;
-    --lamber:  #FEFCBF;
-    --pamber:  #FFFFF0;
-    --rtxt:    #9B2335;
-    --lred:    #FED7D7;
-    --pred:    #FFF5F5;
-    --gray:    #F7FAFC;
-    --gmid:    #E2E8F0;
-    --white:   #FFFFFF;
-    --gold:    #D4AF37;
-    --purple:  #553C9A;
-    --lpurp:   #E9D8FD;
-    --teal:    #2C7A7B;
-    --ink:     #222222;
-    --slate:   #475569;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Segoe UI', Calibri, Arial, sans-serif;
-    background: var(--gray);
-    color: var(--ink);
-    font-size: 14px;
-  }
+:root{
+  --bg:#F6F8FB; --surface:#FFFFFF; --surface-2:#FBFCFE;
+  --ink:#0F172A; --ink-2:#334155; --muted:#64748B; --faint:#94A3B8;
+  --border:#E6EBF2; --border-2:#EEF2F7;
+  --brand:#4F46E5; --brand-2:#6366F1; --brand-soft:#EEF0FF; --brand-tint:#F5F6FF;
+  --teal:#0E7490; --teal-soft:#ECFEFF;
+  --green:#059669; --green-soft:#ECFDF5;
+  --amber:#B45309; --amber-soft:#FFFBEB;
+  --red:#DC2626; --red-soft:#FEF2F2;
+  --violet:#7C3AED; --violet-soft:#F5F3FF;
+  --sky:#0284C7; --sky-soft:#F0F9FF;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --shadow:0 1px 3px rgba(16,24,40,.07),0 1px 2px rgba(16,24,40,.04);
+  --shadow-md:0 4px 12px rgba(16,24,40,.08),0 2px 4px rgba(16,24,40,.04);
+  --shadow-lg:0 12px 32px rgba(16,24,40,.10),0 4px 8px rgba(16,24,40,.04);
+  --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.font-display{font-family:'Manrope','Inter',sans-serif;letter-spacing:-.02em}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:'JetBrains Mono',monospace}
 
-  /* ── TOP BAR ── */
-  .topbar {
-    background: var(--dark);
-    color: #fff;
-    padding: 0 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,.4);
-  }
-  .topbar-logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .logo-badge {
-    background: var(--red);
-    color: #fff;
-    font-weight: 900;
-    font-size: 18px;
-    padding: 6px 12px;
-    border-radius: 4px;
-    letter-spacing: 1px;
-  }
-  .topbar-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #e2e8f0;
-  }
-  .topbar-sub {
-    font-size: 11px;
-    color: #94a3b8;
-    margin-top: 2px;
-  }
-  .topbar-links {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  .topbar-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 12px;
-    transition: color .2s;
-  }
-  .topbar-links a:hover { color: var(--gold); }
+/* ───────── TOP BAR ───────── */
+.appbar{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--border);
+  height:62px;display:flex;align-items:center;
+  padding:0 24px;gap:18px;
+}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer;flex-shrink:0}
+.brand .logo{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--brand) 0%,var(--violet) 100%);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:17px;font-family:'Manrope';
+  box-shadow:0 2px 8px rgba(79,70,229,.35);
+}
+.brand .b-title{font-family:'Manrope';font-weight:800;font-size:15.5px;color:var(--ink);line-height:1.1}
+.brand .b-sub{font-size:11px;color:var(--muted);font-weight:500}
+.appbar-nav{margin-left:auto;display:flex;align-items:center;gap:6px}
+.nav-pill{
+  font-size:13px;font-weight:600;color:var(--ink-2);
+  padding:8px 13px;border-radius:9px;cursor:pointer;
+  border:1px solid transparent;transition:all .15s;white-space:nowrap;
+}
+.nav-pill:hover{background:var(--brand-soft);color:var(--brand)}
+.lob-switch{position:relative}
+.lob-switch-btn{
+  display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+  color:var(--ink);background:var(--surface);border:1px solid var(--border);
+  padding:8px 13px;border-radius:9px;cursor:pointer;box-shadow:var(--shadow-sm);
+}
+.lob-switch-btn:hover{border-color:var(--brand-2)}
+.lob-menu{
+  position:absolute;right:0;top:46px;background:#fff;border:1px solid var(--border);
+  border-radius:var(--r);box-shadow:var(--shadow-lg);width:248px;padding:7px;
+  display:none;z-index:60;
+}
+.lob-menu.open{display:block;animation:pop .14s ease}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.lob-menu-item{
+  display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;
+  cursor:pointer;font-size:13.5px;font-weight:600;color:var(--ink-2);
+}
+.lob-menu-item:hover{background:var(--brand-tint);color:var(--brand)}
+.lob-menu-item .li-ic{font-size:17px;width:22px;text-align:center}
+.lob-menu-item .li-ab{margin-left:auto;font-size:11px;color:var(--faint);font-weight:600}
 
-  /* ── GOLD ACCENT BAR ── */
-  .accent-bar { height: 4px; background: var(--gold); }
+/* ───────── LAYOUT ───────── */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.page{display:none;animation:fade .25s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-  /* ── HERO SECTION ── */
-  .hero {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--dark) 100%);
-    color: #fff;
-    padding: 36px 32px 28px;
-  }
-  .hero h1 {
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    letter-spacing: -.3px;
-  }
-  .hero p {
-    font-size: 13px;
-    color: var(--lblue);
-    font-style: italic;
-    max-width: 700px;
-  }
+/* ───────── HOME ───────── */
+.home-hero{padding:64px 0 40px;text-align:center}
+.eyebrow{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--brand);background:var(--brand-soft);
+  padding:6px 13px;border-radius:99px;margin-bottom:20px;
+}
+.home-hero h1{font-size:46px;font-weight:800;line-height:1.08;color:var(--ink);max-width:760px;margin:0 auto 18px}
+.home-hero h1 .grad{background:linear-gradient(120deg,var(--brand),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.home-hero p{font-size:17.5px;color:var(--muted);max-width:600px;margin:0 auto;font-weight:400}
+.home-stats{display:flex;gap:36px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+.home-stat{text-align:center}
+.home-stat .hs-num{font-family:'Manrope';font-size:30px;font-weight:800;color:var(--ink);line-height:1}
+.home-stat .hs-lab{font-size:12.5px;color:var(--muted);margin-top:5px;font-weight:500}
 
-  /* ── LOB TAB NAV ── */
-  .lob-nav {
-    background: var(--dark);
-    padding: 0 32px;
-    display: flex;
-    gap: 4px;
-    overflow-x: auto;
-  }
-  .lob-tab {
-    padding: 12px 22px;
-    color: #94a3b8;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    transition: all .2s;
-    letter-spacing: .3px;
-  }
-  .lob-tab:hover { color: #fff; background: rgba(255,255,255,.05); }
-  .lob-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.section-head{margin:54px 0 22px}
+.section-head .sh-eyebrow{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--brand)}
+.section-head h2{font-size:27px;font-weight:800;color:var(--ink);margin-top:6px}
+.section-head p{color:var(--muted);margin-top:6px;font-size:15px}
 
-  /* ── MAIN CONTENT ── */
-  .main { max-width: 1280px; margin: 0 auto; padding: 28px 24px 60px; }
+.lob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.lob-grid{grid-template-columns:1fr}}
+.lob-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:24px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.lob-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--brand-2)}
+.lob-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--accent,var(--brand))}
+.lob-card .lc-ic{
+  width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:23px;margin-bottom:15px;background:var(--accent-soft,var(--brand-soft));
+}
+.lob-card h3{font-size:19px;font-weight:800;color:var(--ink)}
+.lob-card .lc-tag{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.5;min-height:42px}
+.lob-card .lc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:15px;border-top:1px solid var(--border-2)}
+.lc-dots{display:flex;gap:3px;align-items:center}
+.lc-dots .d{width:7px;height:7px;border-radius:99px;background:var(--border)}
+.lc-dots .d.on{background:var(--accent,var(--brand))}
+.lc-arrow{font-size:13px;font-weight:700;color:var(--accent,var(--brand));display:flex;align-items:center;gap:5px}
+.lob-card:hover .lc-arrow{gap:9px}
 
-  /* ── TAGLINE BAND ── */
-  .tagline-band {
-    background: var(--pblue);
-    border-left: 5px solid var(--mblue);
-    padding: 14px 20px;
-    border-radius: 0 6px 6px 0;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  .tagline-lob { font-size: 22px; font-weight: 800; color: var(--dark); }
-  .tagline-text { font-size: 13.5px; font-style: italic; color: var(--navy); flex: 1; }
-  .adv-bar { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-  .adv-label { font-size: 11px; color: var(--slate); text-align: right; line-height: 1.2; }
-  .dot { font-size: 16px; }
-  .dot.filled { color: var(--green); }
-  .dot.empty  { color: #d1d5db; }
+.glob-res{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.glob-res{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.glob-res{grid-template-columns:1fr}}
+.gr-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:all .18s}
+.gr-card:hover{border-color:var(--brand-2);box-shadow:var(--shadow-md)}
+.gr-card .grc-tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--brand)}
+.gr-card .grc-name{font-weight:700;font-size:14.5px;color:var(--ink);margin:5px 0 4px;display:block}
+.gr-card .grc-desc{font-size:12px;color:var(--muted);line-height:1.5}
 
-  /* ── CARD GRID ── */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  .grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+/* ───────── LOB PAGE ───────── */
+.lob-hero{
+  border-radius:var(--r-xl);overflow:hidden;margin-top:24px;
+  background:linear-gradient(135deg,var(--accent,#4F46E5),var(--accent2,#7C3AED));
+  color:#fff;padding:34px 36px;position:relative;box-shadow:var(--shadow-lg);
+}
+.lob-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08)}
+.lob-hero .lh-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);cursor:pointer;margin-bottom:16px}
+.lob-hero .lh-back:hover{color:#fff}
+.lob-hero .lh-row{display:flex;align-items:flex-start;gap:18px;position:relative;z-index:1}
+.lob-hero .lh-ic{width:58px;height:58px;border-radius:15px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;backdrop-filter:blur(4px)}
+.lob-hero h1{font-size:32px;font-weight:800;line-height:1.1}
+.lob-hero .lh-tag{font-size:16px;color:rgba(255,255,255,.92);margin-top:6px;font-weight:500;max-width:640px}
+.lh-meta{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap;position:relative;z-index:1}
+.lh-meta .m{display:flex;flex-direction:column}
+.lh-meta .m .mv{font-family:'Manrope';font-size:21px;font-weight:800}
+.lh-meta .m .ml{font-size:11.5px;color:rgba(255,255,255,.8);font-weight:500;margin-top:2px}
+.lh-adv{display:flex;gap:4px;align-items:center;margin-top:6px}
+.lh-adv .d{width:9px;height:9px;border-radius:99px;background:rgba(255,255,255,.3)}
+.lh-adv .d.on{background:#fff}
 
-  /* ── CARD ── */
-  .card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.08);
-    overflow: hidden;
-  }
-  .card-header {
-    padding: 10px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-  }
-  .card-body {
-    padding: 14px 16px;
-    font-size: 13px;
-    line-height: 1.65;
-    white-space: pre-wrap;
-  }
-  .card-body ul { padding-left: 0; list-style: none; }
-  .card-body li { padding: 3px 0; }
+/* sticky section nav */
+.sec-nav{
+  position:sticky;top:62px;z-index:40;background:rgba(246,248,251,.9);
+  backdrop-filter:blur(10px);margin:0 -24px;padding:12px 24px;
+  border-bottom:1px solid var(--border);display:flex;gap:7px;overflow-x:auto;
+  scrollbar-width:none;
+}
+.sec-nav::-webkit-scrollbar{display:none}
+.sec-chip{
+  font-size:12.5px;font-weight:600;color:var(--ink-2);padding:7px 13px;border-radius:99px;
+  white-space:nowrap;cursor:pointer;border:1px solid var(--border);background:#fff;transition:all .15s;
+}
+.sec-chip:hover{border-color:var(--brand-2);color:var(--brand)}
+.sec-chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
 
-  /* Header color variants */
-  .ch-navy     { background: var(--navy);  color: #fff; }
-  .ch-dblue    { background: var(--dblue); color: #fff; }
-  .ch-red      { background: var(--rtxt);  color: #fff; }
-  .ch-moodys   { background: var(--red);   color: #fff; }
-  .ch-green    { background: var(--green); color: #fff; }
-  .ch-teal     { background: var(--teal);  color: #fff; }
-  .ch-amber    { background: var(--amber); color: #fff; }
-  .ch-mblue    { background: var(--mblue); color: #fff; }
-  .ch-gold     { background: var(--gold);  color: var(--dark); }
-  .ch-dark     { background: var(--dark);  color: #fff; }
-  .ch-purple   { background: var(--purple);color: #fff; }
+.sec{padding:38px 0 6px;scroll-margin-top:128px}
+.sec-title{display:flex;align-items:center;gap:11px;margin-bottom:20px}
+.sec-title .st-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--brand-soft)}
+.sec-title h2{font-size:22px;font-weight:800;color:var(--ink)}
+.sec-title .st-sub{font-size:13px;color:var(--muted);font-weight:500}
 
-  /* Body bg variants */
-  .cb-pblue    { background: var(--pblue); }
-  .cb-pred     { background: var(--pred);  }
-  .cb-pgreen   { background: var(--pgreen);}
-  .cb-pamber   { background: var(--pamber);}
-  .cb-lpurp    { background: var(--lpurp); }
-  .cb-white    { background: #fff; }
-  .cb-gray     { background: var(--gray);  }
+/* generic cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+.card-pad{padding:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
 
-  /* ── STAT BAND ── */
-  .stat-band {
-    background: var(--pamber);
-    border: 2px solid var(--lamber);
-    border-radius: 8px;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 16px;
-  }
-  .stat-number {
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--amber);
-    white-space: nowrap;
-  }
-  .stat-rest {
-    font-size: 13.5px;
-    color: var(--ink);
-    font-style: italic;
-  }
+/* overview */
+.ov-what{font-size:16.5px;line-height:1.7;color:var(--ink-2)}
+.who-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.who-chip{font-size:13px;font-weight:600;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--border);padding:6px 12px;border-radius:99px}
 
-  /* ── RESOURCES SECTION ── */
-  .resources-section {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.08);
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-  .resources-header {
-    background: var(--dark);
-    color: #fff;
-    padding: 10px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1px;
-    background: var(--gmid);
-  }
-  .res-item {
-    background: #fff;
-    padding: 14px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .res-item a {
-    color: var(--mblue);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 13px;
-    transition: color .2s;
-  }
-  .res-item a:hover { color: var(--red); text-decoration: underline; }
-  .res-item .res-desc { font-size: 11.5px; color: var(--slate); }
-  .res-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 3px;
-    margin-bottom: 2px;
-  }
-  .tag-product  { background: var(--pblue); color: var(--dblue); }
-  .tag-research { background: var(--pgreen); color: var(--green); }
-  .tag-usecase  { background: var(--pamber); color: var(--amber); }
-  .tag-solution { background: var(--pred);   color: var(--rtxt); }
+/* value props */
+.vp{display:flex;gap:13px;padding:16px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--border-2)}
+.vp .vp-ic{font-size:20px;flex-shrink:0;width:26px}
+.vp h4{font-size:14.5px;font-weight:700;color:var(--ink)}
+.vp p{font-size:13px;color:var(--muted);margin-top:3px}
 
-  /* ── SECTION DIVIDER ── */
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--slate);
-    margin: 20px 0 10px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--gmid);
-  }
+.pitch{
+  background:linear-gradient(135deg,var(--brand-tint),var(--violet-soft));
+  border:1px solid var(--brand-soft);border-radius:var(--r-lg);padding:24px;position:relative;
+}
+.pitch .q-mark{font-family:'Manrope';font-size:46px;color:var(--brand);opacity:.25;line-height:.6;position:absolute;top:16px;left:18px}
+.pitch p{font-size:17px;line-height:1.6;color:var(--ink);font-weight:500;font-style:italic;padding-left:34px}
 
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--dark);
-    color: #6b7280;
-    padding: 20px 32px;
-    font-size: 11px;
-    text-align: center;
-  }
-  .footer a { color: #94a3b8; text-decoration: none; }
-  .footer a:hover { color: var(--gold); }
+/* list rows */
+.tp-list{display:flex;flex-direction:column;gap:10px}
+.tp{display:flex;gap:12px;padding:13px 15px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);font-size:14px;line-height:1.55}
+.tp .tp-n{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
 
-  /* ── HELPERS ── */
-  .pill {
-    display: inline-block;
-    padding: 2px 9px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    margin-right: 4px;
-  }
-  .hidden { display: none; }
+/* discovery */
+.disc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:17px;border-left:3px solid var(--teal)}
+.disc .dq{font-size:15px;font-weight:700;color:var(--ink);display:flex;gap:9px}
+.disc .dq .qi{color:var(--teal);flex-shrink:0}
+.disc .dw{font-size:12.5px;color:var(--muted);margin-top:8px;padding-left:25px}
+.disc .dw b{color:var(--teal);font-weight:600}
 
-  /* ── HERO PRODUCT LINKS INSIDE CARD ── */
-  .hero-product {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--gmid);
-  }
-  .hero-product:last-child { border-bottom: none; }
-  .hp-star { color: var(--gold); font-size: 16px; flex-shrink: 0; }
-  .hp-content { flex: 1; }
-  .hp-name { font-weight: 700; color: var(--dark); font-size: 13px; }
-  .hp-name a { color: var(--mblue); text-decoration: none; }
-  .hp-name a:hover { color: var(--red); text-decoration: underline; }
-  .hp-desc { font-size: 12px; color: var(--slate); margin-top: 2px; }
+/* underwriting */
+.uw-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.uw-step{background:#fff;border:1px solid var(--border);border-radius:99px;padding:8px 15px;font-size:13px;font-weight:600;color:var(--ink-2)}
+.uw-arrow{color:var(--faint);font-weight:700}
+.kv-list{display:flex;flex-direction:column;gap:0}
+.kv{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-2);font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv .kv-k{font-weight:700;color:var(--ink);min-width:165px;flex-shrink:0}
+.kv .kv-v{color:var(--ink-2)}
+.flag-list{display:flex;flex-direction:column;gap:9px}
+.flag{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ink-2);padding:11px 13px;background:var(--red-soft);border:1px solid #FBD5D5;border-radius:var(--r);line-height:1.5}
+.flag .fi{flex-shrink:0}
 
-  /* ── PAIN FIX TABLE ── */
-  .pain-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--gmid);
-  }
-  .pain-row:last-child { border-bottom: none; }
-  .pain-cell { font-size: 12.5px; }
-  .pain-left  { color: var(--rtxt); }
-  .pain-arrow { color: var(--amber); font-weight: 900; font-size: 16px; }
-  .pain-right { color: var(--green); font-weight: 600; }
+/* pain points */
+.pp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.pp .pp-head{padding:15px 18px;background:var(--red-soft);border-bottom:1px solid #FBD5D5}
+.pp .pp-pain{font-size:14.5px;font-weight:700;color:#991B1B;display:flex;gap:8px;align-items:flex-start}
+.pp .pp-impact{font-size:12.5px;color:#B91C1C;margin-top:5px;padding-left:24px}
+.pp .pp-fix{padding:15px 18px;background:var(--green-soft)}
+.pp .pp-fix .fx-lab{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:6px}
+.pp .pp-fix .fx-txt{font-size:13.5px;color:#065F46;margin-top:6px;line-height:1.55}
 
-  /* ── TALKING POINT / QUESTION ITEMS ── */
-  .tp-item {
-    padding: 7px 0;
-    border-bottom: 1px dashed var(--gmid);
-    font-size: 13px;
-    font-style: italic;
-    color: var(--ink);
-  }
-  .tp-item:last-child { border-bottom: none; }
-  .kq-item {
-    padding: 7px 0;
-    border-bottom: 1px dashed var(--gmid);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--amber);
-  }
-  .kq-item:last-child { border-bottom: none; }
+/* hero products */
+.hp{display:flex;gap:14px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);transition:all .18s}
+.hp:hover{border-color:var(--brand-2);box-shadow:var(--shadow-md)}
+.hp .hp-badge{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;font-family:'Manrope'}
+.hp .hp-name{font-size:15.5px;font-weight:800;color:var(--ink)}
+.hp .hp-name a{color:var(--brand)}
+.hp .hp-desc{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.55}
 
-  /* ── SCROLL TO TOP ── */
-  #scroll-top {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--dark);
-    color: var(--gold);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background .2s;
-    z-index: 200;
-  }
-  #scroll-top:hover { background: var(--navy); }
+/* objections — accordion */
+.obj{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:11px;overflow:hidden}
+.obj summary{padding:16px 18px;cursor:pointer;font-size:14.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:11px;list-style:none}
+.obj summary::-webkit-details-marker{display:none}
+.obj summary .obj-q-ic{width:26px;height:26px;border-radius:8px;background:var(--amber-soft);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.obj summary .chev{margin-left:auto;color:var(--faint);transition:transform .2s;font-size:13px}
+.obj[open] summary .chev{transform:rotate(180deg)}
+.obj[open] summary{border-bottom:1px solid var(--border-2)}
+.obj .obj-a{padding:16px 18px 18px 55px;font-size:14px;color:var(--ink-2);line-height:1.65;background:var(--green-soft)}
+.obj .obj-a .lab{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:7px}
+.obj .obj-a b{color:var(--ink);font-weight:700}
+
+/* competition */
+.comp-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.comp-row{display:grid;grid-template-columns:1.1fr 1.3fr 1.6fr;border-bottom:1px solid var(--border-2)}
+.comp-row:last-child{border-bottom:none}
+.comp-row.head{background:var(--surface-2);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.comp-cell{padding:15px 17px;font-size:13.5px;line-height:1.55;border-right:1px solid var(--border-2)}
+.comp-cell:last-child{border-right:none}
+.comp-cell .comp-name{font-weight:700;color:var(--ink)}
+.comp-cell .edge{color:#065F46}
+.comp-cell .edge::before{content:"✦ ";color:var(--green)}
+@media(max-width:820px){
+  .comp-row{grid-template-columns:1fr}
+  .comp-cell{border-right:none;border-bottom:1px solid var(--border-2)}
+  .comp-row.head{display:none}
+  .comp-cell[data-l]::before{content:attr(data-l);display:block;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+}
+
+/* resources */
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+@media(max-width:680px){.res-grid{grid-template-columns:1fr}}
+.res{display:flex;gap:13px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);transition:all .18s}
+.res:hover{border-color:var(--brand-2);box-shadow:var(--shadow-md)}
+.res .res-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.res .res-tag{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.res .res-name{font-weight:700;font-size:14px;color:var(--ink);margin:3px 0;display:block}
+.res .res-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.t-product .res-ic{background:var(--brand-soft)} .t-product .res-tag{color:var(--brand)}
+.t-research .res-ic{background:var(--green-soft)} .t-research .res-tag{color:var(--green)}
+.t-solution .res-ic{background:var(--violet-soft)} .t-solution .res-tag{color:var(--violet)}
+.t-usecase .res-ic{background:var(--amber-soft)} .t-usecase .res-tag{color:var(--amber)}
+
+/* risk signal model */
+.rm-intro{font-size:14px;color:var(--ink-2);line-height:1.6;margin-bottom:18px}
+.rm-intro b{color:var(--ink)}
+.dim-list{display:flex;flex-direction:column;gap:11px}
+.dim{display:grid;grid-template-columns:220px 1fr 46px;align-items:center;gap:14px}
+@media(max-width:680px){.dim{grid-template-columns:130px 1fr 40px;gap:9px}}
+.dim .dim-n{font-size:13.5px;font-weight:600;color:var(--ink)}
+.dim .dim-track{height:11px;background:var(--border-2);border-radius:99px;overflow:hidden}
+.dim .dim-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--violet))}
+.dim .dim-w{font-family:'JetBrains Mono';font-size:13px;font-weight:600;color:var(--brand);text-align:right}
+.rag-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:680px){.rag-grid{grid-template-columns:1fr 1fr}}
+.rag{border-radius:var(--r);padding:14px;border:1px solid var(--border)}
+.rag .rag-top{display:flex;align-items:center;gap:7px;font-weight:800;font-size:13.5px;font-family:'Manrope'}
+.rag .rag-range{font-family:'JetBrains Mono';font-size:18px;font-weight:700;margin:6px 0 2px}
+.rag .rag-lab{font-size:11.5px;color:var(--muted);line-height:1.4}
+.scen{display:flex;align-items:center;gap:16px;padding:15px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:11px}
+.scen .scen-score{font-family:'Manrope';font-size:30px;font-weight:800;width:62px;text-align:center;flex-shrink:0;line-height:1}
+.scen .scen-body{flex:1;min-width:0}
+.scen .scen-name{font-size:14.5px;font-weight:700;color:var(--ink)}
+.scen .scen-prof{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.scen .scen-sig{font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px;white-space:nowrap;flex-shrink:0}
+.gauge{height:9px;border-radius:99px;background:linear-gradient(90deg,#10B981 0%,#10B981 35%,#F59E0B 36%,#F59E0B 55%,#EF4444 56%,#EF4444 75%,#1F2937 76%,#1F2937 100%);position:relative;margin-top:9px}
+.gauge .pin{position:absolute;top:-4px;width:3px;height:17px;background:var(--ink);border-radius:2px;transform:translateX(-50%);box-shadow:0 0 0 2px #fff}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:680px){.stat-band{grid-template-columns:1fr}}
+.stat-c{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;text-align:center;box-shadow:var(--shadow-sm)}
+.stat-c .sc-num{font-family:'Manrope';font-size:30px;font-weight:800;background:linear-gradient(120deg,var(--brand),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat-c .sc-lab{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+
+/* footer */
+.footer{margin-top:64px;border-top:1px solid var(--border);padding:30px 0 50px;text-align:center}
+.footer p{font-size:12px;color:var(--faint);line-height:1.7}
+.footer a{color:var(--muted);font-weight:600}
+
+/* fab */
+.fab{position:fixed;bottom:22px;right:22px;width:46px;height:46px;border-radius:14px;background:var(--brand);color:#fff;border:none;font-size:19px;cursor:pointer;box-shadow:var(--shadow-lg);display:none;align-items:center;justify-content:center;z-index:70}
+.fab:hover{background:var(--brand-2)}
+
+.note{font-size:12.5px;color:var(--muted);background:var(--surface-2);border:1px dashed var(--border);border-radius:var(--r);padding:12px 15px;line-height:1.55}
+.note b{color:var(--ink-2)}
+@media(max-width:560px){
+  .home-hero h1{font-size:34px}
+  .lob-hero{padding:26px 22px}
+  .lob-hero h1{font-size:25px}
+  .wrap{padding:0 16px}
+  .appbar{padding:0 16px}
+  .sec-nav{margin:0 -16px;padding:12px 16px}
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════ TOP BAR ═══════════════════════ -->
-<div class="topbar">
-  <div class="topbar-logo">
-    <div class="logo-badge">MOODY'S</div>
+<!-- ───────── APP BAR ───────── -->
+<header class="appbar">
+  <div class="brand" onclick="go('home')">
+    <div class="logo">IQ</div>
     <div>
-      <div class="topbar-title">Underwriting Sales Hub</div>
-      <div class="topbar-sub">Casualty &amp; Financial Lines · Sales Enablement</div>
+      <div class="b-title">Insurance Sales Intelligence</div>
+      <div class="b-sub">Casualty &amp; Financial Lines · Powered by Moody's data</div>
     </div>
   </div>
-  <div class="topbar-links">
-    <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Casualty Solutions</a>
-    <a href="https://www.moodys.com/web/en/us/solutions/financial-lines.html" target="_blank">Financial Lines</a>
-    <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a>
-    <a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a>
-    <a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">GRID</a>
-    <a href="https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html" target="_blank">RMS</a>
+  <nav class="appbar-nav">
+    <span class="nav-pill" onclick="go('home')">Home</span>
+    <div class="lob-switch">
+      <button class="lob-switch-btn" onclick="toggleMenu(event)">
+        Lines of Business <span style="font-size:10px">▾</span>
+      </button>
+      <div class="lob-menu" id="lobMenu"></div>
+    </div>
+  </nav>
+</header>
+
+<!-- ───────── HOME PAGE ───────── -->
+<main id="page-home" class="page wrap">
+  <section class="home-hero">
+    <span class="eyebrow">Sales Enablement Platform</span>
+    <h1>Win every underwriting conversation across <span class="grad">Casualty &amp; Financial Lines</span></h1>
+    <p>Six lines of business. Everything your team needs — discovery questions, underwriting guidance, objection handling, competitive intel, and the Moody's data that wins the deal.</p>
+    <div class="home-stats">
+      <div class="home-stat"><div class="hs-num">6</div><div class="hs-lab">Lines of Business</div></div>
+      <div class="home-stat"><div class="hs-num">625M+</div><div class="hs-lab">Companies in Orbis</div></div>
+      <div class="home-stat"><div class="hs-num">$1.45T</div><div class="hs-lab">B2B payments (Cortera)</div></div>
+      <div class="home-stat"><div class="hs-num">8</div><div class="hs-lab">Playbook sections / LOB</div></div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div class="sh-eyebrow">Choose your line</div>
+    <h2>Lines of Business</h2>
+    <p>Each opens a full playbook: overview · sales · discovery · underwriting · pain points · objections · competition · resources.</p>
   </div>
-</div>
-<div class="accent-bar"></div>
+  <div class="lob-grid" id="lobGrid"></div>
 
-<!-- ═══════════════════════ HERO ═══════════════════════ -->
-<div class="hero">
-  <h1>Line-of-Business Sales Brief</h1>
-  <p>Everything your team needs to talk credibly about Casualty &amp; Financial Lines — what each line is, what underwriters worry about, where Moody's data wins the conversation, and the questions that open deals.</p>
-</div>
-
-<!-- ═══════════════════════ LOB TAB NAV ═══════════════════════ -->
-<div class="lob-nav" id="lob-nav">
-  <div class="lob-tab active" data-lob="do"  onclick="showLOB('do')">D&amp;O</div>
-  <div class="lob-tab"        data-lob="eo"  onclick="showLOB('eo')">E&amp;O</div>
-  <div class="lob-tab"        data-lob="sur" onclick="showLOB('sur')">Surety</div>
-  <div class="lob-tab"        data-lob="tc"  onclick="showLOB('tc')">Trade Credit</div>
-  <div class="lob-tab"        data-lob="gl"  onclick="showLOB('gl')">General Liability</div>
-  <div class="lob-tab"        data-lob="exc" onclick="showLOB('exc')">Excess Casualty</div>
-</div>
-
-<!-- ═══════════════════════ MAIN ═══════════════════════ -->
-<div class="main">
-
-<!-- ─────────────────── D&O ─────────────────── -->
-<div id="lob-do" class="lob-panel">
-  <div class="tagline-band">
-    <div>
-      <div class="tagline-lob">Directors &amp; Officers (D&amp;O)</div>
-      <div class="tagline-text">Protecting the people who run the company — and the company itself</div>
-    </div>
-    <div class="adv-bar">
-      <div class="adv-label">Moody's<br>Data Advantage</div>
-      <span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span>
-    </div>
+  <div class="section-head">
+    <div class="sh-eyebrow">Cross-line</div>
+    <h2>Moody's Data Ecosystem</h2>
+    <p>The platforms behind every play — click through to product pages.</p>
   </div>
+  <div class="glob-res" id="globRes"></div>
 
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-navy">📌 What It Is</div>
-      <div class="card-body cb-pblue">Directors &amp; Officers liability covers executives, board members and the entity against claims alleging wrongful acts in managing the organization — securities suits, breach of fiduciary duty, creditor and regulatory actions.</div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-dblue">👥 Who Buys It</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🏢 Public companies</li>
-          <li>💼 PE-backed &amp; private companies</li>
-          <li>🏛️ Non-profits</li>
-          <li>🚀 SPACs &amp; IPO candidates</li>
-          <li>🌐 Multinationals with US nexus</li>
-        </ul>
-      </div>
-    </div>
+  <div class="footer">
+    <p>Internal sales enablement tool. Statistics sourced from Moody's product disclosures, NAIC filings &amp; industry litigation data (2024–25).<br>For commercial use only — not for external distribution.</p>
   </div>
+</main>
 
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-dblue">😰 What Keeps the Underwriter Up at Night</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🔹 Financial distress / going-concern risk</li>
-          <li>🔹 Governance quality (board independence, audit committee)</li>
-          <li>🔹 Prior claims &amp; regulatory investigations</li>
-          <li>🔹 Securities-litigation exposure</li>
-          <li>🔹 M&amp;A, SPAC and IPO activity</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-red">🚩 Deal-Breakers (Red Flags)</div>
-      <div class="card-body cb-pred">
-        <ul>
-          <li>🚩 Going-concern audit opinion</li>
-          <li>🚩 Active SEC / DOJ investigation</li>
-          <li>🚩 Fraud-related financial restatement</li>
-          <li>🚩 Sanctions hit on entity, UBO or executive</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<!-- ───────── LOB PAGE (rendered) ───────── -->
+<main id="page-lob" class="page wrap"></main>
 
-  <div class="section-label">⭐ Moody's Hero Products — Where We Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header ch-moodys">⭐ Moody's Hero Products for D&amp;O</div>
-    <div class="card-body cb-white">
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a></div>
-          <div class="hp-desc">Probability of default &amp; early-warning signals for any company globally — rated or unrated, public or private. Flags credit deterioration 3–6 months before financials reflect it.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a></div>
-          <div class="hp-desc">Financials, ownership tree &amp; UBO for 625M+ companies globally. Instant rebuild of company financial &amp; governance picture from scattered filings.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">RDC/GRID</a></div>
-          <div class="hp-desc">Sanctions, PEPs &amp; adverse media screening updated daily. Every director, UBO and executive screened automatically against global enforcement databases.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name">D&amp;O Data</div>
-          <div class="hp-desc">Board composition, director tenure, executive intelligence — the governance layer no other data provider combines with credit risk in a single enrichment call.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-teal">💬 Conversation Starters</div>
-      <div class="card-body cb-white">
-        <div class="tp-item">"Your underwriters rebuild a company's financial &amp; governance picture from scattered filings — we deliver it in seconds."</div>
-        <div class="tp-item">"We flag credit deterioration 3–6 months before it hits the financials."</div>
-        <div class="tp-item">"Every director, UBO and executive screened for sanctions, PEP status and adverse media — automatically."</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-amber">🎯 Killer Questions to Ask</div>
-      <div class="card-body cb-pamber">
-        <div class="kq-item">"Any financial restatements in the last 5 years?"</div>
-        <div class="kq-item">"Any pending regulatory investigations or securities litigation?"</div>
-        <div class="kq-item">"Is the entity rated — and if not, do you know its implied credit quality?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-band">
-    <div class="stat-number">46%</div>
-    <div class="stat-rest">rise in Chapter 11 filings in the 12 months to mid-2024, fueling a new wave of securities litigation and creditor D&amp;O claims</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-green">🔧 Underwriter Pain → Moody's Fix</div>
-      <div class="card-body cb-white">
-        <div class="pain-row"><span class="pain-cell pain-left">Can't gauge private-company credit</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">EDF-X implied ratings</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Manual governance research</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">D&amp;O Data board &amp; exec profiles</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Missed regulatory red flags</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">RDC/GRID real-time enforcement monitoring</span></div>
-      </div>
-    </div>
-    <div class="resources-section" style="margin-bottom:0;border-radius:8px;">
-      <div class="resources-header">🔗 Moody's Resources &amp; Links — D&amp;O</div>
-      <div style="padding:4px 0;">
-        <div class="res-item">
-          <span class="res-tag tag-research">Research</span>
-          <a href="https://www.moodys.com/web/en/us/insights/insurance/d-o-series-evolving-risks-in-the-boardroom-a-new-era-of-d-o-liability-part-1.html" target="_blank">D&amp;O Series: Evolving Risks in the Boardroom</a>
-          <span class="res-desc">Moody's multi-part research series on evolving D&amp;O liability landscape</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X Early Warning System</a>
-          <span class="res-desc">Real-time credit risk signals for private and public companies</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis Company Data</a>
-          <span class="res-desc">625M+ companies with financials, ownership &amp; UBO</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-solution">Solution</span>
-          <a href="https://www.moodys.com/web/en/us/solutions/financial-lines.html" target="_blank">Financial Lines Solutions Overview</a>
-          <span class="res-desc">Moody's data solutions for D&amp;O, E&amp;O and financial lines underwriting</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /lob-do -->
-
-<!-- ─────────────────── E&O ─────────────────── -->
-<div id="lob-eo" class="lob-panel hidden">
-  <div class="tagline-band">
-    <div>
-      <div class="tagline-lob">Errors &amp; Omissions (E&amp;O)</div>
-      <div class="tagline-text">When professional advice or services go wrong</div>
-    </div>
-    <div class="adv-bar">
-      <div class="adv-label">Moody's<br>Data Advantage</div>
-      <span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot empty">○</span>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-navy">📌 What It Is</div>
-      <div class="card-body cb-pblue">Errors &amp; Omissions / Professional Liability covers firms against claims of negligent acts, errors or omissions in delivering professional services — increasingly including data breaches and AI-driven errors.</div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-dblue">👥 Who Buys It</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>💻 Tech companies &amp; SaaS providers</li>
-          <li>⚖️ Law firms</li>
-          <li>📊 Accountants &amp; financial advisers</li>
-          <li>🏗️ Architects &amp; engineers</li>
-          <li>🏥 Healthcare professionals</li>
-          <li>🎯 Consultants of all kinds</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-dblue">😰 What Keeps the Underwriter Up at Night</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🔹 Regulatory &amp; disciplinary history of principals</li>
-          <li>🔹 Cyber &amp; client-data exposure</li>
-          <li>🔹 Prior E&amp;O claims &amp; near-misses</li>
-          <li>🔹 Client concentration</li>
-          <li>🔹 Financial stability of the firm</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-red">🚩 Deal-Breakers (Red Flags)</div>
-      <div class="card-body cb-pred">
-        <ul>
-          <li>🚩 Active license suspension / revocation</li>
-          <li>🚩 Fraud-related prior claim</li>
-          <li>🚩 Prior data breach + weak BitSight score</li>
-          <li>🚩 No engagement letters / no QA framework</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">⭐ Moody's Hero Products — Where We Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header ch-moodys">⭐ Moody's Hero Products for E&amp;O</div>
-    <div class="card-body cb-white">
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.bitsight.com/products/bitsight-for-cyber-insurance" target="_blank">BitSight</a></div>
-          <div class="hp-desc">External cyber risk score — ~40% more accurate claim prediction. Outside-in scan with no questionnaire required. Flags open ports, vulnerabilities and breach exposure in real time.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">RDC/GRID</a></div>
-          <div class="hp-desc">Regulatory, disciplinary &amp; adverse-media screening. Consolidates scattered licensing board, bar association and enforcement actions in one enrichment call.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a></div>
-          <div class="hp-desc">Private-company financial health &amp; probability of default. Most E&amp;O firms are private with no public financials — EDF-X gives you a credit read anyway.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a></div>
-          <div class="hp-desc">Firm profile, revenue &amp; client intelligence. Cross-checks stated operations, org structure and ultimate beneficial ownership in seconds.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-teal">💬 Conversation Starters</div>
-      <div class="card-body cb-white">
-        <div class="tp-item">"Tech &amp; professional firms live and die by their cyber posture — we score it from the outside in, no questionnaire needed."</div>
-        <div class="tp-item">"We screen every principal against global regulatory &amp; disciplinary databases instantly."</div>
-        <div class="tp-item">"Most E&amp;O firms are private with no public financials — EDF-X gives you a credit read anyway."</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-amber">🎯 Killer Questions to Ask</div>
-      <div class="card-body cb-pamber">
-        <div class="kq-item">"Do any principals have disciplinary history with their licensing board?"</div>
-        <div class="kq-item">"Does the firm hold sensitive client data — and how is it protected?"</div>
-        <div class="kq-item">"Are AI tools used in client deliverables?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-band">
-    <div class="stat-number">40%</div>
-    <div class="stat-rest">improvement in claim-prediction accuracy when BitSight cyber-risk data is added to the underwriting model</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-green">🔧 Underwriter Pain → Moody's Fix</div>
-      <div class="card-body cb-white">
-        <div class="pain-row"><span class="pain-cell pain-left">Cyber exposure invisible at UW</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">BitSight outside-in scan</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Disciplinary history scattered</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">RDC/GRID consolidated screen</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">No financials for private firms</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">EDF-X private model</span></div>
-      </div>
-    </div>
-    <div class="resources-section" style="margin-bottom:0;border-radius:8px;">
-      <div class="resources-header">🔗 Moody's Resources &amp; Links — E&amp;O</div>
-      <div style="padding:4px 0;">
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.bitsight.com/products/bitsight-for-cyber-insurance" target="_blank">BitSight for Cyber Insurance</a>
-          <span class="res-desc">~40% more accurate claim prediction; outside-in cyber risk scoring</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">GRID — Global Regulatory Intel</a>
-          <span class="res-desc">Sanctions, PEPs, disciplinary records, adverse media — daily updates</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-solution">Solution</span>
-          <a href="https://www.moodys.com/web/en/us/solutions/financial-lines.html" target="_blank">Financial Lines Solutions</a>
-          <span class="res-desc">Moody's E&amp;O and professional liability data stack</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X for Private Companies</a>
-          <span class="res-desc">Implied credit ratings and PD scores for unrated firms</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /lob-eo -->
-
-<!-- ─────────────────── SURETY ─────────────────── -->
-<div id="lob-sur" class="lob-panel hidden">
-  <div class="tagline-band">
-    <div>
-      <div class="tagline-lob">Surety</div>
-      <div class="tagline-text">Credit, not insurance — backing a principal's promise to perform</div>
-    </div>
-    <div class="adv-bar">
-      <div class="adv-label">Moody's<br>Data Advantage</div>
-      <span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-navy">📌 What It Is</div>
-      <div class="card-body cb-pblue">Surety bonds guarantee a principal (contractor / licensee) will fulfil an obligation to an obligee. The surety expects zero losses and relies on indemnity — so it is fundamentally a credit decision.</div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-dblue">👥 Who Buys It</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🏗️ General contractors</li>
-          <li>🔧 Specialty subcontractors</li>
-          <li>🏢 Developers</li>
-          <li>📋 Licensed professionals (court &amp; license bonds)</li>
-          <li>🏛️ Public-sector obligees</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-dblue">😰 What Keeps the Underwriter Up at Night</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🔹 Working capital &amp; tangible net worth</li>
-          <li>🔹 Trade-payment behavior (do they pay subs on time?)</li>
-          <li>🔹 Backlog size &amp; gross-margin fade</li>
-          <li>🔹 Liens, judgments &amp; UCC filings</li>
-          <li>🔹 Banking relationship &amp; liquidity</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-red">🚩 Deal-Breakers (Red Flags)</div>
-      <div class="card-body cb-pred">
-        <ul>
-          <li>🚩 Negative working capital</li>
-          <li>🚩 Negative gross profit in backlog</li>
-          <li>🚩 Active bond claim or obligee dispute</li>
-          <li>🚩 Unsatisfied tax lien or judgment</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">⭐ Moody's Hero Products — Where We Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header ch-moodys">⭐ Moody's Hero Products for Surety</div>
-    <div class="card-body cb-white">
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Cortera</a></div>
-          <div class="hp-desc">Trade-payment behavior, CPR credit score, liens, judgments, UCC &amp; DOT data. $1.45T annual B2B payment history. See how a contractor actually pays its subs and suppliers, in real time.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a></div>
-          <div class="hp-desc">Early-warning signals on credit deterioration months before the financials reflect it. The forward-looking layer that CPA-grade financials lack.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a></div>
-          <div class="hp-desc">CPA-grade financials, ownership tree &amp; UBO. The gold standard for financial analysis of contractors at any tier of the supply chain.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">RDC/GRID</a></div>
-          <div class="hp-desc">Principal &amp; UBO screening against global sanctions, PEPs and adverse media — especially important for federal and international bonding programs.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-teal">💬 Conversation Starters</div>
-      <div class="card-body cb-white">
-        <div class="tp-item">"Surety is a credit decision — and credit is exactly what Moody's does best."</div>
-        <div class="tp-item">"We see how a contractor actually pays its subs and suppliers, in real time, through Cortera's $1.45T network."</div>
-        <div class="tp-item">"Tax liens, judgments and UCC filings surfaced automatically — no manual public-records search."</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-amber">🎯 Killer Questions to Ask</div>
-      <div class="card-body cb-pamber">
-        <div class="kq-item">"How does the principal pay its subcontractors — on time?"</div>
-        <div class="kq-item">"What's the working capital relative to the bonding program?"</div>
-        <div class="kq-item">"Any liens, judgments or prior bond claims?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-band">
-    <div class="stat-number">$1.45T</div>
-    <div class="stat-rest">annual B2B payment history in Cortera's contributory network — the deepest real-time trade-payment signal available for surety underwriting</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-green">🔧 Underwriter Pain → Moody's Fix</div>
-      <div class="card-body cb-white">
-        <div class="pain-row"><span class="pain-cell pain-left">Financials are a lagging indicator</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Cortera real-time payment behavior</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Manual lien / judgment searches</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Cortera public-records data</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Distress detected too late</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">EDF-X early-warning flags</span></div>
-      </div>
-    </div>
-    <div class="resources-section" style="margin-bottom:0;border-radius:8px;">
-      <div class="resources-header">🔗 Moody's Resources &amp; Links — Surety</div>
-      <div style="padding:4px 0;">
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Cortera — Trade Credit &amp; Payment</a>
-          <span class="res-desc">$1.45T B2B payment network, CPR scores, liens, judgments, UCC</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis — Company Financials</a>
-          <span class="res-desc">CPA-grade financials and ownership for 625M+ companies</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-solution">Solution</span>
-          <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Casualty Insurance Solutions</a>
-          <span class="res-desc">How Moody's data serves the casualty underwriting workflow</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /lob-sur -->
-
-<!-- ─────────────────── TRADE CREDIT ─────────────────── -->
-<div id="lob-tc" class="lob-panel hidden">
-  <div class="tagline-band">
-    <div>
-      <div class="tagline-lob">Trade Credit</div>
-      <div class="tagline-text">Insuring the money your client is owed</div>
-    </div>
-    <div class="adv-bar">
-      <div class="adv-label">Moody's<br>Data Advantage</div>
-      <span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-navy">📌 What It Is</div>
-      <div class="card-body cb-pblue">Trade Credit insurance protects sellers against buyer non-payment from insolvency or protracted default — plus political and currency-transfer risk on export trade.</div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-dblue">👥 Who Buys It</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🌍 Exporters</li>
-          <li>🏭 Manufacturers</li>
-          <li>📦 Distributors &amp; wholesalers</li>
-          <li>🏦 Banks with trade-finance books</li>
-          <li>💰 Factoring companies</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-dblue">😰 What Keeps the Underwriter Up at Night</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🔹 Buyer-portfolio credit quality</li>
-          <li>🔹 Country &amp; political risk</li>
-          <li>🔹 Buyer concentration (single-name risk)</li>
-          <li>🔹 Payment trends (DSO / Days-Beyond-Terms)</li>
-          <li>🔹 Policyholder moral hazard</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-red">🚩 Deal-Breakers (Red Flags)</div>
-      <div class="card-body cb-pred">
-        <ul>
-          <li>🚩 Sanctioned buyer or buyer country</li>
-          <li>🚩 Buyer insolvency filing</li>
-          <li>🚩 Single buyer &gt;50% of the portfolio</li>
-          <li>🚩 Distressed policyholder (adverse selection)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">⭐ Moody's Hero Products — Where We Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header ch-moodys">⭐ Moody's Hero Products for Trade Credit</div>
-    <div class="card-body cb-white">
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a></div>
-          <div class="hp-desc">PD &amp; implied ratings across the entire buyer portfolio — rated or unrated, any country. We can credit-score an entire buyer portfolio including unrated SMEs anywhere in the world.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Cortera</a></div>
-          <div class="hp-desc">Buyer payment behavior &amp; delinquency signals. Shows which buyers are slowing their payments before they default — the leading indicator financials can't provide.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.economy.com/" target="_blank">Economy.com</a> + <a href="https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html" target="_blank">Ratings</a></div>
-          <div class="hp-desc">Sovereign &amp; country risk. Moody's sovereign ratings and Economy.com economic forecasts price country risk precisely — no guesswork on political or transfer risk.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">RDC/GRID</a></div>
-          <div class="hp-desc">Buyer &amp; UBO sanctions screening. Every buyer cross-checked against OFAC, UN and EU sanctions lists before a credit limit is granted.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-teal">💬 Conversation Starters</div>
-      <div class="card-body cb-white">
-        <div class="tp-item">"We can credit-score an entire buyer portfolio — including unrated SMEs anywhere in the world."</div>
-        <div class="tp-item">"Cortera shows you which buyers are slowing their payments before they default."</div>
-        <div class="tp-item">"Moody's sovereign ratings and Economy.com forecasts price country risk precisely."</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-amber">🎯 Killer Questions to Ask</div>
-      <div class="card-body cb-pamber">
-        <div class="kq-item">"What's the credit-quality spread across the buyer portfolio?"</div>
-        <div class="kq-item">"Which countries are the buyers in?"</div>
-        <div class="kq-item">"How concentrated is the receivables book?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-band">
-    <div class="stat-number">625M+</div>
-    <div class="stat-rest">companies Moody's can credit-assess worldwide — rated or unrated — giving Trade Credit underwriters a consistent buyer-risk view across every market</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-green">🔧 Underwriter Pain → Moody's Fix</div>
-      <div class="card-body cb-white">
-        <div class="pain-row"><span class="pain-cell pain-left">Unrated foreign buyers</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">EDF-X implied ratings globally</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Default surprises</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Cortera payment-slowdown alerts</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Country-risk guesswork</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Moody's sovereign ratings + Economy.com</span></div>
-      </div>
-    </div>
-    <div class="resources-section" style="margin-bottom:0;border-radius:8px;">
-      <div class="resources-header">🔗 Moody's Resources &amp; Links — Trade Credit</div>
-      <div style="padding:4px 0;">
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Trade Credit Data Application</a>
-          <span class="res-desc">Moody's Orbis + Cortera integrated trade credit solution</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X — Global Credit Scoring</a>
-          <span class="res-desc">Implied ratings for any company in any country, rated or unrated</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.economy.com/" target="_blank">Economy.com — Country Risk</a>
-          <span class="res-desc">Sovereign risk forecasts, GDP, FX and political risk by country</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-solution">Solution</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html" target="_blank">CreditView / OneView</a>
-          <span class="res-desc">Moody's credit ratings intelligence and research platform</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /lob-tc -->
-
-<!-- ─────────────────── GENERAL LIABILITY ─────────────────── -->
-<div id="lob-gl" class="lob-panel hidden">
-  <div class="tagline-band">
-    <div>
-      <div class="tagline-lob">General Liability (GL)</div>
-      <div class="tagline-text">Third-party injury &amp; property damage — the workhorse of casualty</div>
-    </div>
-    <div class="adv-bar">
-      <div class="adv-label">Moody's<br>Data Advantage</div>
-      <span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot empty">○</span>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-navy">📌 What It Is</div>
-      <div class="card-body cb-pblue">Commercial General Liability covers bodily injury, property damage, personal/advertising injury and products/completed-operations liability to third parties.</div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-dblue">👥 Who Buys It</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🏗️ Contractors</li>
-          <li>🏭 Manufacturers</li>
-          <li>🛍️ Retailers &amp; restaurants</li>
-          <li>💻 Tech companies</li>
-          <li>🏥 Healthcare</li>
-          <li>🏨 Hospitality — virtually every commercial business</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-dblue">😰 What Keeps the Underwriter Up at Night</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🔹 Operations hazard &amp; mass-tort exposure</li>
-          <li>🔹 Jurisdiction / venue (judicial hellholes)</li>
-          <li>🔹 Loss history (frequency &amp; severity)</li>
-          <li>🔹 Products liability</li>
-          <li>🔹 Safety record &amp; risk management</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-red">🚩 Deal-Breakers (Red Flags)</div>
-      <div class="card-body cb-pred">
-        <ul>
-          <li>🚩 Confirmed PFAS / high-probability mass-tort agent</li>
-          <li>🚩 Active mass-tort lawsuit</li>
-          <li>🚩 OSHA willful violation</li>
-          <li>🚩 Imported goods with no domestic manufacturer</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">⭐ Moody's Hero Products — Where We Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header ch-moodys">⭐ Moody's Hero Products for General Liability</div>
-    <div class="card-body cb-white">
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Praedicat (Litagion®)</a></div>
-          <div class="hp-desc">Mass-tort / emerging-liability screening &amp; PML modeling. Screens products &amp; operations against 100+ mass-tort agents — PFAS, talc, opioids, glyphosate — before they become a claim.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a></div>
-          <div class="hp-desc">Operations verification &amp; SIC/NAICS cross-check. Stated operations cross-checked against Orbis — brokers can't hide a hazardous exposure.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Cortera</a></div>
-          <div class="hp-desc">Credit, DOT safety &amp; public records. DOT violation history and OSHA records surfaced alongside financial signals — a single enrichment call.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.economy.com/" target="_blank">Economy.com</a></div>
-          <div class="hp-desc">Jurisdiction &amp; social-inflation context. Nuclear verdicts hit $31.3B in 2024. Maps jurisdiction &amp; industry litigation risk so your team prices for it.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-teal">💬 Conversation Starters</div>
-      <div class="card-body cb-white">
-        <div class="tp-item">"We screen products &amp; operations against 100+ mass-tort agents — PFAS, talc, opioids — before they become a claim."</div>
-        <div class="tp-item">"Nuclear verdicts hit $31.3B in 2024. We map jurisdiction &amp; industry litigation risk so your team prices for it."</div>
-        <div class="tp-item">"Stated operations are cross-checked against Orbis — brokers can't hide a hazardous exposure."</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-amber">🎯 Killer Questions to Ask</div>
-      <div class="card-body cb-pamber">
-        <div class="kq-item">"What exactly do they manufacture or sell — and from what materials?"</div>
-        <div class="kq-item">"Which states is the payroll / revenue concentrated in?"</div>
-        <div class="kq-item">"Any products containing chemicals of concern?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-band">
-    <div class="stat-number">$31.3B</div>
-    <div class="stat-rest">total nuclear-verdict awards in 2024 — up 116% year-on-year — making venue &amp; litigation-risk analytics a must-have for any GL underwriter</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-green">🔧 Underwriter Pain → Moody's Fix</div>
-      <div class="card-body cb-white">
-        <div class="pain-row"><span class="pain-cell pain-left">Latent mass-tort exposure invisible</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Praedicat Litagion® screen</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Misrepresented operations</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Orbis NAICS cross-check</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Nuclear-verdict surprise</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Praedicat + Economy.com venue analytics</span></div>
-      </div>
-    </div>
-    <div class="resources-section" style="margin-bottom:0;border-radius:8px;">
-      <div class="resources-header">🔗 Moody's Resources &amp; Links — General Liability</div>
-      <div style="padding:4px 0;">
-        <div class="res-item">
-          <span class="res-tag tag-solution">Solution</span>
-          <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Casualty Insurance Solutions</a>
-          <span class="res-desc">Praedicat mass-tort modeling, GL and Excess data solutions</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-research">Research</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html" target="_blank">RMS Forward-Looking Risk</a>
-          <span class="res-desc">Catastrophe &amp; emerging risk modeling for casualty lines</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis — Operations Verification</a>
-          <span class="res-desc">SIC/NAICS cross-check, subsidiary mapping, global operations</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /lob-gl -->
-
-<!-- ─────────────────── EXCESS CASUALTY ─────────────────── -->
-<div id="lob-exc" class="lob-panel hidden">
-  <div class="tagline-band">
-    <div>
-      <div class="tagline-lob">Excess Casualty</div>
-      <div class="tagline-text">The high-severity layer — where nuclear verdicts live</div>
-    </div>
-    <div class="adv-bar">
-      <div class="adv-label">Moody's<br>Data Advantage</div>
-      <span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot filled">●</span><span class="dot empty">○</span>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-navy">📌 What It Is</div>
-      <div class="card-body cb-pblue">Excess &amp; Umbrella liability provides additional limits over primary policies (GL, Auto, Employers Liability), built for catastrophic, high-severity loss events.</div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-dblue">👥 Who Buys It</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🏢 Mid-to-large commercial accounts</li>
-          <li>⚠️ High-hazard industries</li>
-          <li>📈 Public companies</li>
-          <li>🏗️ Construction programs</li>
-          <li>🌐 Multinationals</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-dblue">😰 What Keeps the Underwriter Up at Night</div>
-      <div class="card-body cb-white">
-        <ul>
-          <li>🔹 Catastrophic / PML exposure</li>
-          <li>🔹 Social inflation &amp; nuclear verdicts</li>
-          <li>🔹 Underlying program quality &amp; primary-carrier strength</li>
-          <li>🔹 Loss development</li>
-          <li>🔹 Mass-tort accumulation</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-red">🚩 Deal-Breakers (Red Flags)</div>
-      <div class="card-body cb-pred">
-        <ul>
-          <li>🚩 Active mass-tort defendant</li>
-          <li>🚩 Prior sexual-abuse &amp; molestation (SAM) claim</li>
-          <li>🚩 Primary carrier below investment grade</li>
-          <li>🚩 Modeled PML &gt;10× attachment point</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">⭐ Moody's Hero Products — Where We Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header ch-moodys">⭐ Moody's Hero Products for Excess Casualty</div>
-    <div class="card-body cb-white">
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Praedicat</a></div>
-          <div class="hp-desc">Stochastic casualty PML &amp; mass-tort accumulation modeling. Models the probable maximum loss stochastically — so your team knows if the attachment point is mispriced.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.economy.com/" target="_blank">Economy.com</a></div>
-          <div class="hp-desc">Social-inflation &amp; nuclear-verdict analytics. Social inflation hit a 20-year high. Quantifies nuclear-verdict and litigation-funding risk by industry and venue.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html" target="_blank">Moody's Ratings</a></div>
-          <div class="hp-desc">Primary-carrier financial strength ratings. We rate the primary carrier's financial strength so you know your drop-down risk before you attach.</div>
-        </div>
-      </div>
-      <div class="hero-product">
-        <div class="hp-star">⭐</div>
-        <div class="hp-content">
-          <div class="hp-name"><a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a></div>
-          <div class="hp-desc">Insured financial stability &amp; early-warning signals. Tracks the insured's credit trajectory to identify accounts likely to face financial pressure that increases their risk profile.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-teal">💬 Conversation Starters</div>
-      <div class="card-body cb-white">
-        <div class="tp-item">"Praedicat models the probable maximum loss stochastically — so your team knows if the attachment point is mispriced."</div>
-        <div class="tp-item">"Social inflation hit a 20-year high. We quantify nuclear-verdict and litigation-funding risk by industry and venue."</div>
-        <div class="tp-item">"We rate the primary carrier's financial strength so you know your drop-down risk."</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header ch-amber">🎯 Killer Questions to Ask</div>
-      <div class="card-body cb-pamber">
-        <div class="kq-item">"What's the realistic worst-case loss for this risk?"</div>
-        <div class="kq-item">"What jurisdictions and industries drive the exposure?"</div>
-        <div class="kq-item">"Who's the primary carrier and how strong are they?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-band">
-    <div class="stat-number">7%</div>
-    <div class="stat-rest">social inflation rate in 2023 — a 20-year high, outpacing economic inflation and compounding loss development on every Excess Casualty book</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header ch-green">🔧 Underwriter Pain → Moody's Fix</div>
-      <div class="card-body cb-white">
-        <div class="pain-row"><span class="pain-cell pain-left">Attachment-point guesswork</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Praedicat stochastic PML</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Social-inflation blind spot</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Economy.com venue analytics</span></div>
-        <div class="pain-row"><span class="pain-cell pain-left">Drop-down from a weak primary</span><span class="pain-arrow">→</span><span class="pain-cell pain-right">Moody's carrier ratings</span></div>
-      </div>
-    </div>
-    <div class="resources-section" style="margin-bottom:0;border-radius:8px;">
-      <div class="resources-header">🔗 Moody's Resources &amp; Links — Excess Casualty</div>
-      <div style="padding:4px 0;">
-        <div class="res-item">
-          <span class="res-tag tag-solution">Solution</span>
-          <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Casualty Solutions — Praedicat</a>
-          <span class="res-desc">Stochastic PML, mass-tort accumulation, Litagion® agent screening</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-research">Research</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html" target="_blank">RMS Casualty Catastrophe Modeling</a>
-          <span class="res-desc">Forward-looking view of casualty risk including social inflation</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html" target="_blank">CreditView — Carrier Ratings</a>
-          <span class="res-desc">Financial strength ratings for primary &amp; reinsurance carriers</span>
-        </div>
-        <div class="res-item">
-          <span class="res-tag tag-product">Product</span>
-          <a href="https://www.economy.com/" target="_blank">Economy.com — Social Inflation</a>
-          <span class="res-desc">Verdict analytics, litigation funding trends, venue risk by state</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /lob-exc -->
-
-<!-- ═══════════════════ GLOBAL RESOURCES SECTION ═══════════════════ -->
-<div style="margin-top:32px;">
-  <div class="section-label">🔗 Full Moody's Product Ecosystem — All Links</div>
-  <div class="resources-section">
-    <div class="resources-header">📦 Moody's Data Products &amp; Platforms</div>
-    <div class="resources-grid">
-      <div class="res-item">
-        <span class="res-tag tag-product">Company Data</span>
-        <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a>
-        <span class="res-desc">625M+ companies · financials, ownership, UBO · 170+ sources</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">KYC / Screening</span>
-        <a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">RDC / GRID</a>
-        <span class="res-desc">Global sanctions, PEPs, adverse media · daily updates</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Credit Risk</span>
-        <a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a>
-        <span class="res-desc">PD scores &amp; early-warning signals for any company globally</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Trade &amp; Payment</span>
-        <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Cortera</a>
-        <span class="res-desc">$1.45T B2B payment network · liens, judgments, UCC, DOT</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Cyber Risk</span>
-        <a href="https://www.bitsight.com/products/bitsight-for-cyber-insurance" target="_blank">BitSight</a>
-        <span class="res-desc">Outside-in cyber scoring · 40%+ more accurate claims prediction</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Mass Tort / Casualty</span>
-        <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Praedicat</a>
-        <span class="res-desc">Litagion® agent screening · stochastic casualty PML</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Cat Modeling</span>
-        <a href="https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html" target="_blank">RMS</a>
-        <span class="res-desc">Catastrophe &amp; forward-looking risk models</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Property Intel</span>
-        <a href="https://www.moodys.com/web/en/us/insights/announcements/moodys-to-acquire-cape-analytics.html" target="_blank">Cape Analytics</a>
-        <span class="res-desc">Address-level AI/ML geospatial property intelligence (acq. Jan 2025)</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Ratings &amp; Research</span>
-        <a href="https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html" target="_blank">CreditView / OneView</a>
-        <span class="res-desc">Moody's credit ratings, research &amp; analytics platform</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Economics</span>
-        <a href="https://www.economy.com/" target="_blank">Economy.com (Moody's Analytics)</a>
-        <span class="res-desc">Country risk, GDP forecasts, social inflation &amp; verdict data</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">CRE</span>
-        <a href="https://www.moodys.com/web/en/us/solutions/commercial-real-estate.html" target="_blank">Commercial Real Estate</a>
-        <span class="res-desc">CRE valuations, market analytics &amp; CMBS data</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-product">Ratings Agency</span>
-        <a href="https://www.moodys.com/web/en/us/about/ratings-process.html" target="_blank">Moody's Ratings</a>
-        <span class="res-desc">Sovereign, corporate &amp; financial institution credit ratings</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="resources-section" style="margin-top:12px;">
-    <div class="resources-header">📄 Moody's Research, White Papers &amp; Use Cases</div>
-    <div class="resources-grid">
-      <div class="res-item">
-        <span class="res-tag tag-research">D&amp;O Research</span>
-        <a href="https://www.moodys.com/web/en/us/insights/insurance/d-o-series-evolving-risks-in-the-boardroom-a-new-era-of-d-o-liability-part-1.html" target="_blank">D&amp;O Series: Evolving Risks in the Boardroom (Part 1)</a>
-        <span class="res-desc">Moody's multi-part series on new D&amp;O liability landscape</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-solution">Casualty</span>
-        <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Casualty Insurance Solutions Overview</a>
-        <span class="res-desc">Full Moody's data stack for GL, Excess &amp; specialty casualty</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-solution">Financial Lines</span>
-        <a href="https://www.moodys.com/web/en/us/solutions/financial-lines.html" target="_blank">Financial Lines Solutions Overview</a>
-        <span class="res-desc">D&amp;O, E&amp;O, cyber &amp; financial lines data solutions</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-usecase">Trade Credit</span>
-        <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html" target="_blank">Trade Credit Use Case</a>
-        <span class="res-desc">How Orbis + Cortera power buyer-portfolio underwriting</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-research">Property</span>
-        <a href="https://www.moodys.com/web/en/us/insights/announcements/moodys-to-acquire-cape-analytics.html" target="_blank">Cape Analytics Acquisition Announcement</a>
-        <span class="res-desc">Moody's geospatial property intelligence expansion (Jan 2025)</span>
-      </div>
-      <div class="res-item">
-        <span class="res-tag tag-research">Cat Risk</span>
-        <a href="https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html" target="_blank">RMS Forward-Looking View of Risk</a>
-        <span class="res-desc">How RMS models emerging and evolving catastrophe risk</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /main -->
-
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<div class="footer">
-  <p>
-    <a href="https://www.moodys.com" target="_blank">Moody's Corporation</a> &nbsp;|&nbsp;
-    <a href="https://www.moodys.com/web/en/us/solutions/casualty-insurance.html" target="_blank">Casualty Solutions</a> &nbsp;|&nbsp;
-    <a href="https://www.moodys.com/web/en/us/solutions/financial-lines.html" target="_blank">Financial Lines</a> &nbsp;|&nbsp;
-    <a href="https://www.moodys.com/web/en/us/kyc/products/grid.html" target="_blank">GRID / RDC</a> &nbsp;|&nbsp;
-    <a href="https://www.moodysanalytics.com/product-list/edfx" target="_blank">EDF-X</a> &nbsp;|&nbsp;
-    <a href="https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html" target="_blank">Orbis</a>
-  </p>
-  <p style="margin-top:8px;">
-    Internal sales enablement tool. Statistics sourced from Moody's product disclosures, NAIC filings, and industry litigation data (2024–25).
-    This document is for Moody's commercial use only and is not to be distributed externally.
-  </p>
-</div>
-
-<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+<button class="fab" id="fab" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-  function showLOB(id) {
-    // hide all panels
-    document.querySelectorAll('.lob-panel').forEach(function(p) {
-      p.classList.add('hidden');
-    });
-    // show selected
-    document.getElementById('lob-' + id).classList.remove('hidden');
-    // update tabs
-    document.querySelectorAll('.lob-tab').forEach(function(t) {
-      t.classList.remove('active');
-    });
-    document.querySelector('[data-lob="' + id + '"]').classList.add('active');
-    // smooth scroll to top of content
-    window.scrollTo({ top: document.querySelector('.lob-nav').offsetTop - 60, behavior: 'smooth' });
-  }
+/* ════════════════════════ DATA ════════════════════════ */
+const DATA = {
+do:{
+  name:"Directors & Officers", abbr:"D&O", icon:"⚖️",
+  accent:"#4F46E5", accent2:"#7C3AED", advantage:5,
+  tagline:"Protecting the people who run the company — and the company itself.",
+  meta:[{v:"$31.3B",l:"2024 nuclear verdicts"},{v:"46%",l:"↑ Chapter 11 filings"},{v:"5/5",l:"Moody's data fit"}],
+  overview:{
+    what:"Directors & Officers liability covers executives, board members and the entity itself against claims alleging wrongful acts in managing the organization — securities class actions, breach of fiduciary duty, creditor claims, regulatory and derivative actions. It's a financial-lines product where the loss driver is litigation, not physical events.",
+    who:["Public companies","PE-backed & private companies","Non-profits","SPACs","IPO candidates","Multinationals with US nexus","Financial institutions"]
+  },
+  sales:{
+    pitch:"Your underwriters rebuild a company's financial health and governance picture from scattered filings — we deliver it in seconds, and flag credit deterioration 3–6 months before it hits the financials.",
+    valueProps:[
+      {ic:"📉",t:"Forward-looking credit",d:"EDF-X surfaces probability-of-default and early-warning signals on rated AND unrated private companies — the #1 D&O loss predictor."},
+      {ic:"🏛️",t:"Instant governance picture",d:"Board composition, director tenure, interlocks and ownership trees assembled automatically from Orbis + D&O Data."},
+      {ic:"🛡️",t:"Always-on screening",d:"Every director, UBO and executive screened against sanctions, PEPs and adverse media — refreshed daily via GRID."}
+    ],
+    talking:[
+      "We flag credit deterioration 3–6 months before it appears in the financials — your single best leading indicator for D&O loss.",
+      "Every director, UBO and executive is screened for sanctions, PEP status and adverse media automatically — no manual research.",
+      "Private and pre-IPO companies have no public financials — EDF-X gives you an implied rating and PD anyway, globally."
+    ]
+  },
+  discovery:[
+    {q:"Any financial restatements or material weakness disclosures in the last 5 years?",w:"Restatements are a leading securities-litigation trigger. <b>EDF-X + Orbis</b> let you verify the financial trajectory independently of the submission."},
+    {q:"Are there pending regulatory investigations or securities suits?",w:"Surfaces severity exposure. <b>GRID</b> monitors enforcement and adverse media continuously."},
+    {q:"Is the entity rated — and if not, do you know its implied credit quality?",w:"Most private/PE-backed risks are unrated. <b>EDF-X</b> provides an implied rating to anchor pricing."},
+    {q:"How independent is the board, and what's the audit-committee composition?",w:"Governance quality is a core decision driver. <b>D&O Data</b> maps board independence and tenure instantly."},
+    {q:"Any recent M&A, SPAC activity or an IPO on the horizon?",w:"Transaction activity spikes D&O exposure. Orbis tracks ownership change and corporate events."}
+  ],
+  underwriting:{
+    flow:["Submission intake","Financial health review","Governance assessment","Litigation & regulatory check","Limit/retention & pricing"],
+    keyData:[
+      {k:"Financial stability",v:"Revenue, leverage, liquidity, going-concern, PD/implied rating"},
+      {k:"Governance quality",v:"Board independence, audit committee, director tenure, interlocks"},
+      {k:"Litigation history",v:"Prior securities suits, derivative actions, regulatory matters"},
+      {k:"Ownership & structure",v:"UBO, parent/subsidiary tree, PE sponsorship, public float"},
+      {k:"Corporate events",v:"M&A, restatements, IPO/SPAC, executive turnover"}
+    ],
+    decisionDrivers:"Credit/insolvency risk and governance quality dominate — a financially distressed company with weak governance is the classic severe-loss profile.",
+    redFlags:[
+      "Going-concern audit opinion",
+      "Active SEC / DOJ investigation",
+      "Fraud-related financial restatement",
+      "Sanctions hit on entity, UBO or executive",
+      "Director resignation amid disputes"
+    ]
+  },
+  pains:[
+    {pain:"Can't gauge credit quality of private / pre-IPO companies — no public financials.",impact:"Underwriters fly blind on the single biggest D&O loss driver.",fix:"EDF-X implied ratings & PD for 400M+ private companies globally — a credit read where none existed."},
+    {pain:"Governance research is manual, slow and inconsistent across the team.",impact:"Hours per submission; key red flags (interlocks, thin independence) get missed.",fix:"D&O Data + Orbis assemble board composition, tenure and ownership in a single enrichment call."},
+    {pain:"Regulatory and reputational red flags surface only after binding.",impact:"Avoidable severity losses; adverse selection.",fix:"GRID monitors sanctions, enforcement and adverse media in real time, refreshed daily."}
+  ],
+  heroes:[
+    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Probability of default & early-warning signals for any company — rated or unrated, public or private."},
+    {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Financials, ownership trees & UBO for 625M+ companies from 170+ sources."},
+    {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Sanctions, PEPs & adverse-media screening on every director and UBO, updated daily."},
+    {b:"DO",n:"D&O Data",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Board composition, director tenure & executive intelligence — the governance layer."}
+  ],
+  objections:[
+    {o:"We already get financials directly from the applicant.",a:"Applicant-supplied financials are self-reported, often stale, and unverifiable for private firms. <b>Orbis + EDF-X</b> give you an independent, standardized read — and EDF-X's forward-looking PD flags deterioration the applicant won't volunteer."},
+    {o:"We use D&B / Experian for company data already.",a:"D&B is strong on US trade credit but thin on global private financials and forward-looking default risk. <b>Orbis covers 625M+ companies across 170+ sources globally</b>, and EDF-X adds a predictive PD model — not just a backward-looking score."},
+    {o:"Governance data isn't predictive enough to pay for.",a:"Governance is a documented severity multiplier in securities litigation. Combined with EDF-X credit signals, it's the difference between a clean account and a distressed-company-with-a-captured-board profile. We let you see both in one workflow."},
+    {o:"Our underwriters are experienced — they don't need a tool.",a:"This isn't a decision engine; it's a triage and verification layer. It removes 30–60 minutes of manual research per submission and ensures the experienced underwriter spends time on judgment, not data-gathering."}
+  ],
+  competition:[
+    {c:"S&P Global / Bloomberg",a:"Strong public-company financials & market data.",e:"Orbis adds deep private & global coverage; EDF-X adds predictive PD on unrated names."},
+    {c:"Dun & Bradstreet",a:"US-centric business credit & firmographics.",e:"Broader global financials via Orbis + forward-looking early-warning signals D&B lacks."},
+    {c:"ISS / Glass Lewis / Diligent",a:"Governance & proxy data.",e:"We fuse governance with credit risk and screening in a single enrichment — they're governance-only."},
+    {c:"LexisNexis / Dow Jones / World-Check",a:"Sanctions & adverse-media screening.",e:"GRID matches on coverage with daily refresh AND links directly to Orbis entity & ownership resolution."}
+  ],
+  stats:[{n:"$31.3B",l:"Total 2024 nuclear-verdict awards (+116% YoY)"},{n:"46%",l:"Rise in Chapter 11 filings, 12 mths to mid-2024"},{n:"400M+",l:"Private companies EDF-X can score"}],
+  resources:[
+    {t:"research",ic:"📄",tag:"D&O Research",n:"D&O Series: Evolving Risks in the Boardroom",u:"https://www.moodys.com/web/en/us/insights/insurance/d-o-series-evolving-risks-in-the-boardroom-a-new-era-of-d-o-liability-part-1.html",d:"Moody's multi-part series on the new era of D&O liability."},
+    {t:"product",ic:"📉",tag:"Product",n:"EDF-X Early Warning System",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Real-time credit risk for private and public companies."},
+    {t:"product",ic:"🏢",tag:"Product",n:"Orbis Company Data",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"625M+ companies with financials, ownership & UBO."},
+    {t:"solution",ic:"🛡️",tag:"Solution",n:"Financial Lines Solutions",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Moody's data stack for D&O, E&O & financial lines."}
+  ]
+},
 
-  // show/hide scroll-to-top button
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('scroll-top');
-    btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-  });
-  document.getElementById('scroll-top').style.display = 'none';
+eo:{
+  name:"Errors & Omissions", abbr:"E&O", icon:"💼",
+  accent:"#0E7490", accent2:"#0284C7", advantage:4,
+  tagline:"When professional advice or services go wrong.",
+  meta:[{v:"40%",l:"↑ claim accuracy w/ cyber data"},{v:"24",l:"States w/ AI governance rules"},{v:"4/5",l:"Moody's data fit"}],
+  overview:{
+    what:"Errors & Omissions / Professional Liability covers firms against claims of negligent acts, errors or omissions in delivering professional services — increasingly bundled with cyber and AI-driven exposure. The modern E&O risk is as much about a firm's data security posture as its professional competence.",
+    who:["Tech companies & SaaS","Law firms","Accountants & financial advisers","Architects & engineers","Healthcare professionals","Consultants","Insurance agents & brokers"]
+  },
+  sales:{
+    pitch:"Tech and professional firms live and die by their cyber posture — we score it from the outside in, no questionnaire needed, and predict claims ~40% more accurately.",
+    valueProps:[
+      {ic:"🔐",t:"Outside-in cyber score",d:"BitSight rates a firm's external security posture without a questionnaire — open ports, patching cadence, breach history."},
+      {ic:"📋",t:"Consolidated disciplinary screen",d:"GRID surfaces licensing-board actions, bar discipline and regulatory enforcement in one call."},
+      {ic:"📊",t:"Private-firm credit read",d:"Most E&O accounts are private with no public financials — EDF-X delivers an implied rating regardless."}
+    ],
+    talking:[
+      "Adding BitSight cyber data improves claim-prediction accuracy by ~40% — the cyber tail now drives professional-liability losses.",
+      "We screen every principal against global regulatory and disciplinary databases instantly — no more scattered manual checks.",
+      "Most E&O firms are private with no public financials — EDF-X gives you a credit read regardless."
+    ]
+  },
+  discovery:[
+    {q:"Do any principals have disciplinary history with their licensing board or regulator?",w:"Direct severity predictor. <b>GRID</b> consolidates licensing-board, bar and regulatory actions globally."},
+    {q:"Does the firm hold sensitive client data — and how is it secured?",w:"Cyber is now the dominant E&O tail. <b>BitSight</b> scores the actual external posture, not the questionnaire."},
+    {q:"Are AI tools used in client deliverables, and is there human review?",w:"AI-error exposure is the fastest-growing E&O frontier — 24 states have adopted NAIC AI governance rules."},
+    {q:"What's the client concentration — does one client exceed 25% of revenue?",w:"Concentration magnifies single-claim severity. Orbis verifies revenue scale & client base."},
+    {q:"Has the firm had a prior breach, claim or near-miss in the last 5 years?",w:"Prior incidents predict recurrence; a weak BitSight score plus a prior breach is a classic decline."}
+  ],
+  underwriting:{
+    flow:["Submission intake","Principal / license screen","Cyber posture scan","Financial & concentration review","Pricing & terms"],
+    keyData:[
+      {k:"Regulatory standing",v:"License status, disciplinary actions, regulatory enforcement"},
+      {k:"Cyber posture",v:"BitSight rating, breach history, exposed services, patching"},
+      {k:"Financial health",v:"Revenue, profitability, PD/implied rating (private firms)"},
+      {k:"Operational quality",v:"Engagement letters, QA framework, AI/tech use, peer review"},
+      {k:"Client profile",v:"Concentration, industry mix, contract risk transfer"}
+    ],
+    decisionDrivers:"Regulatory/disciplinary standing and cyber posture are the swing factors; for tech E&O the BitSight score often makes or breaks the account.",
+    redFlags:[
+      "Active license suspension / revocation",
+      "Fraud-related prior claim",
+      "Prior data breach + weak BitSight score",
+      "No engagement letters / no QA framework",
+      "Unmonitored AI in client deliverables"
+    ]
+  },
+  pains:[
+    {pain:"Cyber exposure is invisible at underwriting — reliant on a self-reported questionnaire.",impact:"The dominant E&O loss tail goes unpriced; adverse selection on weak-security firms.",fix:"BitSight scores the firm's external security posture objectively, no questionnaire — ~40% better claim prediction."},
+    {pain:"Disciplinary history is scattered across licensing boards, bars and regulators.",impact:"Principals with prior actions slip through; manual checks are incomplete.",fix:"GRID consolidates global regulatory, disciplinary and adverse-media records in one screen."},
+    {pain:"No public financials for the typical private professional firm.",impact:"No objective credit read; pricing leans on gut feel.",fix:"EDF-X delivers an implied rating and PD for private firms anywhere in the world."}
+  ],
+  heroes:[
+    {b:"BS",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber risk rating — ~40% more accurate claim prediction, no questionnaire."},
+    {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Regulatory, disciplinary & adverse-media screening on every principal."},
+    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Private-firm financial health & probability of default."},
+    {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Firm profile, revenue scale & client intelligence."}
+  ],
+  objections:[
+    {o:"We already use a cyber questionnaire / our own scan.",a:"Questionnaires are self-reported and instantly stale. <b>BitSight is the market-leading outside-in rating</b> with the largest validated dataset and a documented ~40% lift in claim-prediction accuracy — it's continuously refreshed, not a point-in-time snapshot."},
+    {o:"SecurityScorecard / UpGuard do the same thing cheaper.",a:"BitSight has the longest track record, the broadest enterprise adoption among carriers, and the strongest published correlation between rating and actual claims. For an insurer pricing tail risk, validated claims-correlation is the whole point — not just a letter grade."},
+    {o:"AI-error exposure is too speculative to underwrite.",a:"24 states have already adopted NAIC's AI governance model — regulators are treating it as real. Asking the AI-use discovery question now, backed by our data on the firm, positions you ahead of the exposure rather than reacting to the first claim."},
+    {o:"Our professional-liability book is small — not worth new data.",a:"The integration is a single enrichment call across screening, cyber and credit — no new workflow. Even on a small book, one avoided cyber-driven E&O claim pays for the data many times over."}
+  ],
+  competition:[
+    {c:"SecurityScorecard / UpGuard",a:"Outside-in cyber ratings, competitively priced.",e:"BitSight has the largest validated dataset and the strongest published claims-correlation — what insurers actually price on."},
+    {c:"RiskRecon (Mastercard) / Black Kite",a:"Cyber posture & third-party risk scoring.",e:"BitSight's insurance-specific models and carrier adoption make it the underwriting standard."},
+    {c:"LexisNexis / Dow Jones",a:"Regulatory & adverse-media screening.",e:"GRID matches coverage with daily refresh and links to Orbis entity resolution."},
+    {c:"Verisk / proprietary carrier models",a:"Industry loss-cost and rating content.",e:"We pair firmographic & credit truth (Orbis/EDF-X) with objective cyber posture — a fuller risk picture."}
+  ],
+  stats:[{n:"~40%",l:"Better claim prediction with BitSight cyber data"},{n:"24",l:"States adopting NAIC AI governance rules"},{n:"625M+",l:"Companies Orbis can profile"}],
+  resources:[
+    {t:"product",ic:"🔐",tag:"Product",n:"BitSight for Cyber Insurance",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber scoring built for insurers."},
+    {t:"product",ic:"📋",tag:"Product",n:"GRID — Global Regulatory Intelligence",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Sanctions, disciplinary records & adverse media, daily."},
+    {t:"solution",ic:"🛡️",tag:"Solution",n:"Financial Lines Solutions",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Moody's E&O & professional-liability data stack."},
+    {t:"product",ic:"📊",tag:"Product",n:"EDF-X for Private Companies",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Implied ratings & PD for unrated firms."}
+  ]
+},
+
+surety:{
+  name:"Surety", abbr:"Surety", icon:"🤝",
+  accent:"#059669", accent2:"#0E7490", advantage:5,
+  tagline:"Credit, not insurance — backing a principal's promise to perform.",
+  meta:[{v:"$1.45T",l:"B2B payments in Cortera"},{v:"0",l:"Expected loss ratio"},{v:"5/5",l:"Moody's data fit"}],
+  overview:{
+    what:"Surety bonds guarantee a principal (contractor or licensee) will fulfil an obligation to an obligee. The surety expects zero losses and relies on indemnity — making it fundamentally a credit decision, evaluated on capital, capacity, character and the principal's real-world payment behavior.",
+    who:["General contractors","Specialty subcontractors","Developers","Licensed professionals","Court & license-bond principals","Public-sector obligees"]
+  },
+  sales:{
+    pitch:"Surety is a credit decision — and credit is exactly what Moody's does best. We show you how a contractor actually pays its subs and suppliers, in real time, across Cortera's $1.45T network.",
+    valueProps:[
+      {ic:"💳",t:"Real payment behavior",d:"Cortera reveals how the principal actually pays subs and suppliers — the truest forward indicator of distress."},
+      {ic:"🔎",t:"Public records, automatic",d:"Tax liens, judgments and UCC filings surfaced instantly — no manual courthouse search."},
+      {ic:"⏱️",t:"Early-warning credit",d:"EDF-X flags deterioration months before it appears in the contractor's financial statements."}
+    ],
+    talking:[
+      "Surety is a credit decision — and credit is what Moody's does best.",
+      "We see how a contractor actually pays its subs and suppliers, in real time, through Cortera's $1.45T network.",
+      "Tax liens, judgments and UCC filings are surfaced automatically — no manual public-records search."
+    ]
+  },
+  discovery:[
+    {q:"How does the principal pay its subcontractors and suppliers — on time?",w:"Payment behavior is the single best leading indicator in surety. <b>Cortera</b> shows real payment trends across a $1.45T network."},
+    {q:"What's the working capital and tangible net worth relative to the bonding program?",w:"Capital adequacy underpins the program. <b>Orbis</b> provides CPA-grade financials to verify."},
+    {q:"Any liens, judgments or prior bond claims?",w:"Direct red flags. <b>Cortera</b> surfaces public records automatically."},
+    {q:"What's the backlog size and gross-margin trend?",w:"Over-extended backlog with fading margins is a classic contractor-failure pattern."},
+    {q:"How strong is the banking relationship and line-of-credit availability?",w:"Liquidity backstop matters when projects run long; verify capacity to absorb shocks."}
+  ],
+  underwriting:{
+    flow:["Submission & indemnity","Capital / financial review","Payment behavior check","Liens & public records","Capacity & bond approval"],
+    keyData:[
+      {k:"Capital (the 1st C)",v:"Working capital, tangible net worth, leverage, liquidity"},
+      {k:"Character (2nd C)",v:"Payment behavior, prior claims, principal reputation"},
+      {k:"Capacity (3rd C)",v:"Backlog, gross-margin trend, project size vs. track record"},
+      {k:"Public records",v:"Tax liens, judgments, UCC filings, DOT safety (if applicable)"},
+      {k:"Banking & liquidity",v:"Line of credit, bank relationship, cash position"}
+    ],
+    decisionDrivers:"It's a credit decision: capital adequacy plus demonstrated payment character. Real-time payment behavior often reveals stress long before audited financials do.",
+    redFlags:[
+      "Negative working capital",
+      "Negative gross profit in backlog",
+      "Active bond claim or obligee dispute",
+      "Unsatisfied tax lien or judgment",
+      "Deteriorating subcontractor payment trend"
+    ]
+  },
+  pains:[
+    {pain:"Audited financials are a lagging indicator — distress shows up months too late.",impact:"Bonds approved on stale data; surprise contractor failures.",fix:"Cortera surfaces real-time payment behavior — the leading indicator that financials can't provide."},
+    {pain:"Lien, judgment and UCC searches are manual and inconsistent.",impact:"Hours of paralegal work per file; records get missed.",fix:"Cortera surfaces public records automatically alongside the credit profile."},
+    {pain:"Credit deterioration is detected too late in the bond term.",impact:"Losses on programs that looked healthy at underwriting.",fix:"EDF-X early-warning flags credit decline months ahead of the financials."}
+  ],
+  heroes:[
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.45T B2B payment network, CPR credit score, liens, judgments, UCC & DOT data."},
+    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Early-warning credit signals before the financials move."},
+    {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"CPA-grade financials, ownership tree & UBO."},
+    {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Principal & UBO screening for federal and international programs."}
+  ],
+  objections:[
+    {o:"We rely on the contractor's CPA-prepared financials and our agent's judgment.",a:"CPA financials are accurate but backward-looking — they describe last year, not next quarter. <b>Cortera's real-time payment behavior</b> reveals stress as it builds, and EDF-X flags credit deterioration months before the next statement. You keep the agent relationship; you just stop flying blind between statements."},
+    {o:"We already pull D&B Paydex for payment data.",a:"Paydex is a useful summary, but Cortera is built on a <b>$1.45T contributory B2B payment network</b> with deeper, more current trade lines — and it bundles liens, judgments, UCC and DOT in the same call. For surety, payment depth and recency are exactly what predict failure."},
+    {o:"Our surety book is relationship-driven, not data-driven.",a:"This doesn't replace the relationship — it protects it. When you can show an agent precisely why a program needs more collateral, backed by payment data, you write more business with confidence and fewer surprises."},
+    {o:"Public-records searches are handled by our service.",a:"Bundling liens, judgments and UCC into the same enrichment as the credit and payment data removes a separate vendor, a separate invoice and a separate delay — one call, full picture, at submission."}
+  ],
+  competition:[
+    {c:"Dun & Bradstreet (Paydex)",a:"Established business-credit score & trade data.",e:"Cortera's $1.45T contributory network offers deeper, more current trade lines + bundled public records."},
+    {c:"Experian / Equifax Commercial",a:"Business credit files & scores.",e:"We add CPA-grade Orbis financials and EDF-X forward-looking default — not just a score."},
+    {c:"Creditsafe",a:"International business-credit reports.",e:"Orbis global financials + Cortera US payment depth give a richer contractor view."},
+    {c:"Manual / in-house underwriting",a:"Agent relationships & CPA financials.",e:"Real-time payment behavior and early-warning signals catch distress between statements."}
+  ],
+  stats:[{n:"$1.45T",l:"Annual B2B payments in Cortera's network"},{n:"36M+",l:"Companies with Cortera payment history"},{n:"5/5",l:"Moody's data fit for a credit-driven line"}],
+  resources:[
+    {t:"product",ic:"💳",tag:"Product",n:"Cortera — Trade Credit & Payment",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.45T payment network, CPR scores, liens, judgments, UCC."},
+    {t:"product",ic:"🏢",tag:"Product",n:"Orbis — Company Financials",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"CPA-grade financials & ownership for 625M+ companies."},
+    {t:"product",ic:"⏱️",tag:"Product",n:"EDF-X Early Warning",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Forward-looking credit deterioration signals."},
+    {t:"solution",ic:"🛡️",tag:"Solution",n:"Casualty Insurance Solutions",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"How Moody's data serves casualty & surety underwriting."}
+  ]
+},
+
+tc:{
+  name:"Trade Credit", abbr:"Trade Credit", icon:"🌐",
+  accent:"#7C3AED", accent2:"#4F46E5", advantage:5,
+  tagline:"Insuring the money your client is owed.",
+  meta:[{v:"625M+",l:"Companies scorable"},{v:"Global",l:"Sovereign coverage"},{v:"5/5",l:"Moody's data fit"}],
+  overview:{
+    what:"Trade Credit insurance protects sellers against buyer non-payment from insolvency or protracted default — plus political and currency-transfer risk on export trade. The underwriter must credit-assess an entire portfolio of buyers, many of them small or foreign and unrated, and monitor them continuously.",
+    who:["Exporters","Manufacturers","Distributors & wholesalers","Banks with trade-finance books","Factoring companies"]
+  },
+  sales:{
+    pitch:"We can credit-score an entire buyer portfolio — including unrated SMEs anywhere in the world — and tell you which buyers are slowing their payments before they default.",
+    valueProps:[
+      {ic:"🌍",t:"Score any buyer, anywhere",d:"EDF-X delivers implied ratings and PD on 625M+ companies, rated or unrated, in any country."},
+      {ic:"📉",t:"Payment-slowdown alerts",d:"Cortera signals which buyers are stretching payments before they default."},
+      {ic:"🗺️",t:"Precise country risk",d:"Moody's sovereign ratings + Economy.com forecasts price political and transfer risk exactly."}
+    ],
+    talking:[
+      "We can credit-score an entire buyer portfolio — including unrated SMEs anywhere in the world.",
+      "Cortera shows you which buyers are slowing their payments before they default.",
+      "Moody's sovereign ratings and Economy.com forecasts let you price country risk precisely, not by guesswork."
+    ]
+  },
+  discovery:[
+    {q:"What's the credit-quality spread across the buyer portfolio?",w:"Drives aggregate loss expectation. <b>EDF-X</b> scores every buyer on a consistent scale, rated or not."},
+    {q:"Which countries are the buyers located in?",w:"Political and transfer risk varies enormously. <b>Sovereign ratings + Economy.com</b> price it precisely."},
+    {q:"How concentrated is the receivables book — any single buyer over 50%?",w:"Single-name concentration is the classic catastrophic-loss path."},
+    {q:"What are recent payment trends / days-beyond-terms across key buyers?",w:"Leading indicator of default. <b>Cortera</b> tracks payment behavior continuously."},
+    {q:"Is the policyholder itself financially healthy, or distressed?",w:"A distressed seller drives adverse selection and moral hazard; EDF-X reads the policyholder too."}
+  ],
+  underwriting:{
+    flow:["Portfolio submission","Buyer credit scoring","Country/political risk","Concentration analysis","Limits & pricing"],
+    keyData:[
+      {k:"Buyer credit quality",v:"PD / implied rating per buyer across the portfolio"},
+      {k:"Country & political risk",v:"Sovereign rating, transfer/convertibility, macro forecast"},
+      {k:"Concentration",v:"Single-buyer share, sector & geographic concentration"},
+      {k:"Payment behavior",v:"DSO, days-beyond-terms, delinquency trend"},
+      {k:"Policyholder health",v:"Seller financial stability, moral-hazard signals"}
+    ],
+    decisionDrivers:"Aggregate buyer credit quality and concentration drive expected loss; country risk overlays it for export books. Continuous monitoring is essential — a healthy buyer today can deteriorate fast.",
+    redFlags:[
+      "Sanctioned buyer or buyer country",
+      "Buyer insolvency filing",
+      "Single buyer >50% of the portfolio",
+      "Distressed policyholder (adverse selection)",
+      "Rapid days-beyond-terms deterioration"
+    ]
+  },
+  pains:[
+    {pain:"Most buyers are unrated SMEs or foreign firms with no credit file.",impact:"Underwriters can't size portfolio risk consistently.",fix:"EDF-X delivers implied ratings & PD on 625M+ companies globally, rated or not."},
+    {pain:"Defaults arrive as surprises — no early signal.",impact:"Losses hit before limits can be pulled.",fix:"Cortera flags payment slowdowns and delinquency trends before default."},
+    {pain:"Country and political risk is priced by guesswork.",impact:"Mispriced export exposure; inconsistent country limits.",fix:"Moody's sovereign ratings + Economy.com forecasts quantify country risk precisely."}
+  ],
+  heroes:[
+    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"PD & implied ratings across the entire buyer portfolio — rated or unrated, any country."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Buyer payment behavior & delinquency signals."},
+    {b:"EC",n:"Economy.com",u:"https://www.economy.com/",d:"Country risk, GDP, FX & political-risk forecasts."},
+    {b:"RT",n:"Moody's Ratings",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Sovereign & corporate credit ratings for country and counterparty risk."}
+  ],
+  objections:[
+    {o:"The major trade-credit carriers (Allianz Trade, Coface, Atradius) have their own buyer databases.",a:"Those proprietary databases are exactly why a challenger or specialty insurer needs an independent edge. <b>EDF-X scores 625M+ companies on a consistent global scale</b> — letting you compete on unrated SMEs and emerging markets without decades of accumulated claims data of your own."},
+    {o:"We already buy D&B / Creditsafe reports per buyer.",a:"Per-buyer report pulls don't scale to a whole portfolio and aren't continuously monitored. EDF-X scores the <b>entire book at once</b> and refreshes it, while Cortera adds live payment-behavior signals — so you catch deterioration mid-policy, not at renewal."},
+    {o:"Country risk is too macro to underwrite per policy.",a:"Moody's sovereign ratings plus Economy.com forecasts translate macro country risk into a concrete, defensible overlay per buyer location — turning 'guesswork' into a documented, consistent country-limit framework."},
+    {o:"Our buyers are mostly domestic and well-known.",a:"Even domestic books face concentration and sudden deterioration. EDF-X early-warning plus Cortera payment trends turn a static known-buyer list into a monitored, risk-ranked portfolio — the difference between reacting and anticipating."}
+  ],
+  competition:[
+    {c:"Allianz Trade / Coface / Atradius",a:"Proprietary in-house buyer databases (also competitors).",e:"Independent global scoring lets challengers & MGAs compete without owning decades of claims data."},
+    {c:"Dun & Bradstreet",a:"US trade-credit scores & reports.",e:"EDF-X scores the whole portfolio globally + continuous monitoring vs. per-report pulls."},
+    {c:"Creditsafe",a:"International credit reports.",e:"EDF-X predictive PD + Cortera payment behavior + sovereign overlay = fuller, live view."},
+    {c:"S&P / internal models",a:"Ratings on large rated names.",e:"We extend consistent scoring to the unrated SME long tail that dominates trade-credit books."}
+  ],
+  stats:[{n:"625M+",l:"Companies scorable worldwide, rated or unrated"},{n:"Global",l:"Sovereign-rating & country-risk coverage"},{n:"Live",l:"Continuous buyer payment monitoring"}],
+  resources:[
+    {t:"product",ic:"🌐",tag:"Product",n:"Trade Credit Data Application",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Orbis + Cortera integrated trade-credit solution."},
+    {t:"product",ic:"📉",tag:"Product",n:"EDF-X — Global Credit Scoring",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Implied ratings for any company, any country."},
+    {t:"product",ic:"🗺️",tag:"Product",n:"Economy.com — Country Risk",u:"https://www.economy.com/",d:"Sovereign risk, GDP, FX & political-risk forecasts."},
+    {t:"solution",ic:"📊",tag:"Solution",n:"CreditView / OneView",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Moody's credit-ratings intelligence platform."}
+  ]
+},
+
+gl:{
+  name:"General Liability", abbr:"GL", icon:"🏭",
+  accent:"#B45309", accent2:"#DC2626", advantage:4,
+  tagline:"Third-party injury & property damage — the workhorse of casualty.",
+  meta:[{v:"$31.3B",l:"2024 nuclear verdicts"},{v:"100+",l:"Litagion® mass-tort agents"},{v:"4/5",l:"Moody's data fit"}],
+  overview:{
+    what:"Commercial General Liability covers bodily injury, property damage, personal/advertising injury, and products/completed-operations liability to third parties. The modern severity threats are mass-tort accumulation (PFAS, talc, opioids) and nuclear verdicts driven by social inflation in plaintiff-friendly venues.",
+    who:["Contractors","Manufacturers","Retailers & restaurants","Tech companies","Healthcare","Hospitality — virtually every commercial business"]
+  },
+  sales:{
+    pitch:"We screen products and operations against 100+ mass-tort agents — PFAS, talc, opioids — before they become a claim, and map jurisdiction and industry litigation risk so your team prices for nuclear verdicts.",
+    valueProps:[
+      {ic:"🧪",t:"Mass-tort early screen",d:"Praedicat's Litagion® framework flags latent mass-tort exposure across 100+ emerging-liability agents."},
+      {ic:"🔍",t:"Operations verified",d:"Orbis cross-checks stated operations against SIC/NAICS — brokers can't hide a hazardous exposure."},
+      {ic:"⚖️",t:"Venue & litigation risk",d:"Economy.com maps jurisdiction and social-inflation context behind nuclear verdicts."}
+    ],
+    talking:[
+      "We screen products and operations against 100+ mass-tort agents — PFAS, talc, opioids — before they become a claim.",
+      "Nuclear verdicts hit $31.3B in 2024. We map jurisdiction and industry litigation risk so your team prices for it.",
+      "Stated operations are cross-checked against Orbis — brokers can't hide a hazardous exposure."
+    ]
+  },
+  discovery:[
+    {q:"What exactly do they manufacture or sell — and from what materials?",w:"Determines latent mass-tort exposure. <b>Praedicat</b> screens products against 100+ Litagion® agents."},
+    {q:"Which states is the payroll / revenue concentrated in?",w:"Venue drives nuclear-verdict severity. <b>Economy.com</b> maps jurisdiction litigation risk."},
+    {q:"Any products containing chemicals of concern (PFAS, etc.)?",w:"PFAS is the fastest-growing mass-tort frontier; latent today, catastrophic later."},
+    {q:"What's the loss history — frequency and severity trend?",w:"Baseline for pricing; severity creep signals social-inflation exposure."},
+    {q:"What's the safety record and risk-management program?",w:"OSHA willful violations and weak safety culture predict frequency and severity."}
+  ],
+  underwriting:{
+    flow:["Submission intake","Operations verification","Mass-tort / hazard screen","Loss & venue analysis","Pricing & terms"],
+    keyData:[
+      {k:"Operations hazard",v:"Products, materials, processes, NAICS/SIC verification"},
+      {k:"Mass-tort exposure",v:"Litagion® agent screening, emerging-liability accumulation"},
+      {k:"Jurisdiction / venue",v:"State litigation climate, judicial-hellhole exposure"},
+      {k:"Loss history",v:"Frequency, severity, large-loss & products claims"},
+      {k:"Safety & risk mgmt",v:"OSHA record, safety culture, QA / recall history"}
+    ],
+    decisionDrivers:"Operations hazard and latent mass-tort exposure drive severity; venue concentration multiplies it. The shift from frequency to social-inflation-driven severity is reshaping GL underwriting.",
+    redFlags:[
+      "Confirmed PFAS / high-probability mass-tort agent",
+      "Active mass-tort lawsuit",
+      "OSHA willful violation",
+      "Imported goods with no domestic manufacturer (subrogation dead-end)",
+      "Heavy revenue concentration in a judicial hellhole"
+    ]
+  },
+  pains:[
+    {pain:"Latent mass-tort exposure is invisible at underwriting.",impact:"Books accumulate PFAS/talc-type exposure that surfaces years later as catastrophic loss.",fix:"Praedicat's Litagion® framework screens products & operations against 100+ mass-tort agents up front."},
+    {pain:"Brokers can misrepresent or understate operations.",impact:"Hazardous classes get written at benign-class pricing.",fix:"Orbis cross-checks stated operations against verified NAICS/SIC and corporate structure."},
+    {pain:"Nuclear verdicts arrive as a surprise on previously 'clean' accounts.",impact:"Severity blows through reserves; pricing didn't reflect venue risk.",fix:"Praedicat + Economy.com quantify venue and industry litigation risk for pricing."}
+  ],
+  heroes:[
+    {b:"PR",n:"Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Mass-tort & emerging-liability (Litagion®) screening and PML modeling."},
+    {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Operations verification & SIC/NAICS cross-check."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Credit, DOT safety & public records."},
+    {b:"EC",n:"Economy.com",u:"https://www.economy.com/",d:"Jurisdiction & social-inflation context for venue pricing."}
+  ],
+  objections:[
+    {o:"Mass-tort exposure is too speculative to underwrite today.",a:"That's precisely the trap — PFAS, talc and opioids were all 'speculative' before they became multi-billion-dollar accumulations. <b>Praedicat's Litagion® framework is science-based</b>, scoring emerging agents by litigation probability so you can price or exclude before the wave, not after."},
+    {o:"We use Verisk / ISO loss costs — that's enough.",a:"ISO loss costs are backward-looking, class-average rating content. Praedicat adds <b>forward-looking, account-specific mass-tort accumulation</b> — it tells you whether THIS insured carries latent emerging-liability exposure, which class averages can't."},
+    {o:"Operations data from the application is reliable enough.",a:"Application data is broker-filtered. Orbis independently verifies operations, NAICS/SIC and corporate structure — the cheapest way to stop a hazardous class being written at benign-class pricing."},
+    {o:"Venue/social-inflation risk isn't something we can price for.",a:"Nuclear verdicts hit $31.3B in 2024, up 116%. Economy.com's jurisdiction analytics turn that into a concrete venue overlay — you price the litigation climate of where the exposure actually sits, rather than ignoring it until a verdict lands."}
+  ],
+  competition:[
+    {c:"Verisk (ISO)",a:"Industry loss costs, rating content & rules.",e:"Praedicat adds forward-looking, account-specific mass-tort accumulation ISO can't model."},
+    {c:"Advisen / Zywave",a:"Loss data & risk-analytics content.",e:"Praedicat's science-based Litagion® framework is uniquely predictive on emerging liability."},
+    {c:"Dun & Bradstreet",a:"Firmographics & business identity.",e:"Orbis adds verified global operations & structure; Cortera adds DOT/public records."},
+    {c:"In-house / manual classification",a:"Underwriter judgment on class & hazard.",e:"Independent Orbis verification + Praedicat screening catch what manual review misses."}
+  ],
+  stats:[{n:"$31.3B",l:"2024 nuclear-verdict awards (+116% YoY)"},{n:"100+",l:"Litagion® mass-tort agents screened"},{n:"7%",l:"2023 social inflation, a 20-yr high"}],
+  resources:[
+    {t:"solution",ic:"🧪",tag:"Solution",n:"Casualty Insurance Solutions",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Praedicat mass-tort modeling for GL & Excess."},
+    {t:"research",ic:"🌀",tag:"Research",n:"RMS Forward-Looking View of Risk",u:"https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html",d:"Catastrophe & emerging-risk modeling for casualty."},
+    {t:"product",ic:"🔍",tag:"Product",n:"Orbis — Operations Verification",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"SIC/NAICS cross-check & global operations."},
+    {t:"product",ic:"⚖️",tag:"Product",n:"Economy.com — Venue Analytics",u:"https://www.economy.com/",d:"Jurisdiction & social-inflation context."}
+  ]
+},
+
+exc:{
+  name:"Excess Casualty", abbr:"Excess Casualty", icon:"🏔️",
+  accent:"#DC2626", accent2:"#B45309", advantage:4,
+  tagline:"The high-severity layer — where nuclear verdicts live.",
+  meta:[{v:"7%",l:"Social inflation (20-yr high)"},{v:"Stochastic",l:"Praedicat PML modeling"},{v:"4/5",l:"Moody's data fit"}],
+  overview:{
+    what:"Excess & Umbrella liability provides additional limits over primary policies (GL, Auto, Employers Liability), built for catastrophic, high-severity loss events. The underwriter must model probable maximum loss, assess the underlying program and primary-carrier strength, and account for social inflation and mass-tort accumulation across the tower.",
+    who:["Mid-to-large commercial accounts","High-hazard industries","Public companies","Construction programs","Multinationals"]
+  },
+  sales:{
+    pitch:"Praedicat models probable maximum loss stochastically — so your team knows if the attachment point is mispriced — and we rate the primary carrier's strength so you understand your drop-down risk.",
+    valueProps:[
+      {ic:"🎲",t:"Stochastic PML",d:"Praedicat models casualty probable-maximum-loss and mass-tort accumulation across the tower."},
+      {ic:"📈",t:"Social-inflation analytics",d:"Economy.com quantifies nuclear-verdict and litigation-funding risk by industry and venue."},
+      {ic:"🏦",t:"Carrier-strength rating",d:"Moody's Ratings tell you the primary carrier's financial strength — your drop-down risk."}
+    ],
+    talking:[
+      "Praedicat models the probable maximum loss stochastically — so your team knows if the attachment point is mispriced.",
+      "Social inflation hit a 20-year high. We quantify nuclear-verdict and litigation-funding risk by industry and venue.",
+      "We rate the primary carrier's financial strength so you know your drop-down risk before you attach."
+    ]
+  },
+  discovery:[
+    {q:"What's the realistic worst-case loss for this risk?",w:"The core excess question. <b>Praedicat</b> models stochastic casualty PML to test the attachment point."},
+    {q:"What jurisdictions and industries drive the exposure?",w:"Determines social-inflation severity. <b>Economy.com</b> maps venue & industry litigation risk."},
+    {q:"Who is the primary carrier and how financially strong are they?",w:"Drop-down risk depends on primary solvency. <b>Moody's Ratings</b> quantify carrier strength."},
+    {q:"Is the insured exposed to any active or emerging mass tort?",w:"Mass-tort accumulation can pierce high layers. Praedicat screens Litagion® agents across the tower."},
+    {q:"How has loss development trended on the underlying program?",w:"Adverse development signals social-inflation pressure eroding the attachment."}
+  ],
+  underwriting:{
+    flow:["Submission & tower review","PML / cat modeling","Underlying & carrier review","Social-inflation overlay","Attachment & pricing"],
+    keyData:[
+      {k:"Catastrophic / PML",v:"Stochastic casualty PML, mass-tort accumulation across tower"},
+      {k:"Social inflation",v:"Venue litigation climate, nuclear-verdict & funding trends"},
+      {k:"Underlying program",v:"Primary limits, terms, attachment adequacy"},
+      {k:"Primary-carrier strength",v:"Financial-strength rating, drop-down / solvency risk"},
+      {k:"Loss development",v:"Adverse-development trend on underlying layers"}
+    ],
+    decisionDrivers:"Catastrophic PML and social-inflation severity dominate; underlying-program quality and primary-carrier solvency determine drop-down risk. Mispriced attachment points are the central failure mode.",
+    redFlags:[
+      "Active mass-tort defendant",
+      "Prior sexual-abuse & molestation (SAM) claim",
+      "Primary carrier below investment grade",
+      "Modeled PML >10× attachment point",
+      "Adverse loss development on underlying layers"
+    ]
+  },
+  pains:[
+    {pain:"Attachment points are set by judgment, not modeled worst-case loss.",impact:"Layers attach too low for the real severity; catastrophic surprise losses.",fix:"Praedicat models stochastic casualty PML so the attachment point reflects realistic worst-case."},
+    {pain:"Social inflation is a blind spot in pricing.",impact:"Nuclear verdicts erode layers that looked adequately priced.",fix:"Economy.com quantifies nuclear-verdict and litigation-funding risk by industry & venue."},
+    {pain:"Drop-down risk from a weak primary carrier is unmeasured.",impact:"Excess pays from dollar one when the primary fails.",fix:"Moody's Ratings quantify primary-carrier financial strength before attachment."}
+  ],
+  heroes:[
+    {b:"PR",n:"Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Stochastic casualty PML & mass-tort accumulation modeling."},
+    {b:"EC",n:"Economy.com",u:"https://www.economy.com/",d:"Social-inflation & nuclear-verdict analytics."},
+    {b:"RT",n:"Moody's Ratings",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Primary-carrier financial-strength ratings."},
+    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Insured financial stability & early-warning signals."}
+  ],
+  objections:[
+    {o:"PML modeling for casualty is unreliable — it's not property cat.",a:"Casualty PML is harder than property, which is exactly why judgment alone fails on attachment. <b>Praedicat is purpose-built for casualty</b>, using a science-based stochastic model of mass-tort accumulation — it doesn't replace the underwriter, it stress-tests whether the attachment point survives a realistic worst case."},
+    {o:"We set attachment points with experienced judgment.",a:"Experienced judgment plus a stochastic model beats judgment alone. Praedicat shows when modeled PML exceeds the attachment by a wide margin — surfacing the mispriced layers that judgment, anchored to last year's losses, tends to miss in a social-inflation environment."},
+    {o:"Social inflation is macro noise, not underwritable.",a:"At a 20-year-high 7% and $31.3B of nuclear verdicts in 2024, it's the dominant excess-severity driver. Economy.com makes it concrete — verdict and litigation-funding trends by venue and industry become a priced overlay, not a vibe."},
+    {o:"We trust the primary carrier on the tower.",a:"Trust is fine until the primary becomes insolvent and your excess drops down to dollar one. Moody's financial-strength ratings quantify that solvency risk before you attach — cheap insurance against an expensive surprise."}
+  ],
+  competition:[
+    {c:"Verisk",a:"Loss costs & analytics content.",e:"Praedicat's stochastic casualty PML & emerging-liability modeling is purpose-built for excess severity."},
+    {c:"Guy Carpenter / Marsh analytics",a:"Broker-side modeling & placement analytics.",e:"Independent Praedicat models + Moody's carrier ratings give the carrier its own underwriting view."},
+    {c:"Internal actuarial models",a:"Company loss-development & pricing models.",e:"Forward-looking mass-tort accumulation + venue analytics extend beyond historical development."},
+    {c:"AM Best (carrier ratings)",a:"Insurer financial-strength ratings.",e:"Moody's Ratings + EDF-X give carrier strength AND insured-side credit signals in one ecosystem."}
+  ],
+  stats:[{n:"7%",l:"2023 social inflation — a 20-year high"},{n:"$31.3B",l:"2024 nuclear verdicts (+116% YoY)"},{n:"Stochastic",l:"Praedicat casualty PML modeling"}],
+  resources:[
+    {t:"solution",ic:"🎲",tag:"Solution",n:"Casualty Solutions — Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Stochastic PML, mass-tort accumulation, Litagion®."},
+    {t:"research",ic:"🌀",tag:"Research",n:"RMS Casualty Catastrophe Modeling",u:"https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html",d:"Forward-looking view of casualty & social-inflation risk."},
+    {t:"product",ic:"🏦",tag:"Product",n:"CreditView — Carrier Ratings",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Financial-strength ratings for primary & reinsurance carriers."},
+    {t:"product",ic:"📈",tag:"Product",n:"Economy.com — Social Inflation",u:"https://www.economy.com/",d:"Verdict analytics & litigation-funding trends by venue."}
+  ]
+}
+};
+
+const ORDER=["do","eo","surety","tc","gl","exc"];
+
+/* Risk Signal Model (IUE) — weighted scoring dimensions & worked scenarios,
+   sourced from the Moody's IUE Risk Signal Model workbook. */
+const RISKMODEL={
+ do:{dims:[{n:"Credit & Financial Health",w:25},{n:"Corporate Governance Quality",w:20},{n:"Litigation & Conduct Risk",w:20},{n:"Market & Shareholder Signals",w:15},{n:"Sector & Macro Risk",w:10},{n:"Cyber & ESG Exposure",w:7},{n:"Geographic & Sanctions Risk",w:3}],scenarios:[{n:"StellarTech Inc.",p:"Series D SaaS company, $80M ARR, 40% YoY growth, VC-backed, IPO planned in 18 months",s:"🟡 YELLOW",sc:38},{n:"RetailGroup PLC",p:"Public mid-cap retailer, $2.1B revenue, declining 18% YoY (3yr), Moody's rating: B1 Negative",s:"🔴 RED",sc:64},{n:"CapitaFin Bank",p:"Mid-size regional bank, $8B assets, active FDIC investigation, material restatement 18mo ago",s:"⛔ BLACK",sc:91}]},
+ tc:{dims:[{n:"Buyer Portfolio Credit Quality",w:35},{n:"Country & Political Risk",w:25},{n:"Policyholder Financial Health",w:15},{n:"Portfolio Structure",w:15},{n:"Macro & Sector Context",w:10}],scenarios:[{n:"EuroExport GmbH",p:"German auto parts exporter. Buyers: 80% EU (Baa-rated), 20% Turkey/Poland. $45M AR insured.",s:"🟢 GREEN",sc:28},{n:"ChemCo Americas LLC",p:"US chemical distributor. 60% buyers: US mid-market. 40% Latin America (Colombia, Argentina, Brazil).",s:"🔴 RED",sc:62}]},
+ surety:{dims:[{n:"Financial Capital",w:30},{n:"Character & Track Record",w:25},{n:"Capacity & Backlog Quality",w:20},{n:"Banking & Liquidity",w:15},{n:"Obligee & Project Quality",w:10}],scenarios:[{n:"BuildRight Construction LLC",p:"25yr-old GC. $85M revenue. Commercial office & industrial. Midwest. Clean record.",s:"🟢 GREEN",sc:22},{n:"FastTrack Builders Inc.",p:"8yr-old GC. $42M revenue. Rapid growth (55% in 2yr). Hiring aggressively. Southeast US.",s:"⛔ BLACK",sc:79}]},
+ gl:{dims:[{n:"Operations Hazard & Mass Tort Screen",w:30},{n:"Jurisdictional & Litigation Risk",w:25},{n:"Loss Experience",w:20},{n:"Financial Stability of Insured",w:15},{n:"Safety & Risk Management",w:10}],scenarios:[{n:"MidwestLogistics LLC",p:"Regional LTL trucking company. 120 trucks. $28M revenue. 4 states. Clean DOT record.",s:"🟡 YELLOW",sc:44},{n:"ChemCoat Mfg Inc.",p:"PFAS-based industrial coating manufacturer. $12M revenue. 2 facilities: NJ and GA.",s:"⛔ BLACK",sc:88}]},
+ exc:{dims:[{n:"Catastrophic Liability Exposure",w:30},{n:"Social Inflation Sensitivity",w:25},{n:"Underlying Program Quality",w:20},{n:"Loss History Quality",w:15},{n:"Financial & Operational Risk",w:10}],scenarios:[{n:"MegaHospitality Group",p:"100-hotel chain. $850M revenue. FL, GA, TX, NY. Umbrella $25M xs $1M primary. Seeking $75M total.",s:"🔴 RED",sc:67},{n:"RegionalTrucking Corp",p:"200-truck LTL carrier. $120M revenue. IL, FL, GA, TX. 5yr claim: $3.2M large loss (fatality).",s:"⛔ BLACK",sc:84}]},
+ eo:{dims:[{n:"Professional Conduct & Regulatory Risk",w:30},{n:"Cyber & Data Liability Risk",w:25},{n:"Financial Stability",w:20},{n:"Operational Risk Management",w:15},{n:"Macro & Sector Context",w:10}],scenarios:[{n:"Meridian Advisory Partners",p:"150-person management consulting firm. $40M revenue. Fortune 500 clients. No prior claims.",s:"🟢 GREEN",sc:24}]},
+};
+
+/* RAG triage thresholds — shared across the IUE model */
+const RAG=[
+  {band:"GREEN",dot:"🟢",range:"0–35",label:"Fast-track / auto-route",color:"var(--green)",soft:"var(--green-soft)"},
+  {band:"YELLOW",dot:"🟡",range:"36–55",label:"Standard underwriting review",color:"var(--amber)",soft:"var(--amber-soft)"},
+  {band:"RED",dot:"🔴",range:"56–75",label:"Senior underwriter referral",color:"var(--red)",soft:"var(--red-soft)"},
+  {band:"BLACK",dot:"⛔",range:"76–100",label:"Decline / heavy scrutiny",color:"#1F2937",soft:"#F3F4F6"}
+];
+
+const ECOSYSTEM=[
+  {tag:"Company Data",ic:"🏢",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"625M+ companies · financials, ownership, UBO · 170+ sources"},
+  {tag:"KYC / Screening",ic:"🛡️",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Global sanctions, PEPs, adverse media · daily updates"},
+  {tag:"Credit Risk",ic:"📉",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"PD scores & early-warning signals for any company"},
+  {tag:"Trade & Payment",ic:"💳",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.45T B2B payments · liens, judgments, UCC, DOT"},
+  {tag:"Cyber Risk",ic:"🔐",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber scoring · ~40% better claim prediction"},
+  {tag:"Mass Tort",ic:"🧪",n:"Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Litagion® agent screening · stochastic casualty PML"},
+  {tag:"Cat Modeling",ic:"🌀",n:"RMS",u:"https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html",d:"Catastrophe & forward-looking risk models"},
+  {tag:"Property Intel",ic:"🛰️",n:"Cape Analytics",u:"https://www.moodys.com/web/en/us/insights/announcements/moodys-to-acquire-cape-analytics.html",d:"Address-level AI/ML geospatial property intelligence"},
+  {tag:"Ratings & Research",ic:"📊",n:"CreditView / OneView",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Moody's ratings, research & analytics platform"},
+  {tag:"Economics",ic:"🗺️",n:"Economy.com",u:"https://www.economy.com/",d:"Country risk, GDP forecasts, social-inflation data"},
+  {tag:"Casualty",ic:"⚖️",n:"Casualty Solutions",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"GL, Excess & specialty casualty data stack"},
+  {tag:"Financial Lines",ic:"💼",n:"Financial Lines",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"D&O, E&O & cyber financial-lines solutions"}
+];
+
+/* ════════════════════════ RENDER ════════════════════════ */
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const dots=(n,cls)=>Array.from({length:5},(_,i)=>`<span class="${cls} ${i<n?'on':''}"></span>`).join('');
+
+function renderHome(){
+  document.getElementById('lobGrid').innerHTML = ORDER.map(id=>{
+    const d=DATA[id];
+    return `<div class="lob-card" style="--accent:${d.accent};--accent-soft:${d.accent}14" onclick="go('${id}')">
+      <div class="lc-ic">${d.icon}</div>
+      <h3>${esc(d.name)}</h3>
+      <div class="lc-tag">${esc(d.tagline)}</div>
+      <div class="lc-foot">
+        <div class="lc-dots">${dots(d.advantage,'d')}</div>
+        <div class="lc-arrow">Open playbook →</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('globRes').innerHTML = ECOSYSTEM.map(r=>
+    `<a class="gr-card" href="${r.u}" target="_blank" rel="noopener">
+      <div class="grc-tag">${r.ic} ${esc(r.tag)}</div>
+      <span class="grc-name">${esc(r.n)}</span>
+      <div class="grc-desc">${esc(r.d)}</div>
+    </a>`).join('');
+
+  document.getElementById('lobMenu').innerHTML = ORDER.map(id=>{
+    const d=DATA[id];
+    return `<div class="lob-menu-item" onclick="go('${id}')"><span class="li-ic">${d.icon}</span>${esc(d.name)}<span class="li-ab">${esc(d.abbr)}</span></div>`;
+  }).join('');
+}
+
+const SECTIONS=[
+  ["overview","Overview","📌"],["sales","Sales Enablement","🚀"],["discovery","Discovery","💬"],
+  ["underwriting","Underwriting","⚖️"],["riskmodel","Risk Signal Model","📊"],["pains","Pain Points","🎯"],
+  ["objections","Objections","🛡️"],["competition","Competition","♟️"],["resources","Resources","🔗"]
+];
+
+function renderLOB(id){
+  const d=DATA[id];
+  const secNav = SECTIONS.map((s,i)=>`<div class="sec-chip ${i===0?'active':''}" data-target="sec-${s[0]}" onclick="jumpTo('sec-${s[0]}')">${s[2]} ${s[1]}</div>`).join('');
+
+  const who = d.overview.who.map(w=>`<span class="who-chip">${esc(w)}</span>`).join('');
+  const vprops = d.sales.valueProps.map(v=>`<div class="vp"><div class="vp-ic">${v.ic}</div><div><h4>${esc(v.t)}</h4><p>${esc(v.d)}</p></div></div>`).join('');
+  const talking = d.sales.talking.map((t,i)=>`<div class="tp"><div class="tp-n">${i+1}</div><div>${esc(t)}</div></div>`).join('');
+  const disc = d.discovery.map(q=>`<div class="disc"><div class="dq"><span class="qi">?</span>${esc(q.q)}</div><div class="dw"><b>Why it matters:</b> ${q.w}</div></div>`).join('');
+  const flow = d.underwriting.flow.map((s,i)=>`<span class="uw-step">${esc(s)}</span>${i<d.underwriting.flow.length-1?'<span class="uw-arrow">→</span>':''}`).join('');
+  const kv = d.underwriting.keyData.map(k=>`<div class="kv"><div class="kv-k">${esc(k.k)}</div><div class="kv-v">${esc(k.v)}</div></div>`).join('');
+  const flags = d.underwriting.redFlags.map(f=>`<div class="flag"><span class="fi">🚩</span>${esc(f)}</div>`).join('');
+  const pains = d.pains.map(p=>`<div class="pp"><div class="pp-head"><div class="pp-pain"><span>⚠️</span>${esc(p.pain)}</div><div class="pp-impact">${esc(p.impact)}</div></div><div class="pp-fix"><div class="fx-lab">✓ Moody's fix</div><div class="fx-txt">${esc(p.fix)}</div></div></div>`).join('');
+  const heroes = d.heroes.map(h=>`<div class="hp"><div class="hp-badge">${esc(h.b)}</div><div><div class="hp-name"><a href="${h.u}" target="_blank" rel="noopener">${esc(h.n)} ↗</a></div><div class="hp-desc">${esc(h.d)}</div></div></div>`).join('');
+  const objs = d.objections.map(o=>`<details class="obj"><summary><span class="obj-q-ic">"</span>${esc(o.o)}<span class="chev">▾</span></summary><div class="obj-a"><span class="lab">How to respond</span>${o.a}</div></details>`).join('');
+  const comp = `<div class="comp-row head"><div class="comp-cell">Competitor</div><div class="comp-cell">Their angle</div><div class="comp-cell">Where Moody's wins</div></div>` +
+    d.competition.map(c=>`<div class="comp-row"><div class="comp-cell" data-l="Competitor"><span class="comp-name">${esc(c.c)}</span></div><div class="comp-cell" data-l="Their angle">${esc(c.a)}</div><div class="comp-cell" data-l="Where Moody's wins"><span class="edge">${esc(c.e)}</span></div></div>`).join('');
+  const res = d.resources.map(r=>`<a class="res t-${r.t}" href="${r.u}" target="_blank" rel="noopener"><div class="res-ic">${r.ic}</div><div><span class="res-tag">${esc(r.tag)}</span><span class="res-name">${esc(r.n)} ↗</span><span class="res-desc">${esc(r.d)}</span></div></a>`).join('');
+  const stats = d.stats.map(s=>`<div class="stat-c"><div class="sc-num">${esc(s.n)}</div><div class="sc-lab">${esc(s.l)}</div></div>`).join('');
+  const meta = d.meta.map(m=>`<div class="m"><span class="mv">${esc(m.v)}</span><span class="ml">${esc(m.l)}</span></div>`).join('');
+
+  // risk signal model (IUE) — sourced from the Moody's IUE Risk Signal Model workbook
+  const rm=RISKMODEL[id];
+  const sigColor=s=>s.includes('GREEN')?'var(--green-soft);color:var(--green)':s.includes('YELLOW')?'var(--amber-soft);color:var(--amber)':s.includes('RED')?'var(--red-soft);color:var(--red)':'#F3F4F6;color:#1F2937';
+  const dimRows = rm.dims.map(x=>`<div class="dim"><div class="dim-n">${esc(x.n)}</div><div class="dim-track"><div class="dim-fill" style="width:${x.w*2.8}%"></div></div><div class="dim-w">${x.w}%</div></div>`).join('');
+  const ragCards = RAG.map(r=>`<div class="rag" style="background:${r.soft}"><div class="rag-top" style="color:${r.color}">${r.dot} ${r.band}</div><div class="rag-range" style="color:${r.color}">${r.range}</div><div class="rag-lab">${esc(r.label)}</div></div>`).join('');
+  const scenRows = rm.scenarios.map(s=>`<div class="scen"><div class="scen-score" style="color:${s.sc<36?'var(--green)':s.sc<56?'var(--amber)':s.sc<76?'var(--red)':'#1F2937'}">${s.sc}</div><div class="scen-body"><div class="scen-name">${esc(s.n)}</div><div class="scen-prof">${esc(s.p)}</div><div class="gauge"><div class="pin" style="left:${s.sc}%"></div></div></div><div class="scen-sig" style="background:${sigColor(s.s)}">${esc(s.s)}</div></div>`).join('');
+
+  document.getElementById('page-lob').innerHTML = `
+  <div class="lob-hero" style="--accent:${d.accent};--accent2:${d.accent2}">
+    <span class="lh-back" onclick="go('home')">← All lines of business</span>
+    <div class="lh-row">
+      <div class="lh-ic">${d.icon}</div>
+      <div>
+        <h1>${esc(d.name)}</h1>
+        <div class="lh-tag">${esc(d.tagline)}</div>
+      </div>
+    </div>
+    <div class="lh-meta">${meta}
+      <div class="m"><span class="ml">Moody's data advantage</span><div class="lh-adv">${dots(d.advantage,'d')}</div></div>
+    </div>
+  </div>
+
+  <div class="sec-nav">${secNav}</div>
+
+  <section class="sec" id="sec-overview">
+    <div class="sec-title"><div class="st-ic">📌</div><div><h2>Overview</h2><div class="st-sub">What it is &amp; who buys it</div></div></div>
+    <div class="grid2">
+      <div class="card card-pad"><div class="ov-what">${esc(d.overview.what)}</div></div>
+      <div class="card card-pad"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px">Who buys it</h4><div class="who-chips">${who}</div>
+        <div class="stat-band" style="margin-top:20px">${stats}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec-sales">
+    <div class="sec-title"><div class="st-ic">🚀</div><div><h2>Sales Enablement</h2><div class="st-sub">The pitch, value props &amp; talking points</div></div></div>
+    <div class="pitch" style="margin-bottom:16px"><span class="q-mark">"</span><p>${esc(d.sales.pitch)}</p></div>
+    <div class="grid3" style="margin-bottom:16px">${vprops}</div>
+    <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:6px 0 12px">Talking points</h4>
+    <div class="tp-list">${talking}</div>
+  </section>
+
+  <section class="sec" id="sec-discovery">
+    <div class="sec-title"><div class="st-ic">💬</div><div><h2>Discovery Questions</h2><div class="st-sub">Ask these — and know why each matters</div></div></div>
+    <div class="grid2">${disc}</div>
+  </section>
+
+  <section class="sec" id="sec-underwriting">
+    <div class="sec-title"><div class="st-ic">⚖️</div><div><h2>Underwriting Guidance</h2><div class="st-sub">How the risk is actually assessed</div></div></div>
+    <div class="card card-pad" style="margin-bottom:16px"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:12px">Underwriting workflow</h4><div class="uw-flow">${flow}</div></div>
+    <div class="grid2">
+      <div class="card card-pad"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px">Key data points</h4><div class="kv-list">${kv}</div>
+        <div class="note" style="margin-top:16px"><b>Decision driver:</b> ${esc(d.underwriting.decisionDrivers)}</div>
+      </div>
+      <div class="card card-pad"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--red);margin-bottom:12px">🚩 Red flags / deal-breakers</h4><div class="flag-list">${flags}</div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec-riskmodel">
+    <div class="sec-title"><div class="st-ic">📊</div><div><h2>Risk Signal Model</h2><div class="st-sub">The Intelligent Underwriting Engine — a 0–100 signal that triages every submission</div></div></div>
+    <div class="card card-pad" style="margin-bottom:16px">
+      <p class="rm-intro">Moody's data feeds a calibrated, LOB-specific scorecard that produces a <b>0–100 risk signal</b> at point of submission. It augments — never replaces — the underwriter, routing clean risks to fast-track and surfacing the ones that need senior eyes. Below are the weighted dimensions for <b>${esc(d.abbr)}</b> and the triage thresholds.</p>
+      <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:6px 0 14px">Weighted scoring dimensions</h4>
+      <div class="dim-list">${dimRows}</div>
+    </div>
+    <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:6px 0 12px">RAG triage thresholds</h4>
+    <div class="rag-grid" style="margin-bottom:24px">${ragCards}</div>
+    <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:6px 0 12px">Worked scenarios — how the model scores real risks</h4>
+    ${scenRows}
+    <div class="note" style="margin-top:6px"><b>Note:</b> Scores illustrate the model design from the IUE Risk Signal workbook. This is a decision-augmentation and triage tool, not an automated decline engine.</div>
+  </section>
+
+  <section class="sec" id="sec-pains">
+    <div class="sec-title"><div class="st-ic">🎯</div><div><h2>Pain Points &amp; Challenges</h2><div class="st-sub">What underwriters struggle with — and how we fix it</div></div></div>
+    <div class="grid3">${pains}</div>
+    <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:28px 0 12px">⭐ Moody's hero products for ${esc(d.abbr)}</h4>
+    <div class="grid2">${heroes}</div>
+  </section>
+
+  <section class="sec" id="sec-objections">
+    <div class="sec-title"><div class="st-ic">🛡️</div><div><h2>Objection Handling</h2><div class="st-sub">Tap each objection for the response</div></div></div>
+    ${objs}
+  </section>
+
+  <section class="sec" id="sec-competition">
+    <div class="sec-title"><div class="st-ic">♟️</div><div><h2>Competitive Intelligence</h2><div class="st-sub">Who else plays here — and where Moody's wins</div></div></div>
+    <div class="comp-table">${comp}</div>
+  </section>
+
+  <section class="sec" id="sec-resources">
+    <div class="sec-title"><div class="st-ic">🔗</div><div><h2>Resources &amp; Links</h2><div class="st-sub">Product pages, research &amp; use cases</div></div></div>
+    <div class="res-grid">${res}</div>
+  </section>
+
+  <div class="footer">
+    <p>Internal sales enablement tool · ${esc(d.name)} playbook.<br>Statistics from Moody's product disclosures, NAIC filings &amp; industry litigation data (2024–25). For commercial use only — not for external distribution.</p>
+  </div>`;
+}
+
+/* ════════════════════════ ROUTER ════════════════════════ */
+function go(id){ location.hash = id==='home'?'#/home':'#/'+id; }
+
+function route(){
+  const hash=(location.hash||'#/home').replace('#/','');
+  closeMenu();
+  if(hash==='home' || !DATA[hash]){
+    document.getElementById('page-home').classList.add('active');
+    document.getElementById('page-lob').classList.remove('active');
+  }else{
+    renderLOB(hash);
+    document.getElementById('page-lob').classList.add('active');
+    document.getElementById('page-home').classList.remove('active');
+    setTimeout(initScrollSpy,30);
+  }
+  scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
+  window.scrollTo(0,0);
+}
+
+function jumpTo(secId){
+  const el=document.getElementById(secId);
+  if(el){ const y=el.getBoundingClientRect().top+window.scrollY-118; window.scrollTo({top:y,behavior:'smooth'}); }
+}
+
+function initScrollSpy(){
+  const chips=[...document.querySelectorAll('.sec-chip')];
+  const secs=SECTIONS.map(s=>document.getElementById('sec-'+s[0]));
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id;
+        chips.forEach(c=>c.classList.toggle('active',c.dataset.target===id));
+      }
+    });
+  },{rootMargin:'-120px 0px -65% 0px',threshold:0});
+  secs.forEach(s=>s&&obs.observe(s));
+}
+
+/* menu */
+function toggleMenu(e){e.stopPropagation();document.getElementById('lobMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('lobMenu').classList.remove('open');}
+document.addEventListener('click',closeMenu);
+
+/* fab */
+addEventListener('scroll',()=>{document.getElementById('fab').style.display=scrollY>400?'flex':'none';});
+
+window.addEventListener('hashchange',route);
+renderHome();
+route();
 </script>
 </body>
 </html>
