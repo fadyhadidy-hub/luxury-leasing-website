@@ -147,6 +147,65 @@ a:hover{text-decoration:underline}
 .mi-lob{font-size:10px;font-weight:600;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;color:var(--ink-2)}
 .mi-foot{font-size:11px;color:var(--muted);border-top:1px solid var(--border-2);padding-top:8px;margin-top:auto}
 
+
+/* ── BUYER PERSONAS ── */
+.pc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.pc{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow-sm)}
+.pc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.pc-role{font-size:15px;font-weight:800;color:var(--ink)}
+.pc-dept{font-size:11px;font-weight:600;background:var(--brand-soft);color:var(--brand);padding:3px 8px;border-radius:4px;white-space:nowrap}
+.pc-row{font-size:12.5px;color:var(--muted);line-height:1.55}
+.pc-row b{color:var(--ink-2);font-weight:700}
+.pc-hook{background:var(--surface-2);border-left:3px solid var(--brand);padding:8px 12px;border-radius:0 6px 6px 0;font-size:12.5px;color:var(--ink-2);line-height:1.55;font-style:italic}
+
+/* ── REGULATORY TAILWINDS ── */
+.ri-list{display:flex;flex-direction:column;gap:12px}
+.ri{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;box-shadow:var(--shadow-sm)}
+.ri.high{border-left:4px solid var(--red)}
+.ri.medium{border-left:4px solid var(--amber)}
+.ri-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.ri-rule{font-size:14px;font-weight:700;color:var(--ink)}
+.ri-eff{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;background:var(--bg);padding:3px 8px;border-radius:4px;align-self:flex-start;flex-shrink:0}
+.ri-impact{font-size:12.5px;color:var(--muted);line-height:1.55}
+.ri-u{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:4px;align-self:flex-start}
+.u-high{background:#FEF2F2;color:#DC2626}
+.u-medium{background:#FFFBEB;color:#D97706}
+
+/* ── PRE-CALL CHECKLIST ── */
+.ck-list{display:flex;flex-direction:column;gap:8px}
+.cli{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;box-shadow:var(--shadow-sm)}
+.cli-n{width:24px;height:24px;border-radius:6px;background:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cli-t{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+/* ── OUTREACH TEMPLATES ── */
+.oe-grid{display:flex;flex-direction:column;gap:16px}
+.oe-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow-sm)}
+.oe-lbl{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.oe-subj{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-2)}
+.oe-body{font-size:12.5px;color:var(--ink-2);line-height:1.65;white-space:pre-wrap;font-family:inherit;margin:0;background:var(--surface-2);padding:14px 16px;border-radius:6px;border:1px solid var(--border-2)}
+.oe-li{background:#fff;border:1px solid var(--border);border-left:4px solid #0A66C2;border-radius:10px;padding:16px 20px;box-shadow:var(--shadow-sm)}
+.oe-li-lbl{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#0A66C2;margin-bottom:6px}
+.oe-li-body{font-size:13px;color:var(--ink-2);line-height:1.6;font-style:italic}
+
+/* ── CROSS-SELL MAP ── */
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:16px}
+.cs-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:all .18s}
+.cs-card:hover{box-shadow:var(--shadow-md);border-color:var(--brand-2)}
+.cs-pair{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cs-lob{font-size:13px;font-weight:800;color:var(--ink);background:var(--surface-2);padding:5px 10px;border-radius:6px}
+.cs-arr{color:var(--brand);font-weight:800;font-size:15px;flex-shrink:0}
+.cs-chips{display:flex;gap:5px;flex-wrap:wrap}
+.cs-buyer{font-size:11px;font-weight:600;background:var(--brand-soft);color:var(--brand);padding:2px 8px;border-radius:4px}
+.cs-data{font-size:11px;font-weight:600;background:#F5F3FF;color:#7C3AED;padding:2px 8px;border-radius:4px}
+.cs-story{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* ── HOME SEARCH ── */
+.home-search{display:flex;align-items:center;gap:0;margin-top:28px;max-width:480px;margin-left:auto;margin-right:auto;position:relative}
+.home-search .hs-ic{position:absolute;left:14px;font-size:15px;color:var(--muted);pointer-events:none;z-index:1}
+.home-search input{width:100%;padding:12px 16px 12px 42px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--surface);color:var(--ink);outline:none;transition:all .18s;font-family:inherit}
+.home-search input:focus{border-color:var(--brand-2);box-shadow:0 0 0 3px var(--brand-soft);background:#fff}
+.search-count{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;min-height:18px}
+
 /* ───────── LOB PAGE ───────── */
 .lob-hero{
   border-radius:var(--r-xl);overflow:hidden;margin-top:24px;
@@ -383,16 +442,28 @@ a:hover{text-decoration:underline}
       <div class="home-stat"><div class="hs-num">6</div><div class="hs-lab">Lines of Business</div></div>
       <div class="home-stat"><div class="hs-num">625M+</div><div class="hs-lab">Companies in Orbis</div></div>
       <div class="home-stat"><div class="hs-num">$1.7T</div><div class="hs-lab">Annual B2B transactions (Cortera)</div></div>
-      <div class="home-stat"><div class="hs-num">8</div><div class="hs-lab">Playbook sections / LOB</div></div>
+      <div class="home-stat"><div class="hs-num">13</div><div class="hs-lab">Playbook sections / LOB</div></div>
     </div>
+    <div class="home-search">
+      <span class="hs-ic">&#128269;</span>
+      <input type="search" id="lobSearch" placeholder="Search LOBs, products, topics…" autocomplete="off">
+    </div>
+    <div class="search-count" id="searchCount"></div>
   </section>
 
   <div class="section-head">
     <div class="sh-eyebrow">Choose your line</div>
     <h2>Lines of Business</h2>
-    <p>Each opens a full playbook: overview · sales · discovery · underwriting · pain points · objections · competition · resources.</p>
+    <p>Each opens a full 13-section playbook: personas · checklist · sales · discovery · regulatory · underwriting · risk model · pains · objections · outreach · competition · resources.</p>
   </div>
   <div class="lob-grid" id="lobGrid"></div>
+
+  <div class="section-head">
+    <div class="sh-eyebrow">Cross-line strategy</div>
+    <h2>Cross-Sell Map</h2>
+    <p>Adjacent LOBs where the same buyer owns two towers — one data conversation opens both doors.</p>
+  </div>
+  <div class="cs-grid" id="crossSell"></div>
 
   <div class="section-head">
     <div class="sh-eyebrow">Cross-line</div>
@@ -401,13 +472,6 @@ a:hover{text-decoration:underline}
   </div>
   <div class="glob-res" id="globRes"></div>
 
-
-  <div class="section-head">
-    <div class="sh-eyebrow">Live signals · Q1 2026</div>
-    <h2>Market Intelligence</h2>
-    <p>Latest filings, loss ratios, litigation trends &amp; credit signals — the external context behind every underwriting conversation.</p>
-  </div>
-  <div class="mi-grid" id="marketIntel"></div>
 
   <div class="footer">
     <p>Internal sales enablement tool. Statistics sourced from Moody's product disclosures, NAIC filings &amp; industry litigation data (2024–25).<br>For commercial use only — not for external distribution.</p>
@@ -944,6 +1008,183 @@ const MARKET_INTEL=[
   {cat:"Payment Risk",cc:"#0284C7",cb:"#F0F9FF",stat:"$1.7T",label:"Annual B2B transactions tracked by Cortera",desc:"Cortera’s contributory payment network monitors $1.7T in annual B2B transactions. Real-time CPR scores, liens, UCC and DOT data — the earliest signal of principal distress.",lobs:["Surety","Trade Credit"],src:"Moody’s / Cortera, 2025"},
 ];
 
+const PERSONAS={
+  do:[
+    {role:"CFO / VP Finance",dept:"Finance",pain:"Earnings misses and restatements trigger securities class actions — creating personal director/officer liability that exceeds any balance-sheet model.",trigger:"Guidance cut, restatement, activist investor letter, earnings surprise",hook:"We can pull an EDF-X 12-month PD on your biggest exposed names before the next earnings call — so pricing reflects real risk, not reported financials."},
+    {role:"General Counsel / CLO",dept:"Legal",pain:"SEC and DOJ investigations, proxy fights, and derivative suits create unpredictable indemnification obligations the board hasn't modeled — and counsel is always last to know.",trigger:"M&A announcement, SEC comment letter, activist 13D/G filing, proxy contest",hook:"Orbis board composition and EDF-X governance-risk scoring quantify litigation exposure before it lands on counsel's desk."},
+    {role:"Chief Risk Officer",dept:"Risk Management",pain:"D&O towers are priced on public filings. PE-backed and pre-IPO targets are a black box — the same governance and financial risk exists with no market data to price it.",trigger:"Pre-IPO filing, SPAC announcement, new PE acquisition, annual tower review",hook:"Orbis provides private-company financials and EDF-X default signals on unrated names — the same rigor as public markets, applied where the opacity is highest."},
+  ],
+  eo:[
+    {role:"CISO",dept:"Information Security",pain:"A single breach creates third-party liability, regulatory fines, and reputational damage — and the standard questionnaire tells the underwriter nothing about real-time security posture.",trigger:"SEC cyber disclosure rule, peer-company breach announcement, annual pen-test, new cloud migration",hook:"BitSight is a continuous outside-in signal independently verified across 589M+ IPs — not a self-reported questionnaire that was accurate the day it was filed."},
+    {role:"CFO / Treasurer",dept:"Finance",pain:"Cyber events are balance-sheet events now. Board reporting and reps & warranties demand a quantified exposure number — but finance teams have no objective baseline.",trigger:"Policy renewal, material cyber incident in peer group, D&O and cyber tower alignment review",hook:"Companies in the top quartile of BitSight ratings see up to 16.4% better loss ratios — that's a quantified premium justification, not a qualitative pitch."},
+    {role:"Risk Manager",dept:"Risk Management",pain:"Silent cyber clauses and coverage gaps between standalone cyber and E&O create uninsured exposure that neither team has mapped. Renewals reveal the gaps at the worst time.",trigger:"Policy renewal, carrier non-renewal, new SaaS or cloud contract, M&A with tech integration",hook:"We can show the coverage gap map using BitSight posture data to right-size limits before the renewal — not after the loss."},
+  ],
+  surety:[
+    {role:"CFO / Treasurer (Contractor)",dept:"Finance",pain:"Surety capacity caps the contract pipeline. Credit decisions are opaque — and a D&B Paydex score doesn't show how a contractor actually pays its subs and suppliers.",trigger:"New large contract bid, banking covenant amendment, subcontractor default on current project",hook:"Cortera shows real payment behavior across a $1.7T network — not a summary score. That's the difference between approving and declining a $50M performance bond."},
+    {role:"VP Business Development",dept:"Business Development",pain:"Surety approval delays kill bid opportunities. Contractors lose contracts because bonding can't move at the speed of the bid calendar.",trigger:"New public or private RFP, bid cycle, new bonding requirement for federal or state project",hook:"Cortera payment data and EDF-X on the principal allow faster, more defensible credit decisions — approvals that took weeks can move in days."},
+    {role:"Surety Underwriter",dept:"Underwriting",pain:"Principal financial statements are 6–12 months stale and show book value, not payment behavior. The first sign of trouble is usually a subcontractor complaint, not a balance sheet entry.",trigger:"New submission, renewal, large contract notification, WIP schedule update",hook:"Cortera's real-time CPR scores show how a principal pays its subs today — not how it reported a year ago. The leading indicator that financial statements can't provide."},
+  ],
+  tc:[
+    {role:"CFO / Treasurer",dept:"Finance",pain:"AR concentration on a few buyers creates hidden balance sheet risk. When a buyer defaults, damage hits revenue and cash flow simultaneously — often without warning.",trigger:"Buyer entering distress, new market expansion, receivables financing review, recession signals",hook:"EDF-X scores 625M+ companies globally — including SMEs and EM buyers competitors can't rate. That's the coverage to underwrite buyers you'd currently have to turn down."},
+    {role:"VP Credit / AR Manager",dept:"Credit & Treasury",pain:"Internal credit teams catch buyer distress too late — relying on trade references and aging reports that are backward-looking by the time a pattern emerges.",trigger:"Buyer rating downgrade, payment terms extension request, industry stress signal",hook:"Cortera CPR plus EDF-X together = real-time payment behavior and a 12-month forward PD on the same entity. The earliest possible warning, in one call."},
+    {role:"Risk Manager",dept:"Risk Management",pain:"Political risk and buyer insolvency in EM markets are hard to price without local data. Most insurers cap coverage at investment-grade buyers — leaving the growth opportunity uninsured.",trigger:"New export market entry, geopolitical event, OFAC sanctions update, portfolio concentration review",hook:"EDF-X covers 240 jurisdictions with a consistent PD methodology — so you can price EM and unrated buyers with the same rigor you apply to Fortune 500 names."},
+  ],
+  gl:[
+    {role:"Risk Manager (Industrial)",dept:"Risk Management",pain:"PFAS and mass-tort exposure is unknowable from internal data. Reserve adequacy is now a board-level issue, and actuarial models haven't been updated for the current litigation environment.",trigger:"EPA PFAS MCL rule, new PFAS suit naming the insured's industry, annual reserve review, industrial M&A",hook:"Moody's litigation analytics map PFAS and mass-tort exposure by product and geography before it surfaces in a claim — so reserve adequacy is strategic, not a crisis response."},
+    {role:"CFO",dept:"Finance",pain:"Large nuclear verdicts against industry peers signal that current GL reserves are inadequate. Social inflation at 7% means every actuarial model built before 2022 is systematically underpriced.",trigger:"High-profile peer verdict, carrier reserve-strengthening announcement, capital allocation review",hook:"Nuclear verdict database (135 verdicts, $31.3B in 2024) plus social inflation trend data lets you stress-test reserve assumptions against where the market actually is."},
+    {role:"Environmental / EHS Director",dept:"Environmental & Safety",pain:"Product liability for PFAS and emerging contaminants is hard to bound without regulatory clarity — and the exposure is retroactive. Companies don't know what they don't know.",trigger:"New EPA rule, facility acquisition, supply chain sustainability audit, PFAS testing mandate",hook:"Moody's environmental liability scoring is tied to real regulatory milestones — so EHS teams can quantify exposure before legal is on defense."},
+  ],
+  exc:[
+    {role:"Risk Manager (Fortune 1000)",dept:"Risk Management",pain:"Primary GL limits were sized for an earlier verdict environment. Nuclear verdicts are breaking through primary layers at companies that haven't changed their risk profile — only the litigation environment has.",trigger:"Large verdict in the industry, primary carrier limit increase, M&A expanding operational footprint",hook:"Nuclear verdict data by industry and jurisdiction lets us model the realistic p99 loss scenario — so the tower rebuild conversation is quantitative, not a gut-check."},
+    {role:"CFO",dept:"Finance",pain:"Total cost of risk is rising faster than revenue. Excess casualty layers are expensive and poorly understood by finance — viewed as a cost center rather than a capital-efficiency tool.",trigger:"Annual renewal, capital allocation review, enterprise risk management report cycle",hook:"Litigation funding trending to $31B/yr by 2028 is a quantifiable multiplier on loss frequency and severity — it makes the limit-increase conversation actuarial, not just defensive."},
+    {role:"Wholesale Broker / MGA",dept:"Distribution",pain:"Capacity is tightening. Without differentiated underwriting data, every submission looks the same to carriers — meaning the best risks don't get priced differently from the worst.",trigger:"Hard market cycle, nuclear verdict in insured's industry, new submission from industrial or healthcare client",hook:"Moody's risk signal model produces a 0–100 score that pre-qualifies submissions before they hit the market — data-backed pricing arguments that move capacity."},
+  ],
+};
+
+const REGULATORY={
+  do:[
+    {rule:"SEC Clawback Rule (Rule 10D-1)",eff:"Oct 2023",impact:"Listed companies must recover executive compensation following a financial restatement — creating new personal financial exposure and incentivizing securities litigation.",urgency:"high"},
+    {rule:"SEC Enhanced Climate Disclosure",eff:"Phased 2025–26",impact:"Large accelerated filers must disclose material climate risks and Scope 1/2 emissions — creating a new basis for securities fraud claims when climate risks are misstated.",urgency:"high"},
+    {rule:"FTC / DOJ M&A Antitrust Scrutiny",eff:"Ongoing 2024–25",impact:"Record deal challenges and extended review periods increase deal-contingent D&O exposure — especially for tech and healthcare M&A.",urgency:"medium"},
+  ],
+  eo:[
+    {rule:"SEC Cyber Disclosure Rule (Reg S-K Item 1.05)",eff:"Dec 2023",impact:"Public companies must disclose material cyber incidents within 4 business days — compressing the timeline from breach to securities litigation and raising materiality stakes.",urgency:"high"},
+    {rule:"NYDFS Cybersecurity Regulation (Part 500 – 2nd Amdt)",eff:"Nov 2023",impact:"Expanded scope, mandatory CISO board reporting, and 72-hour incident notification for covered entities — non-compliance is now a material finding.",urgency:"high"},
+    {rule:"EU NIS2 Directive",eff:"Oct 2024 (EU member states)",impact:"US companies operating in the EU face stricter security controls and board accountability — non-compliance creates cross-border liability and potential coverage disputes.",urgency:"medium"},
+  ],
+  surety:[
+    {rule:"Infrastructure Investment & Jobs Act (IIJA)",eff:"2022–2030 (rolling)",impact:"$1.2T in federal infrastructure spending is the single largest driver of surety demand in a generation — performance and payment bond requirements on every federally funded project.",urgency:"high"},
+    {rule:"Davis-Bacon Act Expansion (DOL Final Rule)",eff:"Oct 2023",impact:"Broadened prevailing wage requirements on federally funded projects increase contractor cost complexity and documentation obligations, driving bond demand.",urgency:"medium"},
+    {rule:"Buy American / Build America Requirements",eff:"Phased 2023–25",impact:"Domestic sourcing mandates for IIJA projects increase supply chain risk, subcontractor vetting requirements, and principal completion exposure.",urgency:"medium"},
+  ],
+  tc:[
+    {rule:"OFAC Sanctions Expansion (Russia/Belarus/China/Iran)",eff:"Ongoing 2024–25",impact:"Expanded sanctioned-entity lists create sudden buyer ineligibility for trade credit coverage — policies without robust sanctions monitoring face uninsured exposure.",urgency:"high"},
+    {rule:"Export Administration Regulations (EAR) – BIS Expansion",eff:"Oct 2023–ongoing",impact:"New export controls on advanced semiconductors and AI force buyer-contract repudiation — creating insurable trade credit losses in high-tech supply chains.",urgency:"high"},
+    {rule:"EU Corporate Sustainability Due Diligence (CSDDD)",eff:"Phased 2026–28",impact:"Mandatory supply chain due diligence for large EU companies creates new buyer-credit and compliance risk that trade credit policies must address explicitly.",urgency:"medium"},
+  ],
+  gl:[
+    {rule:"EPA PFAS Maximum Contaminant Levels (Final Rule)",eff:"Apr 2024 (comply by 2027)",impact:"PFOA/PFOS limits set at 4 ppt in drinking water — vastly expands the universe of liable parties and directly triggers new GL claims across manufacturing, municipal, and real-estate sectors.",urgency:"high"},
+    {rule:"EPA PFAS Superfund Designation (CERCLA)",eff:"Jul 2024",impact:"Designating PFOA/PFOS as hazardous substances creates retroactive cleanup liability for manufacturers, users, and waste handlers — potentially unlimited in scope.",urgency:"high"},
+    {rule:"State Tort Reform Rollbacks",eff:"FL, GA, and others 2023–25",impact:"Removal of caps on non-economic damages in several states directly amplifies nuclear verdict risk — GL reserve models built before 2022 are systematically understated.",urgency:"medium"},
+  ],
+  exc:[
+    {rule:"State Nuclear Verdict / Tort Reform Rollbacks",eff:"FL, GA, and others 2023–25",impact:"Removal of punitive and non-economic damage caps directly inflates the excess casualty loss environment — verdicts that would have been capped now break through primary into excess layers.",urgency:"high"},
+    {rule:"PFAS / Mass Tort Overflow into Excess Layers",eff:"Ongoing — 15,222 active federal cases",impact:"PFAS litigation routinely generates losses that exceed primary GL limits — excess casualty writers with industrial or municipal exposure are absorbing the overflow.",urgency:"high"},
+    {rule:"Third-Party Litigation Funding Disclosure Laws",eff:"Multi-state 2024–25",impact:"Mandatory disclosure of funding agreements signals which cases have been pre-qualified for escalation to verdict — increasing case duration and loss severity.",urgency:"medium"},
+  ],
+};
+
+const OUTREACH={
+  do:{
+    emails:[
+      {subj:"32% of US public companies carry severe credit-stress signals",body:"Hi [Name],\n\nMoody's EDF-X data at year-end 2024 shows 32% of US public companies carrying severe early-warning signals — with average corporate PD at 9.2%, a post-GFC high.\n\nFor D&O underwriters, that's a materially riskier renewal pool. I'd like to show you how EDF-X integrates into your submission workflow to flag distressed names 12+ months before a default or class action. 15 minutes this week?\n\n[Signature]"},
+      {subj:"Business Ch.11 up 19.6% — what it means for your D&O tower",body:"Hi [Name],\n\n8,456 Ch.11 business filings in 2024 — up 19.6% year-over-year, with large corporate bankruptcies running 50% above historical averages. Each one is a potential D&O claim.\n\nMoody's EDF-X has a 92%+ accuracy rate on 12-month default prediction. Worth a quick look at your renewal pipeline?\n\n[Signature]"},
+    ],
+    linkedin:"Hi [Name] — I work with D&O teams using Moody's EDF-X to catch corporate distress signals 12 months before defaults and class actions make the news. Given the current Ch.11 surge (+19.6% in 2024), thought it might be timely. Happy to share a quick look if useful.",
+  },
+  eo:{
+    emails:[
+      {subj:"Bottom 20% of BitSight scores: 6.93× more likely to file a claim",body:"Hi [Name],\n\nA 2024 Gallagher Re study of 62,000+ companies and 589M IPs confirmed: firms in the bottom 20% of BitSight security ratings are 6.93× more likely to file a cyber claim — and integrating BitSight into underwriting delivers up to 16.4% loss ratio reduction.\n\nYour cyber questionnaire can't show you that. I'd love to show you how Moody's BitSight integration works in an E&O/cyber submission flow. 20 minutes?\n\n[Signature]"},
+      {subj:"SEC's cyber disclosure rule is changing your E&O exposure",body:"Hi [Name],\n\nSince the SEC's cyber disclosure rule took effect in December 2023, public companies must disclose material cyber incidents within 4 business days — compressing the timeline from breach to securities litigation.\n\nMoody's BitSight gives you a continuously verified security posture that questionnaires never could. Worth a conversation?\n\n[Signature]"},
+    ],
+    linkedin:"Hi [Name] — Moody's BitSight data shows the bottom 20% of companies by security rating are 6.93× more likely to file a cyber claim. With the SEC's new disclosure rules amplifying E&O exposure, we're helping underwriters build that signal into their workflow. Happy to walk through it if relevant.",
+  },
+  surety:{
+    emails:[
+      {subj:"$1.2T in federal infrastructure spend — is your surety book positioned?",body:"Hi [Name],\n\nThe Infrastructure Investment & Jobs Act is deploying $1.2T through 2030 — the single largest driver of public works bonding demand in a generation.\n\nMoody's Cortera gives you real-time payment behavior across a $1.7T B2B network — the leading indicator for principal default that financial statements can't show. Let me show you how it works.\n\n[Signature]"},
+      {subj:"How are you underwriting contractor credit on infrastructure bonds?",body:"Hi [Name],\n\nWith Ch.11 filings up 19.6% in 2024 and large-project complexity rising under IIJA, the gap between a contractor's financial statements and their actual payment behavior has never been wider.\n\nCortera CPR scores from a $1.7T B2B payment network show how a principal actually pays its subs — before a performance problem becomes your problem. Happy to run a demo on a sample submission.\n\n[Signature]"},
+    ],
+    linkedin:"Hi [Name] — with $1.2T in federal infrastructure spend driving surety demand, Moody's Cortera is helping underwriters see real-time contractor payment behavior across a $1.7T network, not just balance sheets. Worth a quick look if you're working on infrastructure bonds.",
+  },
+  tc:{
+    emails:[
+      {subj:"EDF-X scores 625M+ companies — including the SME buyers you can't currently rate",body:"Hi [Name],\n\nOne of the biggest constraints in trade credit underwriting is coverage gaps on unrated SME buyers. Moody's EDF-X covers 625M+ entities across 240 jurisdictions — including private and EM buyers your competitors can't reach.\n\nIf you're turning away SME or EM portfolios because of data gaps, I'd like to show you how EDF-X fills them.\n\n[Signature]"},
+      {subj:"Buyer defaults are rising — how early is your early warning?",body:"Hi [Name],\n\nAverage US corporate PD is at 9.2% — a post-GFC high — and commercial Ch.11 filings are up 67% YoY as of February 2026. For trade credit portfolios, the buyers you're insuring today may look very different in 12 months.\n\nMoody's EDF-X provides a 12-month forward PD on 625M+ companies — so you price the risk before the default hits your ceded loss ratio. Worth a conversation?\n\n[Signature]"},
+    ],
+    linkedin:"Hi [Name] — with commercial Ch.11 filings up 67% YoY, buyer default risk in trade credit portfolios is as elevated as it's been since the GFC. Moody's EDF-X gives a 12-month forward PD on 625M+ companies globally, including SMEs and EM buyers. Happy to walk through how it fits a trade credit workflow.",
+  },
+  gl:{
+    emails:[
+      {subj:"15,222 active PFAS lawsuits — how exposed is your GL book?",body:"Hi [Name],\n\nAs of April 2026, 15,222 PFAS cases are active in federal court — and the EPA's April 2024 MCL rule vastly expanded the universe of liable parties.\n\nFor GL underwriters with manufacturing, municipal, or real estate exposure, the question is no longer whether PFAS risk is in the book — it's how much. Moody's has the litigation analytics and environmental scoring to help you understand that exposure before it shows up in a claim. 20 minutes?\n\n[Signature]"},
+      {subj:"$31.3B in nuclear verdicts in 2024 — is your social inflation model current?",body:"Hi [Name],\n\n135 nuclear verdicts (>$10M) in 2024 totaled $31.3B — up 116% year-over-year. Median verdict: $51M. Social inflation is running at 7%, a 20-year high.\n\nIf your GL reserving model was calibrated before 2022, it hasn't seen this environment. Moody's can help stress-test your reserve assumptions against current litigation trends. Worth a quick call?\n\n[Signature]"},
+    ],
+    linkedin:"Hi [Name] — 135 nuclear verdicts in 2024 totaled $31.3B (+116% YoY) and social inflation is at a 20-year high. Moody's has the analytics to help GL underwriters pressure-test reserve models against where the market actually is. Happy to connect if useful.",
+  },
+  exc:{
+    emails:[
+      {subj:"Nuclear verdicts are reshaping your excess casualty limit conversations",body:"Hi [Name],\n\n135 nuclear verdicts (>$10M) in 2024 — $31.3B total, up 116% YoY, with 5 individual cases exceeding $1B.\n\nFor excess casualty underwriters, the practical question is whether your insureds' primary limits are still adequate — and whether attachment points reflect the new verdict reality. Moody's litigation analytics can model nuclear verdict frequency and severity by industry. Happy to show you how that changes the limit-setting conversation.\n\n[Signature]"},
+      {subj:"Litigation funding is at $31B/yr — how it changes your loss exposure",body:"Hi [Name],\n\nThird-party litigation funding is projected to reach $31B/yr by 2028 — a multiplier on verdict frequency and severity that traditional actuarial models don't capture.\n\nFor excess casualty, that changes two things: frequency of large losses breaking through primary limits, and the economics of settlement vs. verdict for plaintiffs. I'd like to show you how Moody's social inflation and litigation data integrates into excess limit-setting. 20 minutes?\n\n[Signature]"},
+    ],
+    linkedin:"Hi [Name] — litigation funding is projected to hit $31B/yr by 2028, directly inflating excess casualty loss exposure. Moody's has the nuclear verdict and litigation analytics to help underwriters model where attachment points should actually be set. Happy to connect.",
+  },
+};
+
+const CHECKLIST={
+  do:[
+    "Run EDF-X 1-year probability of default on the named insured — flag anything above 5% PD",
+    "Pull Orbis for full ownership structure, subsidiary tree, revenue profile, and board composition",
+    "Search PACER and securities-litigation trackers for open class actions or derivative suits",
+    "Check SEC EDGAR for recent comment letters, Form 8-K material events, or restatements",
+    "Review last 2 earnings call transcripts for guidance cuts, liquidity disclosures, or covenant mentions",
+    "Confirm any IPO / SPAC / M&A activity in the past 18 months — each is a D&O severity multiplier",
+    "Validate the tower: primary, Side A DIC, excess layers, retentions, and coinsurance splits",
+  ],
+  eo:[
+    "Pull BitSight security rating and 12-month trend — flag Tier 3–4 or deteriorating trend",
+    "Check for open CVEs, breach history, or exposed credentials in BitSight threat intelligence",
+    "Confirm SEC cyber disclosure status (public company) — any filed 8-K cyber disclosures in past 24 months?",
+    "Review NYDFS or state cybersecurity compliance posture if the insured is a regulated entity",
+    "Identify cloud providers, SaaS vendors, and third parties with significant data access",
+    "Confirm coverage scope: standalone cyber vs. E&O/cyber blended vs. tech professional liability",
+    "Check for open FTC, OCR (HIPAA), or state AG enforcement actions",
+  ],
+  surety:[
+    "Pull Cortera CPR score and trend — look for worsening vs. 6 and 12 months ago",
+    "Run EDF-X on the principal if sufficient size — flag elevated 1-year PD",
+    "Request last 3 years of CPA-reviewed financials and a current WIP (work-in-progress) schedule",
+    "Check for open mechanic's liens, UCC filings, judgments, and DOT violations in Cortera public records",
+    "Verify DOT safety ratings and authority registration for any transportation-related bonds",
+    "Confirm bonding history: any prior bond claims, defaults, or SBA bond program participation?",
+    "Size the completion exposure vs. available assets — stress-test net worth under a 20% cost overrun",
+  ],
+  tc:[
+    "Run EDF-X on the top 5 buyers by AR concentration — flag any above 3% 1-year PD",
+    "Pull Cortera CPR scores on key buyers for real-time payment behavior signal",
+    "Check country risk ratings for any emerging-market buyer concentrations",
+    "Review buyer concentration — any single buyer above 20% of insured AR is a structural red flag",
+    "Run OFAC and BIS denied-party screening on all buyer entities",
+    "Review credit limits requested vs. current AR aging — over-limit requests often signal distress",
+    "Assess policyholder financial health: leverage ratio, current ratio, AR turnover, and cash position",
+  ],
+  gl:[
+    "Map the insured's product and operational footprint to active PFAS and mass-tort litigation maps",
+    "Run Orbis for full ownership and subsidiary structure — any subsidiaries in high-exposure industries?",
+    "Pull EPA ECHO facility compliance and enforcement history for insured facilities",
+    "Search PACER for pending or settled mass-tort cases naming the insured or industry peers",
+    "Review prior claims history for any nuclear verdict or excess-layer loss activity",
+    "Confirm PFAS-specific endorsements, pollution exclusions, and per-occurrence aggregate sub-limits",
+    "Stress-test reserves using current nuclear verdict data ($51M median) for the insured's industry vertical",
+  ],
+  exc:[
+    "Map primary GL limits vs. current nuclear verdict median ($51M) for the insured's industry and jurisdiction",
+    "Confirm attachment point adequacy — primary limit plus buffer vs. modeled p99 loss scenario",
+    "Review litigation funding activity in the insured's industry vertical using Moody's analytics",
+    "Check nuclear verdict database for the insured's state and class of business — frequency and severity trends",
+    "Pull social inflation trend for the relevant liability class — 7% national average for 2023",
+    "Confirm IBNR and social-inflation assumptions are reflected in the underlying primary reserves",
+    "Review reinsurance treaty terms — confirm the excess layer does not sit in a gap or corridor",
+  ],
+};
+
+const CROSSSELL=[
+  {from:"D&O",fromId:"do",to:"E&O",toId:"eo",buyer:"CFO / General Counsel",data:"EDF-X + BitSight",story:"SEC cyber disclosure rules created a direct bridge: a breach now triggers both a cyber E&O claim and potential securities litigation. The same CFO buyer owns both towers."},
+  {from:"D&O",fromId:"do",to:"Trade Credit",toId:"tc",buyer:"CFO / CRO",data:"EDF-X + Orbis",story:"EDF-X scores the same counterparties for D&O (corporate distress → class action) and trade credit (buyer default → AR loss). One data conversation opens two product doors."},
+  {from:"E&O",fromId:"eo",to:"Excess Casualty",toId:"exc",buyer:"CISO / Risk Manager",data:"BitSight",story:"Cyber incidents causing third-party harm routinely exceed primary E&O limits. The same BitSight data that prices the E&O layer validates the excess attachment point."},
+  {from:"Surety",fromId:"surety",to:"Trade Credit",toId:"tc",buyer:"CFO / Treasury",data:"Cortera + EDF-X",story:"Cortera payment data and EDF-X PD scores serve both lines: contractor health for surety, buyer creditworthiness for trade credit. One platform, two premium streams."},
+  {from:"GL",fromId:"gl",to:"Excess Casualty",toId:"exc",buyer:"Risk Manager",data:"Litigation Analytics",story:"PFAS and mass-tort claims routinely break through primary GL limits. The same Risk Manager buying GL is underinsured on excess — and the same litigation data justifies both limits."},
+  {from:"Trade Credit",fromId:"tc",to:"D&O",toId:"do",buyer:"CFO",data:"EDF-X",story:"A buyer default large enough to threaten solvency triggers both trade credit losses and D&O exposure for management decisions. EDF-X early warning serves both conversations."},
+];
+
 /* ════════════════════════ RENDER ════════════════════════ */
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const dots=(n,cls)=>Array.from({length:5},(_,i)=>`<span class="${cls} ${i<n?'on':''}"></span>`).join('');
@@ -979,6 +1220,36 @@ function renderHome(){
       <div class="mi-foot">${esc(m.src)}</div>
     </div>`).join('');
 
+  document.getElementById('crossSell').innerHTML = CROSSSELL.map(cs=>
+    `<div class="cs-card" onclick="go('${cs.fromId}')">
+      <div class="cs-pair">
+        <span class="cs-lob">${esc(cs.from)}</span>
+        <span class="cs-arr">→</span>
+        <span class="cs-lob">${esc(cs.to)}</span>
+      </div>
+      <div class="cs-chips">
+        <span class="cs-buyer">&#128100; ${esc(cs.buyer)}</span>
+        <span class="cs-data">&#128202; ${esc(cs.data)}</span>
+      </div>
+      <div class="cs-story">${esc(cs.story)}</div>
+    </div>`).join('');
+
+  const lobSrch=document.getElementById('lobSearch');
+  if(lobSrch){
+    lobSrch.oninput=function(){
+      const q=this.value.toLowerCase().trim();
+      document.querySelectorAll('.lob-card').forEach(c=>{
+        c.style.display=!q||c.innerText.toLowerCase().includes(q)?'':'none';
+      });
+      document.querySelectorAll('.mi-card').forEach(c=>{
+        c.style.display=!q||c.innerText.toLowerCase().includes(q)?'':'none';
+      });
+      const n=[...document.querySelectorAll('.lob-card')].filter(c=>c.style.display!=='none').length;
+      const el=document.getElementById('searchCount');
+      if(el)el.textContent=q?n+' of 6 LOBs match':'';
+    };
+  }
+
   document.getElementById('lobMenu').innerHTML = ORDER.map(id=>{
     const d=DATA[id];
     return `<div class="lob-menu-item" onclick="go('${id}')"><span class="li-ic">${d.icon}</span>${esc(d.name)}<span class="li-ab">${esc(d.abbr)}</span></div>`;
@@ -986,9 +1257,19 @@ function renderHome(){
 }
 
 const SECTIONS=[
-  ["overview","Overview","\uD83D\uDCCC"],["sales","Sales Enablement","\uD83D\uDE80"],["discovery","Discovery","\uD83D\uDCAC"],
-  ["underwriting","Underwriting","⚖️"],["riskmodel","Risk Signal Model","\uD83D\uDCCA"],["pains","Pain Points","\uD83C\uDFAF"],
-  ["objections","Objections","\uD83D\uDEE1️"],["competition","Competition","♟️"],["resources","Resources","\uD83D\uDD17"]
+  ["overview","Overview","\uD83D\uDCCC"],
+  ["personas","Buyer Personas","\uD83D\uDC64"],
+  ["sales","Sales Enablement","\uD83D\uDE80"],
+  ["discovery","Discovery","\uD83D\uDCAC"],
+  ["checklist","Pre-Call Checklist","\u2705"],
+  ["underwriting","Underwriting","⚖️"],
+  ["regulatory","Regulatory Tailwinds","\u26A1"],
+  ["riskmodel","Risk Signal Model","\uD83D\uDCCA"],
+  ["pains","Pain Points","\uD83C\uDFAF"],
+  ["objections","Objections","\uD83D\uDEE1️"],
+  ["outreach","Outreach Templates","\uD83D\uDCE7"],
+  ["competition","Competition","♟️"],
+  ["resources","Resources","\uD83D\uDD17"]
 ];
 
 function renderLOB(id){
@@ -1016,6 +1297,11 @@ function renderLOB(id){
   const sigColor=s=>s.includes('GREEN')?'var(--green-soft);color:var(--green)':s.includes('YELLOW')?'var(--amber-soft);color:var(--amber)':s.includes('RED')?'var(--red-soft);color:var(--red)':'#F3F4F6;color:#1F2937';
   const dimRows = rm.dims.map(x=>`<div class="dim"><div class="dim-n">${esc(x.n)}</div><div class="dim-track"><div class="dim-fill" style="width:${x.w*2.8}%"></div></div><div class="dim-w">${x.w}%</div></div>`).join('');
   const ragCards = RAG.map(r=>`<div class="rag" style="background:${r.soft}"><div class="rag-top" style="color:${r.color}">${r.dot} ${r.band}</div><div class="rag-range" style="color:${r.color}">${r.range}</div><div class="rag-lab">${esc(r.label)}</div></div>`).join('');
+  const pList=(PERSONAS[id]||[]).map(p=>`<div class="pc"><div class="pc-head"><div class="pc-role">${esc(p.role)}</div><div class="pc-dept">${esc(p.dept)}</div></div><div class="pc-row"><b>Pain point:</b> ${esc(p.pain)}</div><div class="pc-row"><b>Trigger events:</b> ${esc(p.trigger)}</div><div class="pc-hook"><b>Opening hook</b> — ${esc(p.hook)}</div></div>`).join('');
+  const rList=(REGULATORY[id]||[]).map(r=>`<div class="ri ${r.urgency}"><div class="ri-head"><div class="ri-rule">${esc(r.rule)}</div><div class="ri-eff">${esc(r.eff)}</div></div><div class="ri-impact">${esc(r.impact)}</div><div class="ri-u u-${r.urgency}">${r.urgency.charAt(0).toUpperCase()+r.urgency.slice(1)} urgency</div></div>`).join('');
+  const ck=(CHECKLIST[id]||[]).map((c,i)=>`<div class="cli"><div class="cli-n">${i+1}</div><div class="cli-t">${esc(c)}</div></div>`).join('');
+  const ot=OUTREACH[id]||{emails:[],linkedin:""};
+  const emailHtml=ot.emails.map(e=>`<div class="oe-card"><div class="oe-lbl">Email subject</div><div class="oe-subj">${esc(e.subj)}</div><div class="oe-lbl">Body</div><pre class="oe-body">${esc(e.body)}</pre></div>`).join('');
   const scenRows = rm.scenarios.map(s=>`<div class="scen"><div class="scen-score" style="color:${s.sc<36?'var(--green)':s.sc<56?'var(--amber)':s.sc<76?'var(--red)':'#1F2937'}">${s.sc}</div><div class="scen-body"><div class="scen-name">${esc(s.n)}</div><div class="scen-prof">${esc(s.p)}</div><div class="gauge"><div class="pin" style="left:${s.sc}%"></div></div></div><div class="scen-sig" style="background:${sigColor(s.s)}">${esc(s.s)}</div></div>`).join('');
 
   document.getElementById('page-lob').innerHTML = `
@@ -1045,6 +1331,11 @@ function renderLOB(id){
     </div>
   </section>
 
+  <section class="sec" id="sec-personas">
+    <div class="sec-title"><div class="st-ic">\uD83D\uDC64</div><div><h2>Buyer Personas</h2><div class="st-sub">Who you're talking to — their pain, triggers &amp; opening hook</div></div></div>
+    <div class="pc-grid">${pList}</div>
+  </section>
+
   <section class="sec" id="sec-sales">
     <div class="sec-title"><div class="st-ic">\uD83D\uDE80</div><div><h2>Sales Enablement</h2><div class="st-sub">The pitch, value props &amp; talking points</div></div></div>
     <div class="pitch" style="margin-bottom:16px"><span class="q-mark">"</span><p>${esc(d.sales.pitch)}</p></div>
@@ -1058,6 +1349,11 @@ function renderLOB(id){
     <div class="grid2">${disc}</div>
   </section>
 
+  <section class="sec" id="sec-checklist">
+    <div class="sec-title"><div class="st-ic">\u2705</div><div><h2>Pre-Call Checklist</h2><div class="st-sub">Research these before every prospect call — 10 minutes that win the meeting</div></div></div>
+    <div class="ck-list">${ck}</div>
+  </section>
+
   <section class="sec" id="sec-underwriting">
     <div class="sec-title"><div class="st-ic">⚖️</div><div><h2>Underwriting Guidance</h2><div class="st-sub">How the risk is actually assessed</div></div></div>
     <div class="card card-pad" style="margin-bottom:16px"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:12px">Underwriting workflow</h4><div class="uw-flow">${flow}</div></div>
@@ -1067,6 +1363,11 @@ function renderLOB(id){
       </div>
       <div class="card card-pad"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--red);margin-bottom:12px">\uD83D\uDEA9 Red flags / deal-breakers</h4><div class="flag-list">${flags}</div></div>
     </div>
+  </section>
+
+  <section class="sec" id="sec-regulatory">
+    <div class="sec-title"><div class="st-ic">\u26A1</div><div><h2>Regulatory Tailwinds</h2><div class="st-sub">Rules and events creating urgency in this line right now</div></div></div>
+    <div class="ri-list">${rList}</div>
   </section>
 
   <section class="sec" id="sec-riskmodel">
@@ -1093,6 +1394,11 @@ function renderLOB(id){
   <section class="sec" id="sec-objections">
     <div class="sec-title"><div class="st-ic">\uD83D\uDEE1️</div><div><h2>Objection Handling</h2><div class="st-sub">Tap each objection for the response</div></div></div>
     ${objs}
+  </section>
+
+  <section class="sec" id="sec-outreach">
+    <div class="sec-title"><div class="st-ic">\uD83D\uDCE7</div><div><h2>Outreach Templates</h2><div class="st-sub">Copy, personalize &amp; send — stat-led prospecting that opens doors</div></div></div>
+    <div class="oe-grid">${emailHtml}<div class="oe-li"><div class="oe-li-lbl">&#128203; LinkedIn note</div><div class="oe-li-body">${esc(ot.linkedin)}</div></div></div>
   </section>
 
   <section class="sec" id="sec-competition">
