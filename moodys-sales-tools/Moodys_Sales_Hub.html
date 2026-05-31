@@ -134,6 +134,19 @@ a:hover{text-decoration:underline}
 .gr-card .grc-name{font-weight:700;font-size:14.5px;color:var(--ink);margin:5px 0 4px;display:block}
 .gr-card .grc-desc{font-size:12px;color:var(--muted);line-height:1.5}
 
+
+/* ───────── MARKET INTELLIGENCE ───────── */
+.mi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-bottom:16px}
+.mi-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm);transition:box-shadow .18s}
+.mi-card:hover{box-shadow:var(--shadow-md)}
+.mi-cat{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:4px;align-self:flex-start}
+.mi-stat{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI Variable Display', 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;font-size:26px;font-weight:800;line-height:1;color:var(--ink)}
+.mi-label{font-size:13.5px;font-weight:700;color:var(--ink);margin-top:-2px}
+.mi-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
+.mi-lobs{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.mi-lob{font-size:10px;font-weight:600;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;color:var(--ink-2)}
+.mi-foot{font-size:11px;color:var(--muted);border-top:1px solid var(--border-2);padding-top:8px;margin-top:auto}
+
 /* ───────── LOB PAGE ───────── */
 .lob-hero{
   border-radius:var(--r-xl);overflow:hidden;margin-top:24px;
@@ -369,7 +382,7 @@ a:hover{text-decoration:underline}
     <div class="home-stats">
       <div class="home-stat"><div class="hs-num">6</div><div class="hs-lab">Lines of Business</div></div>
       <div class="home-stat"><div class="hs-num">625M+</div><div class="hs-lab">Companies in Orbis</div></div>
-      <div class="home-stat"><div class="hs-num">$1.45T</div><div class="hs-lab">B2B payments (Cortera)</div></div>
+      <div class="home-stat"><div class="hs-num">$1.7T</div><div class="hs-lab">Annual B2B transactions (Cortera)</div></div>
       <div class="home-stat"><div class="hs-num">8</div><div class="hs-lab">Playbook sections / LOB</div></div>
     </div>
   </section>
@@ -388,6 +401,14 @@ a:hover{text-decoration:underline}
   </div>
   <div class="glob-res" id="globRes"></div>
 
+
+  <div class="section-head">
+    <div class="sh-eyebrow">Live signals · Q1 2026</div>
+    <h2>Market Intelligence</h2>
+    <p>Latest filings, loss ratios, litigation trends &amp; credit signals — the external context behind every underwriting conversation.</p>
+  </div>
+  <div class="mi-grid" id="marketIntel"></div>
+
   <div class="footer">
     <p>Internal sales enablement tool. Statistics sourced from Moody's product disclosures, NAIC filings &amp; industry litigation data (2024–25).<br>For commercial use only — not for external distribution.</p>
   </div>
@@ -405,7 +426,7 @@ do:{
   name:"Directors & Officers", abbr:"D&O", icon:"⚖️",
   accent:"#4F46E5", accent2:"#7C3AED", advantage:5,
   tagline:"Protecting the people who run the company — and the company itself.",
-  meta:[{v:"$31.3B",l:"2024 nuclear verdicts"},{v:"46%",l:"↑ Chapter 11 filings"},{v:"5/5",l:"Moody's data fit"}],
+  meta:[{v:"$31.3B",l:"2024 nuclear verdicts (135 cases, +116%)"},{v:"19.6%",l:"↑ business Ch.11 filings (2024)"},{v:"5/5",l:"Moody's data fit"}],
   overview:{
     what:"Directors & Officers liability covers executives, board members and the entity itself against claims alleging wrongful acts in managing the organization — securities class actions, breach of fiduciary duty, creditor claims, regulatory and derivative actions. It's a financial-lines product where the loss driver is litigation, not physical events.",
     who:["Public companies","PE-backed & private companies","Non-profits","SPACs","IPO candidates","Multinationals with US nexus","Financial institutions"]
@@ -454,7 +475,7 @@ do:{
     {pain:"Regulatory and reputational red flags surface only after binding.",impact:"Avoidable severity losses; adverse selection.",fix:"GRID monitors sanctions, enforcement and adverse media in real time, refreshed daily."}
   ],
   heroes:[
-    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Probability of default & early-warning signals for any company — rated or unrated, public or private."},
+    {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Probability of default & early-warning signals for any company. 32% of US public companies carry severe EWS signals (year-end 2024); average US corporate PD at post-GFC high of 9.2%."},
     {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Financials, ownership trees & UBO for 625M+ companies from 170+ sources."},
     {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Sanctions, PEPs & adverse-media screening on every director and UBO, updated daily."},
     {b:"DO",n:"D&O Data",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Board composition, director tenure & executive intelligence — the governance layer."}
@@ -471,7 +492,7 @@ do:{
     {c:"ISS / Glass Lewis / Diligent",a:"Governance & proxy data.",e:"We fuse governance with credit risk and screening in a single enrichment — they're governance-only."},
     {c:"LexisNexis / Dow Jones / World-Check",a:"Sanctions & adverse-media screening.",e:"GRID matches on coverage with daily refresh AND links directly to Orbis entity & ownership resolution."}
   ],
-  stats:[{n:"$31.3B",l:"Total 2024 nuclear-verdict awards (+116% YoY)"},{n:"46%",l:"Rise in Chapter 11 filings, 12 mths to mid-2024"},{n:"400M+",l:"Private companies EDF-X can score"}],
+  stats:[{n:"$31.3B",l:"Total 2024 nuclear-verdict awards (+116% YoY)"},{n:"19.6%",l:"Rise in business Chapter 11 filings, full year 2024 (8,456 cases)"},{n:"400M+",l:"Private companies EDF-X can score"}],
   resources:[
     {t:"research",ic:"\uD83D\uDCC4",tag:"D&O Research",n:"D&O Series: Evolving Risks in the Boardroom",u:"https://www.moodys.com/web/en/us/insights/insurance/d-o-series-evolving-risks-in-the-boardroom-a-new-era-of-d-o-liability-part-1.html",d:"Moody's multi-part series on the new era of D&O liability."},
     {t:"product",ic:"\uD83D\uDCC9",tag:"Product",n:"EDF-X Early Warning System",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Real-time credit risk for private and public companies."},
@@ -484,13 +505,13 @@ eo:{
   name:"Errors & Omissions", abbr:"E&O", icon:"\uD83D\uDCBC",
   accent:"#0E7490", accent2:"#0284C7", advantage:4,
   tagline:"When professional advice or services go wrong.",
-  meta:[{v:"40%",l:"↑ claim accuracy w/ cyber data"},{v:"24",l:"States w/ AI governance rules"},{v:"4/5",l:"Moody's data fit"}],
+  meta:[{v:"6.9×",l:"More likely to claim (worst vs. best 20%)"},{v:"24",l:"States w/ AI governance rules"},{v:"4/5",l:"Moody's data fit"}],
   overview:{
     what:"Errors & Omissions / Professional Liability covers firms against claims of negligent acts, errors or omissions in delivering professional services — increasingly bundled with cyber and AI-driven exposure. The modern E&O risk is as much about a firm's data security posture as its professional competence.",
     who:["Tech companies & SaaS","Law firms","Accountants & financial advisers","Architects & engineers","Healthcare professionals","Consultants","Insurance agents & brokers"]
   },
   sales:{
-    pitch:"Tech and professional firms live and die by their cyber posture — we score it from the outside in, no questionnaire needed, and predict claims ~40% more accurately.",
+    pitch:"Tech and professional firms live and die by their cyber posture — we score it from the outside in, no questionnaire needed, and reduce loss ratios by up to 16.4% and identify highest-risk accounts up to 6.9\u00D7 more likely to claim (2024 Gallagher Re / BitSight study, 62K companies, 589M IPs).",
     valueProps:[
       {ic:"\uD83D\uDD10",t:"Outside-in cyber score",d:"BitSight rates a firm's external security posture without a questionnaire — open ports, patching cadence, breach history."},
       {ic:"\uD83D\uDCCB",t:"Consolidated disciplinary screen",d:"GRID surfaces licensing-board actions, bar discipline and regulatory enforcement in one call."},
@@ -533,7 +554,7 @@ eo:{
     {pain:"No public financials for the typical private professional firm.",impact:"No objective credit read; pricing leans on gut feel.",fix:"EDF-X delivers an implied rating and PD for private firms anywhere in the world."}
   ],
   heroes:[
-    {b:"BS",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber risk rating — ~40% more accurate claim prediction, no questionnaire."},
+    {b:"BS",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber risk rating. 2024 Gallagher Re study (62K companies, 589M IPs): worst 20% of risks 6.9\u00D7 more likely to claim; removing them cuts loss ratios by up to 16.4%."},
     {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Regulatory, disciplinary & adverse-media screening on every principal."},
     {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Private-firm financial health & probability of default."},
     {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Firm profile, revenue scale & client intelligence."}
@@ -550,7 +571,7 @@ eo:{
     {c:"LexisNexis / Dow Jones",a:"Regulatory & adverse-media screening.",e:"GRID matches coverage with daily refresh and links to Orbis entity resolution."},
     {c:"Verisk / proprietary carrier models",a:"Industry loss-cost and rating content.",e:"We pair firmographic & credit truth (Orbis/EDF-X) with objective cyber posture — a fuller risk picture."}
   ],
-  stats:[{n:"~40%",l:"Better claim prediction with BitSight cyber data"},{n:"24",l:"States adopting NAIC AI governance rules"},{n:"625M+",l:"Companies Orbis can profile"}],
+  stats:[{n:"6.9\u00D7",l:"Worst 20% of risks more likely to claim (2024 Gallagher Re study)"},{n:"24",l:"States adopting NAIC AI governance rules"},{n:"625M+",l:"Companies Orbis can profile"}],
   resources:[
     {t:"product",ic:"\uD83D\uDD10",tag:"Product",n:"BitSight for Cyber Insurance",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber scoring built for insurers."},
     {t:"product",ic:"\uD83D\uDCCB",tag:"Product",n:"GRID — Global Regulatory Intelligence",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Sanctions, disciplinary records & adverse media, daily."},
@@ -563,13 +584,13 @@ surety:{
   name:"Surety", abbr:"Surety", icon:"\uD83E\uDD1D",
   accent:"#059669", accent2:"#0E7490", advantage:5,
   tagline:"Credit, not insurance — backing a principal's promise to perform.",
-  meta:[{v:"$1.45T",l:"B2B payments in Cortera"},{v:"0",l:"Expected loss ratio"},{v:"5/5",l:"Moody's data fit"}],
+  meta:[{v:"$1.7T",l:"Annual B2B transactions (Cortera)"},{v:"0",l:"Expected loss ratio"},{v:"5/5",l:"Moody's data fit"}],
   overview:{
     what:"Surety bonds guarantee a principal (contractor or licensee) will fulfil an obligation to an obligee. The surety expects zero losses and relies on indemnity — making it fundamentally a credit decision, evaluated on capital, capacity, character and the principal's real-world payment behavior.",
     who:["General contractors","Specialty subcontractors","Developers","Licensed professionals","Court & license-bond principals","Public-sector obligees"]
   },
   sales:{
-    pitch:"Surety is a credit decision — and credit is exactly what Moody's does best. We show you how a contractor actually pays its subs and suppliers, in real time, across Cortera's $1.45T network.",
+    pitch:"Surety is a credit decision — and credit is exactly what Moody's does best. We show you how a contractor actually pays its subs and suppliers, in real time, across Cortera's $1.7T network.",
     valueProps:[
       {ic:"\uD83D\uDCB3",t:"Real payment behavior",d:"Cortera reveals how the principal actually pays subs and suppliers — the truest forward indicator of distress."},
       {ic:"\uD83D\uDD0E",t:"Public records, automatic",d:"Tax liens, judgments and UCC filings surfaced instantly — no manual courthouse search."},
@@ -577,12 +598,12 @@ surety:{
     ],
     talking:[
       "Surety is a credit decision — and credit is what Moody's does best.",
-      "We see how a contractor actually pays its subs and suppliers, in real time, through Cortera's $1.45T network.",
+      "We see how a contractor actually pays its subs and suppliers, in real time, through Cortera's $1.7T annual B2B transaction network.",
       "Tax liens, judgments and UCC filings are surfaced automatically — no manual public-records search."
     ]
   },
   discovery:[
-    {q:"How does the principal pay its subcontractors and suppliers — on time?",w:"Payment behavior is the single best leading indicator in surety. <b>Cortera</b> shows real payment trends across a $1.45T network."},
+    {q:"How does the principal pay its subcontractors and suppliers — on time?",w:"Payment behavior is the single best leading indicator in surety. <b>Cortera</b> shows real payment trends across a $1.7T network."},
     {q:"What's the working capital and tangible net worth relative to the bonding program?",w:"Capital adequacy underpins the program. <b>Orbis</b> provides CPA-grade financials to verify."},
     {q:"Any liens, judgments or prior bond claims?",w:"Direct red flags. <b>Cortera</b> surfaces public records automatically."},
     {q:"What's the backlog size and gross-margin trend?",w:"Over-extended backlog with fading margins is a classic contractor-failure pattern."},
@@ -612,26 +633,26 @@ surety:{
     {pain:"Credit deterioration is detected too late in the bond term.",impact:"Losses on programs that looked healthy at underwriting.",fix:"EDF-X early-warning flags credit decline months ahead of the financials."}
   ],
   heroes:[
-    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.45T B2B payment network, CPR credit score, liens, judgments, UCC & DOT data."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.7T B2B payment network, CPR credit score, liens, judgments, UCC & DOT data."},
     {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Early-warning credit signals before the financials move."},
     {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"CPA-grade financials, ownership tree & UBO."},
     {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Principal & UBO screening for federal and international programs."}
   ],
   objections:[
     {o:"We rely on the contractor's CPA-prepared financials and our agent's judgment.",a:"CPA financials are accurate but backward-looking — they describe last year, not next quarter. <b>Cortera's real-time payment behavior</b> reveals stress as it builds, and EDF-X flags credit deterioration months before the next statement. You keep the agent relationship; you just stop flying blind between statements."},
-    {o:"We already pull D&B Paydex for payment data.",a:"Paydex is a useful summary, but Cortera is built on a <b>$1.45T contributory B2B payment network</b> with deeper, more current trade lines — and it bundles liens, judgments, UCC and DOT in the same call. For surety, payment depth and recency are exactly what predict failure."},
+    {o:"We already pull D&B Paydex for payment data.",a:"Paydex is a useful summary, but Cortera is built on a <b>$1.7T contributory B2B payment network</b> with deeper, more current trade lines — and it bundles liens, judgments, UCC and DOT in the same call. For surety, payment depth and recency are exactly what predict failure."},
     {o:"Our surety book is relationship-driven, not data-driven.",a:"This doesn't replace the relationship — it protects it. When you can show an agent precisely why a program needs more collateral, backed by payment data, you write more business with confidence and fewer surprises."},
     {o:"Public-records searches are handled by our service.",a:"Bundling liens, judgments and UCC into the same enrichment as the credit and payment data removes a separate vendor, a separate invoice and a separate delay — one call, full picture, at submission."}
   ],
   competition:[
-    {c:"Dun & Bradstreet (Paydex)",a:"Established business-credit score & trade data.",e:"Cortera's $1.45T contributory network offers deeper, more current trade lines + bundled public records."},
+    {c:"Dun & Bradstreet (Paydex)",a:"Established business-credit score & trade data.",e:"Cortera's $1.7T contributory network offers deeper, more current trade lines + bundled public records."},
     {c:"Experian / Equifax Commercial",a:"Business credit files & scores.",e:"We add CPA-grade Orbis financials and EDF-X forward-looking default — not just a score."},
     {c:"Creditsafe",a:"International business-credit reports.",e:"Orbis global financials + Cortera US payment depth give a richer contractor view."},
     {c:"Manual / in-house underwriting",a:"Agent relationships & CPA financials.",e:"Real-time payment behavior and early-warning signals catch distress between statements."}
   ],
-  stats:[{n:"$1.45T",l:"Annual B2B payments in Cortera's network"},{n:"36M+",l:"Companies with Cortera payment history"},{n:"5/5",l:"Moody's data fit for a credit-driven line"}],
+  stats:[{n:"$1.7T",l:"Annual B2B transactions in Cortera's network"},{n:"36M+",l:"Companies with Cortera payment history"},{n:"5/5",l:"Moody's data fit for a credit-driven line"}],
   resources:[
-    {t:"product",ic:"\uD83D\uDCB3",tag:"Product",n:"Cortera — Trade Credit & Payment",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.45T payment network, CPR scores, liens, judgments, UCC."},
+    {t:"product",ic:"\uD83D\uDCB3",tag:"Product",n:"Cortera — Trade Credit & Payment",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.7T payment network, CPR scores, liens, judgments, UCC."},
     {t:"product",ic:"\uD83C\uDFE2",tag:"Product",n:"Orbis — Company Financials",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"CPA-grade financials & ownership for 625M+ companies."},
     {t:"product",ic:"⏱️",tag:"Product",n:"EDF-X Early Warning",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Forward-looking credit deterioration signals."},
     {t:"solution",ic:"\uD83D\uDEE1️",tag:"Solution",n:"Casualty Insurance Solutions",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"How Moody's data serves casualty & surety underwriting."}
@@ -692,7 +713,7 @@ tc:{
   ],
   heroes:[
     {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"PD & implied ratings across the entire buyer portfolio — rated or unrated, any country."},
-    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Buyer payment behavior & delinquency signals."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Buyer payment behavior & delinquency signals. $1.7T annual B2B transaction network tracks payment slowdowns before default."},
     {b:"EC",n:"Economy.com",u:"https://www.economy.com/",d:"Country risk, GDP, FX & political-risk forecasts."},
     {b:"RT",n:"Moody's Ratings",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Sovereign & corporate credit ratings for country and counterparty risk."}
   ],
@@ -721,7 +742,7 @@ gl:{
   name:"General Liability", abbr:"GL", icon:"\uD83C\uDFED",
   accent:"#B45309", accent2:"#DC2626", advantage:4,
   tagline:"Third-party injury & property damage — the workhorse of casualty.",
-  meta:[{v:"$31.3B",l:"2024 nuclear verdicts"},{v:"100+",l:"Litagion® mass-tort agents"},{v:"4/5",l:"Moody's data fit"}],
+  meta:[{v:"$31.3B",l:"2024 nuclear verdicts"},{v:"15,222",l:"Active PFAS federal lawsuits (Apr 2026)"},{v:"4/5",l:"Moody's data fit"}],
   overview:{
     what:"Commercial General Liability covers bodily injury, property damage, personal/advertising injury, and products/completed-operations liability to third parties. The modern severity threats are mass-tort accumulation (PFAS, talc, opioids) and nuclear verdicts driven by social inflation in plaintiff-friendly venues.",
     who:["Contractors","Manufacturers","Retailers & restaurants","Tech companies","Healthcare","Hospitality — virtually every commercial business"]
@@ -866,7 +887,7 @@ exc:{
     {c:"Internal actuarial models",a:"Company loss-development & pricing models.",e:"Forward-looking mass-tort accumulation + venue analytics extend beyond historical development."},
     {c:"AM Best (carrier ratings)",a:"Insurer financial-strength ratings.",e:"Moody's Ratings + EDF-X give carrier strength AND insured-side credit signals in one ecosystem."}
   ],
-  stats:[{n:"7%",l:"2023 social inflation — a 20-year high"},{n:"$31.3B",l:"2024 nuclear verdicts (+116% YoY)"},{n:"Stochastic",l:"Praedicat casualty PML modeling"}],
+  stats:[{n:"7%",l:"2023 social inflation (20-yr high); litigation funding to hit $31B/yr by 2028"},{n:"$31.3B",l:"2024 nuclear verdicts (+116% YoY)"},{n:"Stochastic",l:"Praedicat casualty PML modeling"}],
   resources:[
     {t:"solution",ic:"\uD83C\uDFB2",tag:"Solution",n:"Casualty Solutions — Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Stochastic PML, mass-tort accumulation, Litagion®."},
     {t:"research",ic:"\uD83C\uDF00",tag:"Research",n:"RMS Casualty Catastrophe Modeling",u:"https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html",d:"Forward-looking view of casualty & social-inflation risk."},
@@ -901,7 +922,7 @@ const ECOSYSTEM=[
   {tag:"Company Data",ic:"\uD83C\uDFE2",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"625M+ companies · financials, ownership, UBO · 170+ sources"},
   {tag:"KYC / Screening",ic:"\uD83D\uDEE1️",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Global sanctions, PEPs, adverse media · daily updates"},
   {tag:"Credit Risk",ic:"\uD83D\uDCC9",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"PD scores & early-warning signals for any company"},
-  {tag:"Trade & Payment",ic:"\uD83D\uDCB3",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.45T B2B payments · liens, judgments, UCC, DOT"},
+  {tag:"Trade & Payment",ic:"\uD83D\uDCB3",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.7T B2B payments · liens, judgments, UCC, DOT"},
   {tag:"Cyber Risk",ic:"\uD83D\uDD10",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber scoring · ~40% better claim prediction"},
   {tag:"Mass Tort",ic:"\uD83E\uDDEA",n:"Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Litagion® agent screening · stochastic casualty PML"},
   {tag:"Cat Modeling",ic:"\uD83C\uDF00",n:"RMS",u:"https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html",d:"Catastrophe & forward-looking risk models"},
@@ -910,6 +931,17 @@ const ECOSYSTEM=[
   {tag:"Economics",ic:"\uD83D\uDDFA️",n:"Economy.com",u:"https://www.economy.com/",d:"Country risk, GDP forecasts, social-inflation data"},
   {tag:"Casualty",ic:"⚖️",n:"Casualty Solutions",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"GL, Excess & specialty casualty data stack"},
   {tag:"Financial Lines",ic:"\uD83D\uDCBC",n:"Financial Lines",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"D&O, E&O & cyber financial-lines solutions"}
+];
+
+const MARKET_INTEL=[
+  {cat:"Nuclear Verdicts",cc:"#DC2626",cb:"#FEF2F2",stat:"$31.3B",label:"Nuclear verdict exposure — Full Year 2024",desc:"135 lawsuits exceeding $10M totaled $31.3B in awards (+116% YoY). Median verdict: $51M. Five individual cases exceeded $1B.",lobs:["GL","Excess Casualty"],src:"Marathon Strategies / Swiss Re, 2025"},
+  {cat:"Social Inflation",cc:"#D97706",cb:"#FFFBEB",stat:"7%",label:"Social inflation rate — 20-year high",desc:"US social inflation running at 7% (2023), its highest in two decades. Third-party litigation funding projected to reach $31B/yr by 2028, amplifying verdicts.",lobs:["GL","D&O","E&O","Excess Casualty"],src:"Swiss Re / Bloomberg Law, 2024"},
+  {cat:"PFAS Litigation",cc:"#7C3AED",cb:"#F5F3FF",stat:"15,222",label:"Active federal PFAS lawsuits — April 2026",desc:"15,222 PFAS cases in federal court as of April 2026. 3M settled for $10.3B. Exposure expanding into municipalities, water utilities, and commercial RE.",lobs:["GL","Excess Casualty"],src:"PACER / Law360, April 2026"},
+  {cat:"Cyber Risk",cc:"#0891B2",cb:"#ECFEFF",stat:"6.93×",label:"Cyber-scored firms: claim likelihood multiplier",desc:"Gallagher Re 2024 study (62K+ companies, 589M IPs): worst-scoring 20% are 6.93× more likely to file a claim. BitSight integration delivers up to 16.4% loss ratio reduction.",lobs:["E&O"],src:"BitSight / Gallagher Re, 2024"},
+  {cat:"Credit Stress",cc:"#DC2626",cb:"#FEF2F2",stat:"32%",label:"US public cos with severe EWS signals",desc:"Year-end 2024: 32% of US public companies carry severe early-warning signals per EDF-X. Average US corporate PD is 9.2% — a post-GFC high.",lobs:["D&O","Surety","Trade Credit"],src:"Moody’s EDF-X, December 2024"},
+  {cat:"Bankruptcy",cc:"#B45309",cb:"#FFFBEB",stat:"+19.6%",label:"Business Chapter 11 filings — 2024",desc:"8,456 Ch.11 business filings in full-year 2024. Large corporate bankruptcies +50% vs historical avg (H1 2024). Commercial Ch.11 up +67% YoY as of Feb 2026.",lobs:["D&O","Surety","Trade Credit"],src:"American Bankruptcy Institute, Feb 2026"},
+  {cat:"Reserve Pressure",cc:"#9333EA",cb:"#FAF5FF",stat:"$43B",label:"Cumulative casualty underwriting losses 2019–2023",desc:"US casualty writers absorbed $43B in cumulative underwriting losses (2019–2023) plus $10B in reserve strengthening in 2024. Combined ratios: D&O 105%, E&O 109%, GL 106%.",lobs:["D&O","E&O","GL","Excess Casualty"],src:"AM Best / NAIC, 2024"},
+  {cat:"Payment Risk",cc:"#0284C7",cb:"#F0F9FF",stat:"$1.7T",label:"Annual B2B transactions tracked by Cortera",desc:"Cortera’s contributory payment network monitors $1.7T in annual B2B transactions. Real-time CPR scores, liens, UCC and DOT data — the earliest signal of principal distress.",lobs:["Surety","Trade Credit"],src:"Moody’s / Cortera, 2025"},
 ];
 
 /* ════════════════════════ RENDER ════════════════════════ */
@@ -936,6 +968,16 @@ function renderHome(){
       <span class="grc-name">${esc(r.n)}</span>
       <div class="grc-desc">${esc(r.d)}</div>
     </a>`).join('');
+
+  document.getElementById('marketIntel').innerHTML = MARKET_INTEL.map(m=>
+    `<div class="mi-card">
+      <span class="mi-cat" style="background:${m.cb};color:${m.cc}">${esc(m.cat)}</span>
+      <div class="mi-stat" style="color:${m.cc}">${esc(m.stat)}</div>
+      <div class="mi-label">${esc(m.label)}</div>
+      <div class="mi-desc">${esc(m.desc)}</div>
+      <div class="mi-lobs">${m.lobs.map(l=>`<span class="mi-lob">${esc(l)}</span>`).join('')}</div>
+      <div class="mi-foot">${esc(m.src)}</div>
+    </div>`).join('');
 
   document.getElementById('lobMenu').innerHTML = ORDER.map(id=>{
     const d=DATA[id];
@@ -1062,6 +1104,14 @@ function renderLOB(id){
     <div class="sec-title"><div class="st-ic">\uD83D\uDD17</div><div><h2>Resources &amp; Links</h2><div class="st-sub">Product pages, research &amp; use cases</div></div></div>
     <div class="res-grid">${res}</div>
   </section>
+
+
+  <div class="section-head">
+    <div class="sh-eyebrow">Live signals · Q1 2026</div>
+    <h2>Market Intelligence</h2>
+    <p>Latest filings, loss ratios, litigation trends &amp; credit signals — the external context behind every underwriting conversation.</p>
+  </div>
+  <div class="mi-grid" id="marketIntel"></div>
 
   <div class="footer">
     <p>Internal sales enablement tool · ${esc(d.name)} playbook.<br>Statistics from Moody's product disclosures, NAIC filings &amp; industry litigation data (2024–25). For commercial use only — not for external distribution.</p>
