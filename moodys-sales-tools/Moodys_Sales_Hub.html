@@ -441,7 +441,7 @@ a:hover{text-decoration:underline}
     <div class="home-stats">
       <div class="home-stat"><div class="hs-num">6</div><div class="hs-lab">Lines of Business</div></div>
       <div class="home-stat"><div class="hs-num">625M+</div><div class="hs-lab">Companies in Orbis</div></div>
-      <div class="home-stat"><div class="hs-num">$1.7T</div><div class="hs-lab">Annual B2B transactions (Cortera)</div></div>
+      <div class="home-stat"><div class="hs-num">$3.7T</div><div class="hs-lab">B2B transactions tracked biennially (Cortera)</div></div>
       <div class="home-stat"><div class="hs-num">13</div><div class="hs-lab">Playbook sections / LOB</div></div>
     </div>
     <div class="home-search">
@@ -511,7 +511,8 @@ do:{
     talking:[
       "We flag credit deterioration 3–6 months before it appears in the financials — your single best leading indicator for D&O loss.",
       "Every director, UBO and executive is screened for sanctions, PEP status and adverse media automatically — no manual research.",
-      "Private and pre-IPO companies have no public financials — EDF-X gives you an implied rating and PD anyway, globally."
+      "Private and pre-IPO companies have no public financials — EDF-X gives you an implied rating and PD anyway, globally.",
+      "Since the SEC's December 2023 cyber disclosure rule, a material breach triggers D&O exposure within 4 business days — BitSight quantifies that board-level cyber risk before the incident."
     ]
   },
   discovery:[
@@ -519,7 +520,8 @@ do:{
     {q:"Are there pending regulatory investigations or securities suits?",w:"Surfaces severity exposure. <b>GRID</b> monitors enforcement and adverse media continuously."},
     {q:"Is the entity rated — and if not, do you know its implied credit quality?",w:"Most private/PE-backed risks are unrated. <b>EDF-X</b> provides an implied rating to anchor pricing."},
     {q:"How independent is the board, and what's the audit-committee composition?",w:"Governance quality is a core decision driver. <b>D&O Data</b> maps board independence and tenure instantly."},
-    {q:"Any recent M&A, SPAC activity or an IPO on the horizon?",w:"Transaction activity spikes D&O exposure. Orbis tracks ownership change and corporate events."}
+    {q:"Any recent M&A, SPAC activity or an IPO on the horizon?",w:"Transaction activity spikes D&O exposure. Orbis tracks ownership change and corporate events."},
+    {q:"Does the board have a cyber oversight committee — and has the company ever filed an SEC 8-K disclosing a material cyber incident?",w:"The SEC\'s Dec 2023 rule compresses breach-to-litigation timelines to 4 business days. <b>BitSight</b> scores board-level cyber governance risk continuously — weak ratings on public-company boards are a documented D&O trigger."}
   ],
   underwriting:{
     flow:["Submission intake","Financial health review","Governance assessment","Litigation & regulatory check","Limit/retention & pricing"],
@@ -528,7 +530,8 @@ do:{
       {k:"Governance quality",v:"Board independence, audit committee, director tenure, interlocks"},
       {k:"Litigation history",v:"Prior securities suits, derivative actions, regulatory matters"},
       {k:"Ownership & structure",v:"UBO, parent/subsidiary tree, PE sponsorship, public float"},
-      {k:"Corporate events",v:"M&A, restatements, IPO/SPAC, executive turnover"}
+      {k:"Corporate events",v:"M&A, restatements, IPO/SPAC, executive turnover"},
+      {k:"Cyber governance risk",v:"BitSight security rating, board cyber oversight disclosures, SEC 8-K cyber incident history"}
     ],
     decisionDrivers:"Credit/insolvency risk and governance quality dominate — a financially distressed company with weak governance is the classic severe-loss profile.",
     redFlags:[
@@ -536,7 +539,8 @@ do:{
       "Active SEC / DOJ investigation",
       "Fraud-related financial restatement",
       "Sanctions hit on entity, UBO or executive",
-      "Director resignation amid disputes"
+      "Director resignation amid disputes",
+      "SEC 8-K cyber incident disclosure + weak BitSight security rating on a public company"
     ]
   },
   pains:[
@@ -548,7 +552,8 @@ do:{
     {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Probability of default & early-warning signals for any company. 32% of US public companies carry severe EWS signals (year-end 2024); average US corporate PD at post-GFC high of 9.2%."},
     {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Financials, ownership trees & UBO for 625M+ companies from 170+ sources."},
     {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Sanctions, PEPs & adverse-media screening on every director and UBO, updated daily."},
-    {b:"DO",n:"D&O Data",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Board composition, director tenure & executive intelligence — the governance layer."}
+    {b:"DO",n:"D&O Data",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Board composition, director tenure & executive intelligence — the governance layer."},
+    {b:"BS",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber security rating. SEC's Dec 2023 cyber disclosure rule means a material breach triggers D&O exposure within 4 business days. BitSight quantifies board-level cyber governance risk continuously — without a questionnaire."}
   ],
   objections:[
     {o:"We already get financials directly from the applicant.",a:"Applicant-supplied financials are self-reported, often stale, and unverifiable for private firms. <b>Orbis + EDF-X</b> give you an independent, standardized read — and EDF-X's forward-looking PD flags deterioration the applicant won't volunteer."},
@@ -567,7 +572,8 @@ do:{
     {t:"research",ic:"\uD83D\uDCC4",tag:"D&O Research",n:"D&O Series: Evolving Risks in the Boardroom",u:"https://www.moodys.com/web/en/us/insights/insurance/d-o-series-evolving-risks-in-the-boardroom-a-new-era-of-d-o-liability-part-1.html",d:"Moody's multi-part series on the new era of D&O liability."},
     {t:"product",ic:"\uD83D\uDCC9",tag:"Product",n:"EDF-X Early Warning System",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Real-time credit risk for private and public companies."},
     {t:"product",ic:"\uD83C\uDFE2",tag:"Product",n:"Orbis Company Data",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"625M+ companies with financials, ownership & UBO."},
-    {t:"solution",ic:"\uD83D\uDEE1️",tag:"Solution",n:"Financial Lines Solutions",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Moody's data stack for D&O, E&O & financial lines."}
+    {t:"solution",ic:"\uD83D\uDEE1️",tag:"Solution",n:"Financial Lines Solutions",u:"https://www.moodys.com/web/en/us/solutions/financial-lines.html",d:"Moody's data stack for D&O, E&O & financial lines."},
+    {t:"product",ic:"\uD83D\uDD10",tag:"Product",n:"BitSight for Cyber Insurance",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber security rating. SEC Dec 2023 disclosure rule: a material breach triggers D&O exposure within 4 business days. BitSight scores board-level cyber governance risk continuously — no questionnaire."}
   ]
 },
 
@@ -605,6 +611,7 @@ eo:{
     keyData:[
       {k:"Regulatory standing",v:"License status, disciplinary actions, regulatory enforcement"},
       {k:"Cyber posture",v:"BitSight rating, breach history, exposed services, patching"},
+      {k:"Cyber risk identity layer",v:"Cortera Cyber Risk Rating — business-identity-linked cyber risk score cross-referenced with payment & public-records data"},
       {k:"Financial health",v:"Revenue, profitability, PD/implied rating (private firms)"},
       {k:"Operational quality",v:"Engagement letters, QA framework, AI/tech use, peer review"},
       {k:"Client profile",v:"Concentration, industry mix, contract risk transfer"}
@@ -619,7 +626,7 @@ eo:{
     ]
   },
   pains:[
-    {pain:"Cyber exposure is invisible at underwriting — reliant on a self-reported questionnaire.",impact:"The dominant E&O loss tail goes unpriced; adverse selection on weak-security firms.",fix:"BitSight scores the firm's external security posture objectively, no questionnaire — ~40% better claim prediction."},
+    {pain:"Cyber exposure is invisible at underwriting — reliant on a self-reported questionnaire.",impact:"The dominant E&O loss tail goes unpriced; adverse selection on weak-security firms.",fix:"BitSight scores the firm's external security posture objectively, no questionnaire — ~40% better claim prediction. Cortera's Cyber Risk Rating adds a business-identity-linked inside-out layer to complement the outside-in score."},
     {pain:"Disciplinary history is scattered across licensing boards, bars and regulators.",impact:"Principals with prior actions slip through; manual checks are incomplete.",fix:"GRID consolidates global regulatory, disciplinary and adverse-media records in one screen."},
     {pain:"No public financials for the typical private professional firm.",impact:"No objective credit read; pricing leans on gut feel.",fix:"EDF-X delivers an implied rating and PD for private firms anywhere in the world."}
   ],
@@ -654,13 +661,13 @@ surety:{
   name:"Surety", abbr:"Surety", icon:"\uD83E\uDD1D",
   accent:"#059669", accent2:"#0E7490", advantage:5,
   tagline:"Credit, not insurance — backing a principal's promise to perform.",
-  meta:[{v:"$1.7T",l:"Annual B2B transactions (Cortera)"},{v:"0",l:"Expected loss ratio"},{v:"5/5",l:"Moody's data fit"}],
+  meta:[{v:"$3.7T",l:"B2B transactions tracked biennially (Cortera)"},{v:"0",l:"Expected loss ratio"},{v:"5/5",l:"Moody's data fit"}],
   overview:{
     what:"Surety bonds guarantee a principal (contractor or licensee) will fulfil an obligation to an obligee. The surety expects zero losses and relies on indemnity — making it fundamentally a credit decision, evaluated on capital, capacity, character and the principal's real-world payment behavior.",
     who:["General contractors","Specialty subcontractors","Developers","Licensed professionals","Court & license-bond principals","Public-sector obligees"]
   },
   sales:{
-    pitch:"Surety is a credit decision — and credit is exactly what Moody's does best. We show you how a contractor actually pays its subs and suppliers, in real time, across Cortera's $1.7T network.",
+    pitch:"Surety is a credit decision — and credit is exactly what Moody's does best. We show you how a contractor actually pays its subs and suppliers, in real time, across Cortera's $3.7T network.",
     valueProps:[
       {ic:"\uD83D\uDCB3",t:"Real payment behavior",d:"Cortera reveals how the principal actually pays subs and suppliers — the truest forward indicator of distress."},
       {ic:"\uD83D\uDD0E",t:"Public records, automatic",d:"Tax liens, judgments and UCC filings surfaced instantly — no manual courthouse search."},
@@ -668,14 +675,16 @@ surety:{
     ],
     talking:[
       "Surety is a credit decision — and credit is what Moody's does best.",
-      "We see how a contractor actually pays its subs and suppliers, in real time, through Cortera's $1.7T annual B2B transaction network.",
+      "We see how a contractor actually pays its subs and suppliers, in real time, through Cortera's $3.7T biennial B2B transaction network (60M+ business locations).",
+      "Cortera surfaces the full legal picture automatically: legal events, bankruptcy & tax liens, corporate filings and shell company indicators — the red flags that manual public-records searches miss.",
       "Tax liens, judgments and UCC filings are surfaced automatically — no manual public-records search."
     ]
   },
   discovery:[
-    {q:"How does the principal pay its subcontractors and suppliers — on time?",w:"Payment behavior is the single best leading indicator in surety. <b>Cortera</b> shows real payment trends across a $1.7T network."},
+    {q:"How does the principal pay its subcontractors and suppliers — on time?",w:"Payment behavior is the single best leading indicator in surety. <b>Cortera</b> shows real payment trends across a $3.7T network."},
     {q:"What's the working capital and tangible net worth relative to the bonding program?",w:"Capital adequacy underpins the program. <b>Orbis</b> provides CPA-grade financials to verify."},
     {q:"Any liens, judgments or prior bond claims?",w:"Direct red flags. <b>Cortera</b> surfaces public records automatically."},
+    {q:"Has the principal or any related entity had a recent bankruptcy, filed corporate restructuring documents, or shown signs of shell-company layering in its ownership structure?",w:"Corporate filings, bankruptcy & tax liens, shell company indicators and legal events are now surfaced automatically by <b>Cortera</b> — so you\'re not relying on the agent\'s disclosure for the most sensitive red flags."},
     {q:"What's the backlog size and gross-margin trend?",w:"Over-extended backlog with fading margins is a classic contractor-failure pattern."},
     {q:"How strong is the banking relationship and line-of-credit availability?",w:"Liquidity backstop matters when projects run long; verify capacity to absorb shocks."}
   ],
@@ -685,7 +694,7 @@ surety:{
       {k:"Capital (the 1st C)",v:"Working capital, tangible net worth, leverage, liquidity"},
       {k:"Character (2nd C)",v:"Payment behavior, prior claims, principal reputation"},
       {k:"Capacity (3rd C)",v:"Backlog, gross-margin trend, project size vs. track record"},
-      {k:"Public records",v:"Tax liens, judgments, UCC filings, DOT safety (if applicable)"},
+      {k:"Public records & legal",v:"Tax liens, judgments, UCC filings, DOT safety · legal events, bankruptcy & tax liens, corporate filings, shell company indicators (via Cortera)"},
       {k:"Banking & liquidity",v:"Line of credit, bank relationship, cash position"}
     ],
     decisionDrivers:"It's a credit decision: capital adequacy plus demonstrated payment character. Real-time payment behavior often reveals stress long before audited financials do.",
@@ -699,30 +708,30 @@ surety:{
   },
   pains:[
     {pain:"Audited financials are a lagging indicator — distress shows up months too late.",impact:"Bonds approved on stale data; surprise contractor failures.",fix:"Cortera surfaces real-time payment behavior — the leading indicator that financials can't provide."},
-    {pain:"Lien, judgment and UCC searches are manual and inconsistent.",impact:"Hours of paralegal work per file; records get missed.",fix:"Cortera surfaces public records automatically alongside the credit profile."},
+    {pain:"Lien, judgment and UCC searches are manual and inconsistent — and shell-company layering and legal events rarely get checked at all.",impact:"Hours of paralegal work per file; critical red flags (bankruptcy filings, shell-company indicators, active legal events) get missed.",fix:"Cortera surfaces the complete legal picture automatically: legal events, bankruptcy & tax liens, corporate filings, shell company indicators and UCC — alongside the CPR credit profile, in a single call."},
     {pain:"Credit deterioration is detected too late in the bond term.",impact:"Losses on programs that looked healthy at underwriting.",fix:"EDF-X early-warning flags credit decline months ahead of the financials."}
   ],
   heroes:[
-    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.7T B2B payment network, CPR credit score, liens, judgments, UCC & DOT data."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$3.7T biennial B2B payment network (60M+ business locations). CPR credit score, PD, payment delinquency risk · Legal events, bankruptcy & tax liens, corporate filings, shell company indicators · Cyber risk rating, ESG & geopolitical risk scores · Comparable financials & key ratios."},
     {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Early-warning credit signals before the financials move."},
     {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"CPA-grade financials, ownership tree & UBO."},
     {b:"GR",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Principal & UBO screening for federal and international programs."}
   ],
   objections:[
     {o:"We rely on the contractor's CPA-prepared financials and our agent's judgment.",a:"CPA financials are accurate but backward-looking — they describe last year, not next quarter. <b>Cortera's real-time payment behavior</b> reveals stress as it builds, and EDF-X flags credit deterioration months before the next statement. You keep the agent relationship; you just stop flying blind between statements."},
-    {o:"We already pull D&B Paydex for payment data.",a:"Paydex is a useful summary, but Cortera is built on a <b>$1.7T contributory B2B payment network</b> with deeper, more current trade lines — and it bundles liens, judgments, UCC and DOT in the same call. For surety, payment depth and recency are exactly what predict failure."},
+    {o:"We already pull D&B Paydex for payment data.",a:"Paydex is a useful summary, but Cortera is built on a <b>$3.7T biennial B2B payment network (60M+ locations)</b> with deeper, more current trade lines — and it bundles legal events, bankruptcy & tax liens, corporate filings, shell company indicators, UCC and DOT in the same call. For surety, payment depth, recency and legal-event breadth are exactly what predict failure."},
     {o:"Our surety book is relationship-driven, not data-driven.",a:"This doesn't replace the relationship — it protects it. When you can show an agent precisely why a program needs more collateral, backed by payment data, you write more business with confidence and fewer surprises."},
     {o:"Public-records searches are handled by our service.",a:"Bundling liens, judgments and UCC into the same enrichment as the credit and payment data removes a separate vendor, a separate invoice and a separate delay — one call, full picture, at submission."}
   ],
   competition:[
-    {c:"Dun & Bradstreet (Paydex)",a:"Established business-credit score & trade data.",e:"Cortera's $1.7T contributory network offers deeper, more current trade lines + bundled public records."},
+    {c:"Dun & Bradstreet (Paydex)",a:"Established business-credit score & trade data.",e:"Cortera's $3.7T biennial contributory network offers deeper trade lines + full legal data: legal events, bankruptcy & tax liens, corporate filings, shell company indicators — all in one call."},
     {c:"Experian / Equifax Commercial",a:"Business credit files & scores.",e:"We add CPA-grade Orbis financials and EDF-X forward-looking default — not just a score."},
     {c:"Creditsafe",a:"International business-credit reports.",e:"Orbis global financials + Cortera US payment depth give a richer contractor view."},
     {c:"Manual / in-house underwriting",a:"Agent relationships & CPA financials.",e:"Real-time payment behavior and early-warning signals catch distress between statements."}
   ],
-  stats:[{n:"$1.7T",l:"Annual B2B transactions in Cortera's network"},{n:"36M+",l:"Companies with Cortera payment history"},{n:"5/5",l:"Moody's data fit for a credit-driven line"}],
+  stats:[{n:"$3.7T",l:"B2B transactions tracked biennially in Cortera's network"},{n:"36M+",l:"Companies with Cortera payment history"},{n:"5/5",l:"Moody's data fit for a credit-driven line"}],
   resources:[
-    {t:"product",ic:"\uD83D\uDCB3",tag:"Product",n:"Cortera — Trade Credit & Payment",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.7T payment network, CPR scores, liens, judgments, UCC."},
+    {t:"product",ic:"\uD83D\uDCB3",tag:"Product",n:"Cortera — Trade Credit & Payment",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$3.7T biennial payment network, CPR scores, legal events, bankruptcy & tax liens, cyber risk rating, ESG & geopolitical risk scores."},
     {t:"product",ic:"\uD83C\uDFE2",tag:"Product",n:"Orbis — Company Financials",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"CPA-grade financials & ownership for 625M+ companies."},
     {t:"product",ic:"⏱️",tag:"Product",n:"EDF-X Early Warning",u:"https://www.moodysanalytics.com/product-list/edfx",d:"Forward-looking credit deterioration signals."},
     {t:"solution",ic:"\uD83D\uDEE1️",tag:"Solution",n:"Casualty Insurance Solutions",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"How Moody's data serves casualty & surety underwriting."}
@@ -783,7 +792,7 @@ tc:{
   ],
   heroes:[
     {b:"EDF",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"PD & implied ratings across the entire buyer portfolio — rated or unrated, any country."},
-    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Buyer payment behavior & delinquency signals. $1.7T annual B2B transaction network tracks payment slowdowns before default."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Buyer payment behavior & delinquency signals. $3.7T biennial B2B network (60M+ locations) tracks payment slowdowns before default · Legal events & bankruptcy · Cyber risk rating, ESG & geopolitical risk scores."},
     {b:"EC",n:"Economy.com",u:"https://www.economy.com/",d:"Country risk, GDP, FX & political-risk forecasts."},
     {b:"RT",n:"Moody's Ratings",u:"https://www.moodys.com/web/en/us/capabilities/credit-risk/creditview.html",d:"Sovereign & corporate credit ratings for country and counterparty risk."}
   ],
@@ -863,7 +872,7 @@ gl:{
   heroes:[
     {b:"PR",n:"Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Mass-tort & emerging-liability (Litagion®) screening and PML modeling."},
     {b:"OR",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"Operations verification & SIC/NAICS cross-check."},
-    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"Credit, DOT safety & public records."},
+    {b:"CO",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"CPR scores, payment risk · Legal events, bankruptcy & tax liens, corporate filings · Cyber risk rating, ESG & geopolitical risk scores."},
     {b:"EC",n:"Economy.com",u:"https://www.economy.com/",d:"Jurisdiction & social-inflation context for venue pricing."}
   ],
   objections:[
@@ -992,7 +1001,7 @@ const ECOSYSTEM=[
   {tag:"Company Data",ic:"\uD83C\uDFE2",n:"Orbis",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/orbis.html",d:"625M+ companies · financials, ownership, UBO · 170+ sources"},
   {tag:"KYC / Screening",ic:"\uD83D\uDEE1️",n:"RDC / GRID",u:"https://www.moodys.com/web/en/us/kyc/products/grid.html",d:"Global sanctions, PEPs, adverse media · daily updates"},
   {tag:"Credit Risk",ic:"\uD83D\uDCC9",n:"EDF-X",u:"https://www.moodysanalytics.com/product-list/edfx",d:"PD scores & early-warning signals for any company"},
-  {tag:"Trade & Payment",ic:"\uD83D\uDCB3",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$1.7T B2B payments · liens, judgments, UCC, DOT"},
+  {tag:"Trade & Payment",ic:"\uD83D\uDCB3",n:"Cortera",u:"https://www.moodys.com/web/en/us/capabilities/company-reference-data/data-applications/trade-credit.html",d:"$3.7T biennial B2B payments · CPR score, payment risk, legal events, bankruptcy & tax liens, corporate filings, shell company indicators, cyber risk rating, ESG & geopolitical risk"},
   {tag:"Cyber Risk",ic:"\uD83D\uDD10",n:"BitSight",u:"https://www.bitsight.com/products/bitsight-for-cyber-insurance",d:"Outside-in cyber scoring · ~40% better claim prediction"},
   {tag:"Mass Tort",ic:"\uD83E\uDDEA",n:"Praedicat",u:"https://www.moodys.com/web/en/us/solutions/casualty-insurance.html",d:"Litagion® agent screening · stochastic casualty PML"},
   {tag:"Cat Modeling",ic:"\uD83C\uDF00",n:"RMS",u:"https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/forward-looking-view-risk.html",d:"Catastrophe & forward-looking risk models"},
@@ -1011,7 +1020,7 @@ const MARKET_INTEL=[
   {cat:"Credit Stress",cc:"#DC2626",cb:"#FEF2F2",stat:"32%",label:"US public cos with severe EWS signals",desc:"Year-end 2024: 32% of US public companies carry severe early-warning signals per EDF-X. Average US corporate PD is 9.2% — a post-GFC high.",lobs:["D&O","Surety","Trade Credit"],src:"Moody’s EDF-X, December 2024"},
   {cat:"Bankruptcy",cc:"#B45309",cb:"#FFFBEB",stat:"+19.6%",label:"Business Chapter 11 filings — 2024",desc:"8,456 Ch.11 business filings in full-year 2024. Large corporate bankruptcies +50% vs historical avg (H1 2024). Commercial Ch.11 up +67% YoY as of Feb 2026.",lobs:["D&O","Surety","Trade Credit"],src:"American Bankruptcy Institute, Feb 2026"},
   {cat:"Reserve Pressure",cc:"#9333EA",cb:"#FAF5FF",stat:"$43B",label:"Cumulative casualty underwriting losses 2019–2023",desc:"US casualty writers absorbed $43B in cumulative underwriting losses (2019–2023) plus $10B in reserve strengthening in 2024. Combined ratios (2024): Other Liability composite (GL/Excess/E&O) 110.1% — worst since 2016. D&O improved to ~95% combined ratio as the market softened.",lobs:["D&O","E&O","GL","Excess Casualty"],src:"AM Best / NAIC, Full-Year 2024 (published Feb 2025)"},
-  {cat:"Payment Risk",cc:"#0284C7",cb:"#F0F9FF",stat:"$1.7T",label:"Annual B2B transactions tracked by Cortera",desc:"Cortera’s contributory payment network monitors $1.7T in annual B2B transactions. Real-time CPR scores, liens, UCC and DOT data — the earliest signal of principal distress.",lobs:["Surety","Trade Credit"],src:"Moody’s / Cortera, 2025"},
+  {cat:"Payment Risk",cc:"#0284C7",cb:"#F0F9FF",stat:"$3.7T",label:"B2B transactions tracked biennially by Cortera",desc:"Cortera’s contributory payment network monitors $3.7T in biennial B2B transactions. Real-time CPR scores, liens, UCC and DOT data — the earliest signal of principal distress.",lobs:["Surety","Trade Credit"],src:"Moody’s / Cortera, 2025"},
 ];
 
 const PERSONAS={
@@ -1026,7 +1035,7 @@ const PERSONAS={
     {role:"Risk Manager",dept:"Risk Management",pain:"Silent cyber clauses and coverage gaps between standalone cyber and E&O create uninsured exposure that neither team has mapped. Renewals reveal the gaps at the worst time.",trigger:"Policy renewal, carrier non-renewal, new SaaS or cloud contract, M&A with tech integration",hook:"We can show the coverage gap map using BitSight posture data to right-size limits before the renewal — not after the loss."},
   ],
   surety:[
-    {role:"CFO / Treasurer (Contractor)",dept:"Finance",pain:"Surety capacity caps the contract pipeline. Credit decisions are opaque — and a D&B Paydex score doesn't show how a contractor actually pays its subs and suppliers.",trigger:"New large contract bid, banking covenant amendment, subcontractor default on current project",hook:"Cortera shows real payment behavior across a $1.7T network — not a summary score. That's the difference between approving and declining a $50M performance bond."},
+    {role:"CFO / Treasurer (Contractor)",dept:"Finance",pain:"Surety capacity caps the contract pipeline. Credit decisions are opaque — and a D&B Paydex score doesn't show how a contractor actually pays its subs and suppliers.",trigger:"New large contract bid, banking covenant amendment, subcontractor default on current project",hook:"Cortera shows real payment behavior across a $3.7T network — not a summary score. That's the difference between approving and declining a $50M performance bond."},
     {role:"VP Business Development",dept:"Business Development",pain:"Surety approval delays kill bid opportunities. Contractors lose contracts because bonding can't move at the speed of the bid calendar.",trigger:"New public or private RFP, bid cycle, new bonding requirement for federal or state project",hook:"Cortera payment data and EDF-X on the principal allow faster, more defensible credit decisions — approvals that took weeks can move in days."},
     {role:"Surety Underwriter",dept:"Underwriting",pain:"Principal financial statements are 6–12 months stale and show book value, not payment behavior. The first sign of trouble is usually a subcontractor complaint, not a balance sheet entry.",trigger:"New submission, renewal, large contract notification, WIP schedule update",hook:"Cortera's real-time CPR scores show how a principal pays its subs today — not how it reported a year ago. The leading indicator that financial statements can't provide."},
   ],
@@ -1097,10 +1106,10 @@ const OUTREACH={
   },
   surety:{
     emails:[
-      {subj:"$1.2T in federal infrastructure spend — is your surety book positioned?",body:"Hi [Name],\n\nThe Infrastructure Investment & Jobs Act is deploying $1.2T through 2030 — $275.1B obligated (47%) and $119.4B disbursed (21%) as of December 2024, with spending accelerating year-on-year.\n\nMoody's Cortera gives you real-time payment behavior across a $1.7T B2B network — the leading indicator for principal default that financial statements can't show. Let me show you how it works.\n\n[Signature]"},
-      {subj:"How are you underwriting contractor credit on infrastructure bonds?",body:"Hi [Name],\n\nWith Ch.11 filings up 19.6% in 2024 and large-project complexity rising under IIJA, the gap between a contractor's financial statements and their actual payment behavior has never been wider.\n\nCortera CPR scores from a $1.7T B2B payment network show how a principal actually pays its subs — before a performance problem becomes your problem. Happy to run a demo on a sample submission.\n\n[Signature]"},
+      {subj:"$1.2T in federal infrastructure spend — is your surety book positioned?",body:"Hi [Name],\n\nThe Infrastructure Investment & Jobs Act is deploying $1.2T through 2030 — $275.1B obligated (47%) and $119.4B disbursed (21%) as of December 2024, with spending accelerating year-on-year.\n\nMoody's Cortera gives you real-time payment behavior across a $3.7T B2B network — the leading indicator for principal default that financial statements can't show. Let me show you how it works.\n\n[Signature]"},
+      {subj:"How are you underwriting contractor credit on infrastructure bonds?",body:"Hi [Name],\n\nWith Ch.11 filings up 19.6% in 2024 and large-project complexity rising under IIJA, the gap between a contractor's financial statements and their actual payment behavior has never been wider.\n\nCortera CPR scores from a $3.7T B2B payment network show how a principal actually pays its subs — before a performance problem becomes your problem. Happy to run a demo on a sample submission.\n\n[Signature]"},
     ],
-    linkedin:"Hi [Name] — with $1.2T in federal infrastructure spend driving surety demand, Moody's Cortera is helping underwriters see real-time contractor payment behavior across a $1.7T network, not just balance sheets. Worth a quick look if you're working on infrastructure bonds.",
+    linkedin:"Hi [Name] — with $1.2T in federal infrastructure spend driving surety demand, Moody's Cortera is helping underwriters see real-time contractor payment behavior across a $3.7T network, not just balance sheets. Worth a quick look if you're working on infrastructure bonds.",
   },
   tc:{
     emails:[
@@ -1148,7 +1157,7 @@ const CHECKLIST={
     "Pull Cortera CPR score and trend — look for worsening vs. 6 and 12 months ago",
     "Run EDF-X on the principal if sufficient size — flag elevated 1-year PD",
     "Request last 3 years of CPA-reviewed financials and a current WIP (work-in-progress) schedule",
-    "Check for open mechanic's liens, UCC filings, judgments, and DOT violations in Cortera public records",
+    "Check for open mechanic's liens, UCC filings, judgments, DOT violations, legal events, bankruptcy & tax liens, corporate filings and shell-company indicators in Cortera public records",
     "Verify DOT safety ratings and authority registration for any transportation-related bonds",
     "Confirm bonding history: any prior bond claims, defaults, or SBA bond program participation?",
     "Size the completion exposure vs. available assets — stress-test net worth under a 20% cost overrun",
