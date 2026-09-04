@@ -1,0 +1,974 @@
+<title>Promotion Case Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F1F3F6; --surface:#FFFFFF; --surface-2:#F7F8FA; --surface-3:#EAEEF3;
+  --line:#DCE2E9; --line-strong:#BFC9D4;
+  --ink:#10161E; --ink-2:#47535F; --ink-3:#6E7B89;
+  --brass:#8A6410; --brass-ink:#6E4F0B; --brass-wash:#F3EAD5; --brass-line:#DFCB9C;
+  --good:#1C6B4B; --good-wash:#E2F0E9;
+  --warn:#8F620B; --warn-wash:#F6EBD6;
+  --crit:#A03429; --crit-wash:#F7E4E1;
+  --shadow:0 1px 2px rgba(16,22,30,.06), 0 8px 24px -12px rgba(16,22,30,.16);
+  --r:10px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0F14; --surface:#141A21; --surface-2:#1A212A; --surface-3:#212A34;
+    --line:#26303B; --line-strong:#3A4653;
+    --ink:#E9EDF2; --ink-2:#A8B4C1; --ink-3:#7C8996;
+    --brass:#E2B65B; --brass-ink:#EDCB86; --brass-wash:#2B2211; --brass-line:#4B3B18;
+    --good:#57C293; --good-wash:#12291F;
+    --warn:#E0AC49; --warn-wash:#2B2211;
+    --crit:#E9877A; --crit-wash:#311916;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0F14; --surface:#141A21; --surface-2:#1A212A; --surface-3:#212A34;
+  --line:#26303B; --line-strong:#3A4653;
+  --ink:#E9EDF2; --ink-2:#A8B4C1; --ink-3:#7C8996;
+  --brass:#E2B65B; --brass-ink:#EDCB86; --brass-wash:#2B2211; --brass-line:#4B3B18;
+  --good:#57C293; --good-wash:#12291F;
+  --warn:#E0AC49; --warn-wash:#2B2211;
+  --crit:#E9877A; --crit-wash:#311916;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:Archivo,-apple-system,"Segoe UI",sans-serif; margin:0; text-wrap:balance; letter-spacing:-.015em}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+a{color:var(--brass-ink)}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--brass); outline-offset:2px; border-radius:4px}
+
+/* ---------- shell ---------- */
+.wrap{max-width:1200px; margin:0 auto; padding:0 20px}
+header.top{
+  border-bottom:1px solid var(--line); background:var(--surface);
+  position:sticky; top:0; z-index:40;
+}
+.topbar{display:flex; align-items:center; gap:20px; padding:14px 0; flex-wrap:wrap}
+.brand{display:flex; align-items:baseline; gap:10px; min-width:0}
+.brand h1{font-size:17px; font-weight:700}
+.brand .yr{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); border:1px solid var(--line); border-radius:99px; padding:2px 8px}
+.ask{display:flex; gap:22px; margin-left:auto; align-items:center; flex-wrap:wrap}
+.ask .fact{display:flex; flex-direction:column; line-height:1.25}
+.ask .fact .k{font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
+.ask .fact .v{font-size:13px; font-weight:600}
+.btn{
+  border:1px solid var(--line-strong); background:var(--surface); color:var(--ink);
+  padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:500;
+  transition:background .12s, border-color .12s;
+}
+.btn:hover{background:var(--surface-3)}
+.btn.primary{background:var(--brass); border-color:var(--brass); color:#fff; font-weight:600}
+:root[data-theme="dark"] .btn.primary,:root:not([data-theme="light"]) .btn.primary{color:#1A1204}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff}}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.sm{padding:5px 10px; font-size:12px}
+.btn.ghost{border-color:transparent; background:transparent; color:var(--ink-2)}
+.btn.ghost:hover{background:var(--surface-3); color:var(--ink)}
+
+nav.tabs{display:flex; gap:2px; border-top:1px solid var(--line); overflow-x:auto}
+nav.tabs button{
+  background:none; border:none; border-bottom:2px solid transparent; padding:11px 14px;
+  cursor:pointer; color:var(--ink-3); font-size:13px; font-weight:500; white-space:nowrap;
+}
+nav.tabs button:hover{color:var(--ink)}
+nav.tabs button[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--brass); font-weight:600}
+main{padding:26px 0 80px}
+.panel[hidden]{display:none!important}
+.stack{display:flex; flex-direction:column; gap:22px}
+
+/* ---------- banner ---------- */
+.banner{
+  display:flex; gap:12px; align-items:flex-start; padding:12px 14px; border-radius:var(--r);
+  background:var(--brass-wash); border:1px solid var(--brass-line); font-size:13px; color:var(--ink-2);
+}
+.banner strong{color:var(--ink)}
+.banner .dot{width:7px;height:7px;border-radius:99px;background:var(--brass); flex:none; margin-top:7px}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+.card > .hd{display:flex; align-items:baseline; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.card > .hd h3{font-size:14px; font-weight:600}
+.card > .hd .sub{font-size:12px; color:var(--ink-3); margin-left:auto}
+.card > .bd{padding:16px}
+
+/* ---------- value tiles ---------- */
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.tile{background:var(--surface); padding:16px 18px; display:flex; flex-direction:column; gap:3px}
+.tile .k{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
+.tile .v{font-family:Archivo,sans-serif; font-size:27px; font-weight:700; letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1.15}
+.tile .n{font-size:11.5px; color:var(--ink-3)}
+.tile.accent .v{color:var(--brass-ink)}
+
+/* ---------- attainment ---------- */
+.meter{height:8px; border-radius:99px; background:var(--surface-3); overflow:hidden; border:1px solid var(--line)}
+.meter > i{display:block; height:100%; background:var(--brass); border-radius:99px}
+
+/* ---------- grid ---------- */
+.cols{display:grid; gap:22px; grid-template-columns:1.35fr 1fr; align-items:start}
+@media(max-width:900px){.cols{grid-template-columns:1fr}}
+.prose-2col{display:grid; grid-template-columns:1fr 1fr; gap:20px 34px}
+.prose-2col p{max-width:52ch}
+@media(max-width:760px){.prose-2col{grid-template-columns:1fr}}
+
+/* ---------- charts ---------- */
+.charts{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+@media(max-width:560px){.charts{grid-template-columns:1fr}}
+.chart figcaption{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); font-weight:600; margin:0 0 6px}
+.chart svg{display:block; width:100%; height:auto}
+figure{margin:0}
+
+/* ---------- coverage matrix ---------- */
+.matrix{display:flex; flex-direction:column}
+.mrow{display:grid; grid-template-columns:minmax(190px,1.5fr) 74px 100px 1fr 108px; gap:14px; align-items:center; padding:13px 16px; border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:none}
+.mrow.head{padding-top:10px; padding-bottom:10px; background:var(--surface-2); border-bottom:1px solid var(--line)}
+.mrow.head span{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
+.mname{font-weight:600; font-size:13.5px}
+.mname .gapnote{display:block; font-weight:400; font-size:12px; color:var(--ink-3); margin-top:3px; line-height:1.4}
+.bar{height:7px; background:var(--surface-3); border-radius:99px; overflow:hidden; border:1px solid var(--line)}
+.bar > i{display:block; height:100%; border-radius:99px}
+.pill{display:inline-flex; align-items:center; gap:6px; padding:3px 9px; border-radius:99px; font-size:11.5px; font-weight:600; border:1px solid}
+.pill .g{width:6px;height:6px;border-radius:99px;background:currentColor;flex:none}
+.pill.good{color:var(--good); background:var(--good-wash); border-color:color-mix(in srgb,var(--good) 30%,transparent)}
+.pill.warn{color:var(--warn); background:var(--warn-wash); border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.pill.crit{color:var(--crit); background:var(--crit-wash); border-color:color-mix(in srgb,var(--crit) 30%,transparent)}
+.pill.mut{color:var(--ink-3); background:var(--surface-2); border-color:var(--line)}
+@media(max-width:820px){
+  .mrow{grid-template-columns:1fr 1fr; gap:8px}
+  .mrow.head{display:none}
+  .mrow .bar{grid-column:1/-1}
+}
+
+/* ---------- log table ---------- */
+.filters{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:14px}
+.filters input,.filters select{
+  background:var(--surface); border:1px solid var(--line-strong); border-radius:8px; padding:7px 10px; font-size:13px;
+}
+.filters input[type="search"]{min-width:210px}
+.tblwrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:820px}
+th{
+  text-align:left; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
+  font-weight:600; padding:11px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap;
+}
+td{padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; font-size:13px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--surface-2)}
+td.num{text-align:right; white-space:nowrap}
+.etitle{font-weight:600; display:block}
+.emeta{color:var(--ink-3); font-size:12px; margin-top:2px; display:block}
+.tag{display:inline-block; font-size:11px; padding:2px 7px; border-radius:5px; background:var(--surface-3); color:var(--ink-2); border:1px solid var(--line); margin:2px 3px 0 0; white-space:nowrap}
+.tag.cmp{background:var(--brass-wash); border-color:var(--brass-line); color:var(--brass-ink)}
+.tag.ex{background:var(--warn-wash); border-color:color-mix(in srgb,var(--warn) 35%,transparent); color:var(--warn); font-weight:600}
+.score{display:inline-flex; gap:2px}
+.score i{width:6px; height:6px; border-radius:99px; background:var(--line-strong); display:block}
+.score i.on{background:var(--brass)}
+.rowacts{display:flex; gap:4px; justify-content:flex-end}
+.empty{padding:44px 20px; text-align:center; color:var(--ink-3)}
+.empty h3{font-size:15px; color:var(--ink); margin-bottom:6px}
+
+/* ---------- case builder ---------- */
+.narr{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:20px 22px}
+.narr h2{font-size:19px; margin-bottom:4px}
+.narr .lede{color:var(--ink-2); max-width:66ch; margin:8px 0 0}
+.proof{border-left:2px solid var(--brass); padding:2px 0 2px 14px; margin:14px 0}
+.proof .ph{font-weight:600}
+.proof .pl{color:var(--ink-2); font-size:13px; margin-top:3px}
+.proof .pl b{color:var(--ink); font-weight:600}
+.secblk{margin-top:26px; padding-top:20px; border-top:1px solid var(--line)}
+.secblk:first-of-type{border-top:none; margin-top:18px; padding-top:0}
+.secblk h4{font-size:14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.mdout{
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px;
+  font-family:"IBM Plex Mono",monospace; font-size:12px; line-height:1.6; white-space:pre-wrap;
+  max-height:420px; overflow:auto; color:var(--ink-2);
+}
+
+/* ---------- dialog / form ---------- */
+dialog{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:14px; padding:0; width:min(720px,94vw); box-shadow:var(--shadow); max-height:90vh;
+}
+dialog::backdrop{background:rgba(10,14,20,.55); backdrop-filter:blur(2px)}
+.dlg-hd{display:flex; align-items:center; gap:12px; padding:16px 20px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--surface); border-radius:14px 14px 0 0}
+.dlg-hd h3{font-size:15px}
+.dlg-bd{padding:20px; overflow-y:auto; max-height:calc(90vh - 132px)}
+.dlg-ft{display:flex; gap:8px; justify-content:flex-end; padding:14px 20px; border-top:1px solid var(--line); background:var(--surface-2); border-radius:0 0 14px 14px}
+.fgrid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr}}
+.f{display:flex; flex-direction:column; gap:5px}
+.f.full{grid-column:1/-1}
+.f label{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
+.f .hint{font-size:11.5px; color:var(--ink-3); text-transform:none; letter-spacing:0; font-weight:400}
+.f input,.f select,.f textarea{
+  background:var(--surface); border:1px solid var(--line-strong); border-radius:8px; padding:8px 10px; font-size:13.5px; width:100%;
+}
+.f textarea{resize:vertical; min-height:66px; line-height:1.5}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{
+  border:1px solid var(--line-strong); background:var(--surface); border-radius:99px; padding:5px 11px;
+  font-size:12.5px; cursor:pointer; user-select:none;
+}
+.chip[aria-pressed="true"]{background:var(--brass-wash); border-color:var(--brass); color:var(--brass-ink); font-weight:600}
+.checkrow{display:flex; align-items:flex-start; gap:9px; padding:11px 13px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2)}
+.checkrow input{width:16px; height:16px; margin-top:2px; flex:none; accent-color:var(--brass)}
+.checkrow span{font-size:12.5px; color:var(--ink-2)}
+.checkrow b{color:var(--ink); display:block; font-size:13px}
+.status{font-size:12px; color:var(--ink-3); margin-right:auto}
+@media(prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Promotion Case Tracker</h1>
+        <span class="yr" id="yrBadge">FY2026</span>
+      </div>
+      <div class="ask" id="askStrip"></div>
+      <button class="btn primary" id="btnAdd">+ Log an entry</button>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="dash" aria-selected="true">Dashboard</button>
+      <button role="tab" data-tab="log" aria-selected="false">Activity log</button>
+      <button role="tab" data-tab="cov" aria-selected="false">Competency coverage</button>
+      <button role="tab" data-tab="case" aria-selected="false">Case builder</button>
+      <button role="tab" data-tab="setup" aria-selected="false">Setup</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="notice"></div>
+  <section class="panel stack" id="p-dash"></section>
+  <section class="panel stack" id="p-log" hidden></section>
+  <section class="panel stack" id="p-cov" hidden></section>
+  <section class="panel stack" id="p-case" hidden></section>
+  <section class="panel stack" id="p-setup" hidden></section>
+</main>
+
+<dialog id="dlg">
+  <form method="dialog" id="entryForm">
+    <div class="dlg-hd">
+      <h3 id="dlgTitle">Log an entry</h3>
+      <button type="button" class="btn ghost sm" id="dlgX" style="margin-left:auto">Close</button>
+    </div>
+    <div class="dlg-bd">
+      <div class="fgrid">
+        <div class="f full">
+          <label for="f_title">Headline <span class="hint">— write it the way you'd say it out loud in the review</span></label>
+          <input id="f_title" required maxlength="140" placeholder="Recovered $410K Guidewire-adjacent renewal after 9 months dark">
+        </div>
+        <div class="f">
+          <label for="f_date">Date</label>
+          <input type="date" id="f_date" required>
+        </div>
+        <div class="f">
+          <label for="f_cat">Activity type</label>
+          <select id="f_cat" required></select>
+        </div>
+        <div class="f">
+          <label for="f_account">Account / client</label>
+          <input id="f_account" maxlength="90" placeholder="Zurich NA — Commercial Lines">
+        </div>
+        <div class="f">
+          <label for="f_segment">Segment</label>
+          <select id="f_segment"></select>
+        </div>
+        <div class="f full">
+          <label for="f_action">What I actually did <span class="hint">— the verb belongs to you, not the team</span></label>
+          <textarea id="f_action" maxlength="600" placeholder="Rebuilt the stakeholder map after our champion left, ran a joint workshop with the Chief Actuary and the CUO, and rebuilt the business case around loss-ratio impact instead of seat count."></textarea>
+        </div>
+        <div class="f full">
+          <label for="f_outcome">Result <span class="hint">— what changed for the client or for Moody's</span></label>
+          <textarea id="f_outcome" maxlength="600" placeholder="Renewed at $410K on a 3-year term, up 14% from prior, with an expansion clause for Reinsurance."></textarea>
+        </div>
+        <div class="f">
+          <label for="f_vtype">Value type</label>
+          <select id="f_vtype"></select>
+        </div>
+        <div class="f">
+          <label for="f_vamt">Dollar value (USD)</label>
+          <input type="number" id="f_vamt" min="0" step="1000" placeholder="410000">
+        </div>
+        <div class="f full">
+          <label for="f_metric">Non-dollar metric <span class="hint">— adoption %, NPS, hours saved, cycle time, headcount reached</span></label>
+          <input id="f_metric" maxlength="160" placeholder="Seat utilization 41% → 78% in two quarters">
+        </div>
+        <div class="f full">
+          <label>Promotion competencies this proves <span class="hint">— pick every one it genuinely supports</span></label>
+          <div class="chips" id="f_comps"></div>
+        </div>
+        <div class="f">
+          <label for="f_sponsors">Who can vouch for it <span class="hint">— names your manager can check</span></label>
+          <input id="f_sponsors" maxlength="160" placeholder="R. Alvarez (CUO, Zurich); M. Chen (Product)">
+        </div>
+        <div class="f">
+          <label for="f_link">Evidence link <span class="hint">— SFDC, deck, email, Teams thread</span></label>
+          <input id="f_link" maxlength="400" placeholder="https://…">
+        </div>
+        <div class="f full">
+          <label class="checkrow" for="f_above">
+            <input type="checkbox" id="f_above">
+            <span><b>This was next-level work</b>Scope, altitude or autonomy beyond my current title — the single strongest promotion signal there is.</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="dlg-ft">
+      <span class="status" id="dlgStatus"></span>
+      <button type="button" class="btn" id="dlgCancel">Cancel</button>
+      <button type="submit" class="btn primary" id="dlgSave">Save entry</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+"use strict";
+/* ============================ taxonomy ============================ */
+const CATS = [
+  {id:"rev_new",  label:"New business win",             grp:"Revenue"},
+  {id:"rev_exp",  label:"Expansion / upsell / cross-sell", grp:"Revenue"},
+  {id:"renewal",  label:"Renewal secured",              grp:"Revenue"},
+  {id:"save",     label:"At-risk save / churn recovery",grp:"Revenue"},
+  {id:"react",    label:"Expired or dormant line reactivated", grp:"Revenue"},
+  {id:"cs",       label:"Client success & adoption",    grp:"Client"},
+  {id:"exec",     label:"Executive relationship built", grp:"Client"},
+  {id:"travel",   label:"Client travel / field presence", grp:"Client"},
+  {id:"rt",       label:"Roundtable / event / speaking",grp:"Market"},
+  {id:"content",  label:"Thought leadership / POV",     grp:"Market"},
+  {id:"init",     label:"Internal initiative / process",grp:"Internal"},
+  {id:"enable",   label:"Enablement, mentoring, hiring",grp:"Internal"},
+  {id:"xfn",      label:"Cross-functional / partner work", grp:"Internal"},
+  {id:"stretch",  label:"Stretch assignment / extra scope", grp:"Internal"},
+  {id:"recog",    label:"Recognition & feedback received", grp:"Internal"}
+];
+const SEGMENTS = ["—","P&C carrier","Life & Annuity","Health","Reinsurer","MGA / MGU","Broker","ILS / Capital markets","Regulator / Rating","Internal"];
+const VTYPES = [
+  {id:"none", label:"No dollar value",              bucket:null},
+  {id:"new",  label:"New ARR booked",               bucket:"booked"},
+  {id:"exp",  label:"Expansion ARR booked",         bucket:"booked"},
+  {id:"react",label:"Reactivated ARR (expired line)",bucket:"booked"},
+  {id:"ren",  label:"ARR renewed on time",          bucket:"protected"},
+  {id:"save", label:"ARR saved from churn",         bucket:"protected"},
+  {id:"pipe", label:"Qualified pipeline created",   bucket:"pipeline"},
+  {id:"eff",  label:"Cost / efficiency value",      bucket:"efficiency"}
+];
+const COMPS = [
+  {id:"ci",  name:"Commercial Impact",
+   gap:"Log the number you own — bookings, renewals, saves — with the dollar figure attached, not just the activity."},
+  {id:"sal", name:"Strategic Account Leadership",
+   gap:"Log multi-year account plans, C-suite relationships you built, and deals you shaped rather than responded to."},
+  {id:"mda", name:"Market & Domain Authority",
+   gap:"Host or speak at a roundtable, publish a POV, or get quoted. Managers promote people the market already recognizes."},
+  {id:"xfi", name:"Cross-Functional Influence",
+   gap:"Log times you moved Product, Marketing, or Delivery without authority — and the deal or client outcome it unlocked."},
+  {id:"ttl", name:"Talent & Team Leverage",
+   gap:"Mentor a rep, run an enablement session, build a reusable playbook, or sit on a hiring loop. Scope means multiplying others."},
+  {id:"opr", name:"Operating Rigor",
+   gap:"Log forecast accuracy, pipeline hygiene, process fixes, or systems you cleaned up. This is the quiet one that kills cases."},
+  {id:"sca", name:"Scope & Altitude",
+   gap:"Log work you did above your title — territory you absorbed, a peer you unblocked, a decision you owned. Tick the next-level box when you log it."}
+];
+const CATMAP = {
+  rev_new:["ci","sal"], rev_exp:["ci","sal"], renewal:["ci","sal"], save:["ci","sal"],
+  react:["ci","opr"], cs:["sal","xfi"], exec:["sal","mda"], travel:["sal"],
+  rt:["mda","xfi"], content:["mda"], init:["opr","sca"], enable:["ttl","sca"],
+  xfn:["xfi"], stretch:["sca"], recog:["ci"]
+};
+
+/* ============================ examples ============================ */
+const EXAMPLES = [
+  {id:"ex1", example:true, date:"2026-02-11", title:"Reactivated a dormant Reinsurance line worth $265K after 14 months cold",
+   cat:"react", account:"Everest Re — Ceded Analytics", segment:"Reinsurer",
+   action:"Pulled the closed-lost history, found the original blocker was a data-mapping gap we shipped last year, and re-entered through the Head of Ceded Re rather than procurement.",
+   outcome:"Signed a 2-year $265K deal in 71 days; account is now on the FY27 expansion list.",
+   vtype:"react", vamt:265000, metric:"71-day cycle vs. 154-day segment average",
+   comps:["ci","opr","sca"], sponsors:"D. Okafor (Head of Ceded Re); internal: T. Brandt", link:"", above:true},
+  {id:"ex2", example:true, date:"2026-03-04", title:"Founded and hosted the Northeast P&C Reserving Roundtable",
+   cat:"rt", account:"12 carriers", segment:"P&C carrier",
+   action:"Built the guest list, set the agenda around reserve volatility under IFRS 17, moderated the session, and turned the transcript into a follow-up POV for Marketing.",
+   outcome:"12 carriers attended, 5 new opportunities sourced, and Marketing repackaged it as a national series.",
+   vtype:"pipe", vamt:1400000, metric:"12 carriers · 5 sourced opportunities",
+   comps:["mda","xfi","sca"], sponsors:"S. Whitmore (VP Marketing); attendee list on file", link:"", above:true},
+  {id:"ex3", example:true, date:"2026-04-22", title:"Saved a $520K renewal that forecast had already written off",
+   cat:"save", account:"Sentry Insurance", segment:"P&C carrier",
+   action:"Flew to Stevens Point after the champion left, rebuilt the stakeholder map, and reframed the business case around loss-ratio impact instead of seat count with the Chief Actuary.",
+   outcome:"Renewed at $520K on a 3-year term with an expansion clause; seat utilization went 41% → 78%.",
+   vtype:"save", vamt:520000, metric:"Seat utilization 41% → 78%",
+   comps:["ci","sal","xfi"], sponsors:"R. Alvarez (Chief Actuary, Sentry)", link:"", above:false}
+];
+
+/* ============================ state ============================ */
+const DEFAULT_PROFILE = {
+  name:"", currentTitle:"Relationship Manager", targetTitle:"Sales Director",
+  manager:"", reviewDate:(new Date().getFullYear())+"-12-15",
+  quota:0, fyLabel:"FY"+(new Date().getFullYear())
+};
+const LS_ENTRIES="pct.entries.v1", LS_PROFILE="pct.profile.v1", LS_MIGRATED="pct.migrated.v1";
+let DB=null, entries=[], profile={...DEFAULT_PROFILE}, activeTab="dash", editingId=null;
+let filters={q:"",cat:"",comp:"",quarter:""};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const catOf=id=>CATS.find(c=>c.id===id)||{label:id||"—",grp:""};
+const vtOf=id=>VTYPES.find(v=>v.id===id)||VTYPES[0];
+const compOf=id=>COMPS.find(c=>c.id===id);
+const uid=()=>"e"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+
+function money(n){
+  n=Number(n)||0; if(!n) return "$0";
+  if(Math.abs(n)>=1e6) return "$"+(n/1e6).toFixed(n%1e6===0?0:2).replace(/\.00$/,"")+"M";
+  if(Math.abs(n)>=1e3) return "$"+Math.round(n/1e3)+"K";
+  return "$"+n.toLocaleString();
+}
+function fmtDate(d){
+  if(!d) return "—";
+  const p=String(d).split("-"); if(p.length<3) return d;
+  return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+}
+function quarterOf(d){ const m=+String(d||"").split("-")[1]; return m?("Q"+Math.ceil(m/3)):null; }
+function isExampleMode(){ return entries.length===0; }
+function view(){ return isExampleMode()?EXAMPLES:entries; }
+
+/* evidence score 0–4: quantified, vouched, linked, mapped */
+function scoreOf(e){
+  let s=0;
+  if((Number(e.vamt)>0 && e.vtype!=="none") || (e.metric||"").trim()) s++;
+  if((e.sponsors||"").trim()) s++;
+  if((e.link||"").trim()) s++;
+  if((e.comps||[]).length) s++;
+  return s;
+}
+function rollup(list){
+  const r={booked:0,protected:0,pipeline:0,efficiency:0,above:0,scoreSum:0,byQ:{Q1:{n:0,v:0},Q2:{n:0,v:0},Q3:{n:0,v:0},Q4:{n:0,v:0}}};
+  list.forEach(e=>{
+    const b=vtOf(e.vtype).bucket, amt=Number(e.vamt)||0;
+    if(b) r[b]+=amt;
+    if(e.above) r.above++;
+    r.scoreSum+=scoreOf(e);
+    const q=quarterOf(e.date); if(q&&r.byQ[q]){ r.byQ[q].n++; r.byQ[q].v+=amt; }
+  });
+  r.avgScore=list.length?r.scoreSum/list.length:0;
+  return r;
+}
+function coverage(list){
+  return COMPS.map(c=>{
+    const es=list.filter(e=>(e.comps||[]).includes(c.id));
+    const dollars=es.reduce((a,e)=>a+(vtOf(e.vtype).bucket?(Number(e.vamt)||0):0),0);
+    const vouched=es.filter(e=>(e.sponsors||"").trim()).length;
+    const avg=es.length?es.reduce((a,e)=>a+scoreOf(e),0)/es.length:0;
+    const volume=Math.min(es.length,3)/3*50;
+    const quality=(avg/4)*50;
+    const strength=Math.round(volume+quality);
+    const status=es.length===0?"none":strength>=70?"good":strength>=40?"warn":"crit";
+    return {...c, entries:es, count:es.length, dollars, vouched, avg, strength, status};
+  });
+}
+const STATUS_LABEL={good:"Strong",warn:"Developing",crit:"Thin",none:"No evidence"};
+const STATUS_CLASS={good:"good",warn:"warn",crit:"crit",none:"mut"};
+</script>
+<script>
+"use strict";
+/* ============================ chart ============================ */
+function barChart(rows,{fmt=v=>v, caption=""}={}){
+  const W=320,H=152,padT=26,padB=26,padX=6;
+  const plotH=H-padT-padB, slot=(W-padX*2)/rows.length, bw=Math.min(46,slot-24);
+  const max=Math.max(...rows.map(r=>r.value),0);
+  const scale=v=>max>0?(v/max)*plotH:0;
+  const bp=(x,y,w,h,r)=>{r=Math.max(0,Math.min(r,w/2,h));
+    return `M${x},${y+h} L${x},${y+r} Q${x},${y} ${x+r},${y} L${x+w-r},${y} Q${x+w},${y} ${x+w},${y+r} L${x+w},${y+h} Z`;};
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(caption)}">`;
+  s+=`<line x1="${padX}" y1="${padT+plotH+.5}" x2="${W-padX}" y2="${padT+plotH+.5}" stroke="var(--line-strong)" stroke-width="1"/>`;
+  rows.forEach((r,i)=>{
+    const cx=padX+slot*i+slot/2, x=cx-bw/2;
+    const h=r.value>0?Math.max(scale(r.value),3):0, y=padT+plotH-h;
+    if(h>0) s+=`<path d="${bp(x,y,bw,h,4)}" fill="var(--brass)"/>`;
+    s+=`<text x="${cx}" y="${(h>0?y:padT+plotH)-7}" text-anchor="middle" font-size="11" font-weight="600" font-family="IBM Plex Mono, monospace" fill="var(--ink)">${esc(fmt(r.value))}</text>`;
+    s+=`<text x="${cx}" y="${padT+plotH+17}" text-anchor="middle" font-size="11" font-family="IBM Plex Sans, sans-serif" fill="var(--ink-3)">${esc(r.label)}</text>`;
+    s+=`<title>${esc(r.label)}: ${esc(fmt(r.value))}</title>`;
+  });
+  return s+"</svg>";
+}
+
+/* ============================ render ============================ */
+function renderAsk(){
+  const d=profile.reviewDate?new Date(profile.reviewDate+"T00:00:00"):null;
+  const days=d?Math.ceil((d-new Date())/864e5):null;
+  $("#yrBadge").textContent=profile.fyLabel||"FY";
+  $("#askStrip").innerHTML=`
+    <div class="fact"><span class="k">The ask</span><span class="v">${esc(profile.currentTitle||"—")} &rarr; ${esc(profile.targetTitle||"—")}</span></div>
+    <div class="fact"><span class="k">Review</span><span class="v mono">${d?fmtDate(profile.reviewDate):"not set"}${days!=null&&days>=0?" · "+days+"d":""}</span></div>`;
+}
+
+function renderNotice(){
+  const bits=[];
+  if(isExampleMode()) bits.push(`<div class="banner"><span class="dot"></span><div><strong>These three entries are examples, not your data.</strong> They show what a strong entry looks like. Log your first real one and they disappear for good.</div></div>`);
+  if(!DB) bits.push(`<div class="banner"><span class="dot"></span><div><strong>Saving to this browser only.</strong> Shared storage isn't available in this view, so your entries live in this browser's local storage. Export a CSV from Setup to keep a copy.</div></div>`);
+  $("#notice").innerHTML=bits.length?`<div class="stack" style="margin-bottom:22px">${bits.join("")}</div>`:"";
+}
+
+function renderDash(){
+  const list=view(), r=rollup(list), cov=coverage(list);
+  const overall=Math.round(cov.reduce((a,c)=>a+c.strength,0)/COMPS.length);
+  const gaps=cov.filter(c=>c.status==="none"||c.status==="crit");
+  const quota=Number(profile.quota)||0;
+  const attain=quota?Math.round((r.booked+r.protected)/quota*100):null;
+  const qrows=["Q1","Q2","Q3","Q4"].map(q=>({label:q,value:r.byQ[q].n}));
+  const vrows=["Q1","Q2","Q3","Q4"].map(q=>({label:q,value:r.byQ[q].v}));
+
+  $("#p-dash").innerHTML=`
+  <div class="tiles">
+    <div class="tile accent"><span class="k">Booked</span><span class="v">${money(r.booked)}</span><span class="n">New, expansion &amp; reactivated ARR</span></div>
+    <div class="tile accent"><span class="k">Protected</span><span class="v">${money(r.protected)}</span><span class="n">Renewed on time + saved from churn</span></div>
+    <div class="tile"><span class="k">Pipeline created</span><span class="v">${money(r.pipeline)}</span><span class="n">Qualified, sourced by me</span></div>
+    <div class="tile"><span class="k">Efficiency value</span><span class="v">${money(r.efficiency)}</span><span class="n">Cost and time returned to the business</span></div>
+  </div>
+
+  ${quota?`<div class="card"><div class="bd" style="display:flex;flex-direction:column;gap:9px">
+    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+      <strong style="font-size:13px">Booked + protected against quota</strong>
+      <span class="mono" style="font-size:13px;font-weight:600">${money(r.booked+r.protected)} / ${money(quota)}</span>
+      <span class="pill ${attain>=100?"good":attain>=80?"warn":"crit"}" style="margin-left:auto"><i class="g"></i>${attain}% of plan</span>
+    </div>
+    <div class="meter"><i style="width:${Math.min(attain,100)}%"></i></div>
+  </div></div>`:""}
+
+  <div class="cols">
+    <div class="card">
+      <div class="hd"><h3>Momentum by quarter</h3><span class="sub">Two scales, shown separately — never stacked on one axis</span></div>
+      <div class="bd charts">
+        <figure class="chart"><figcaption>Entries logged</figcaption>${barChart(qrows,{caption:"Entries logged by quarter"})}</figure>
+        <figure class="chart"><figcaption>Value attached</figcaption>${barChart(vrows,{fmt:money,caption:"Dollar value attached by quarter"})}</figure>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hd"><h3>Case strength</h3></div>
+      <div class="bd" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;gap:12px">
+          <span class="mono" style="font-family:Archivo,sans-serif;font-size:38px;font-weight:700;letter-spacing:-.03em;color:var(--brass-ink)">${overall}</span>
+          <div style="line-height:1.35"><div style="font-weight:600">out of 100</div>
+          <div style="font-size:12px;color:var(--ink-3)">Half volume, half evidence quality, averaged across all seven competencies.</div></div>
+        </div>
+        <div class="meter"><i style="width:${overall}%"></i></div>
+        <div style="display:flex;gap:22px;flex-wrap:wrap;font-size:12.5px">
+          <div><span style="color:var(--ink-3)">Entries</span> <b class="mono">${list.length}</b></div>
+          <div><span style="color:var(--ink-3)">Avg evidence</span> <b class="mono">${r.avgScore.toFixed(1)}/4</b></div>
+          <div><span style="color:var(--ink-3)">Next-level</span> <b class="mono">${r.above}</b></div>
+        </div>
+        ${gaps.length?`<div style="border-top:1px solid var(--line);padding-top:12px">
+          <div style="font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:8px">Fix before your review</div>
+          ${gaps.map(g=>`<div style="margin-bottom:9px"><span class="pill ${STATUS_CLASS[g.status]}"><i class="g"></i>${esc(g.name)}</span>
+            <div style="font-size:12px;color:var(--ink-2);margin-top:5px;line-height:1.45">${esc(g.gap)}</div></div>`).join("")}
+        </div>`:`<div style="border-top:1px solid var(--line);padding-top:12px;font-size:12.5px;color:var(--good);font-weight:600">Every competency has evidence behind it. Keep deepening the thin ones.</div>`}
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="hd"><h3>Most recent</h3><span class="sub">${list.length} total</span></div>
+    ${entryTable(list.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,5))}
+  </div>`;
+}
+
+function entryTable(list){
+  if(!list.length) return `<div class="empty"><h3>Nothing logged yet</h3><p>Every week you don't log something is a week you'll be reconstructing from memory in December.</p></div>`;
+  return `<div class="tblwrap"><table>
+    <thead><tr><th>Entry</th><th>Type</th><th>Competencies</th><th class="num">Value</th><th>Evidence</th><th></th></tr></thead>
+    <tbody>${list.map(e=>{
+      const sc=scoreOf(e), vt=vtOf(e.vtype);
+      return `<tr>
+        <td style="min-width:280px">
+          <span class="etitle">${esc(e.title)}${e.example?' <span class="tag ex">Example</span>':""}${e.above?' <span class="tag cmp">Next-level</span>':""}</span>
+          <span class="emeta mono">${fmtDate(e.date)}${e.account?" · "+esc(e.account):""}</span>
+        </td>
+        <td style="white-space:nowrap"><span class="tag">${esc(catOf(e.cat).label)}</span></td>
+        <td style="min-width:150px">${(e.comps||[]).map(c=>`<span class="tag cmp">${esc(compOf(c)?compOf(c).name:c)}</span>`).join("")||'<span style="color:var(--ink-3)">—</span>'}</td>
+        <td class="num mono">${vt.bucket&&Number(e.vamt)?`<b>${money(e.vamt)}</b><br><span style="font-size:11px;color:var(--ink-3)">${esc(vt.label)}</span>`:'<span style="color:var(--ink-3)">—</span>'}</td>
+        <td><span class="score" title="${sc} of 4: quantified, vouched, linked, mapped">${[0,1,2,3].map(i=>`<i class="${i<sc?"on":""}"></i>`).join("")}</span></td>
+        <td><div class="rowacts">${e.example?"":`<button class="btn ghost sm" data-edit="${esc(e.id)}">Edit</button><button class="btn ghost sm" data-del="${esc(e.id)}">Delete</button>`}</div></td>
+      </tr>`;}).join("")}</tbody></table></div>`;
+}
+
+function renderLog(){
+  const all=view();
+  const f=all.filter(e=>{
+    if(filters.cat&&e.cat!==filters.cat) return false;
+    if(filters.comp&&!(e.comps||[]).includes(filters.comp)) return false;
+    if(filters.quarter&&quarterOf(e.date)!==filters.quarter) return false;
+    if(filters.q){const q=filters.q.toLowerCase();
+      if(!([e.title,e.account,e.action,e.outcome,e.sponsors,e.metric].join(" ")).toLowerCase().includes(q)) return false;}
+    return true;
+  }).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  $("#p-log").innerHTML=`
+    <div class="filters">
+      <input type="search" id="fl_q" placeholder="Search entries, accounts, people…" value="${esc(filters.q)}">
+      <select id="fl_cat"><option value="">All activity types</option>${CATS.map(c=>`<option value="${c.id}"${filters.cat===c.id?" selected":""}>${esc(c.label)}</option>`).join("")}</select>
+      <select id="fl_comp"><option value="">All competencies</option>${COMPS.map(c=>`<option value="${c.id}"${filters.comp===c.id?" selected":""}>${esc(c.name)}</option>`).join("")}</select>
+      <select id="fl_q4"><option value="">All quarters</option>${["Q1","Q2","Q3","Q4"].map(q=>`<option value="${q}"${filters.quarter===q?" selected":""}>${q}</option>`).join("")}</select>
+      <span style="margin-left:auto;font-size:12.5px;color:var(--ink-3)" class="mono">${f.length} of ${all.length}</span>
+    </div>
+    ${entryTable(f)}`;
+  $("#fl_q").oninput=e=>{filters.q=e.target.value; renderLog(); $("#fl_q").focus();};
+  $("#fl_cat").onchange=e=>{filters.cat=e.target.value; renderLog();};
+  $("#fl_comp").onchange=e=>{filters.comp=e.target.value; renderLog();};
+  $("#fl_q4").onchange=e=>{filters.quarter=e.target.value; renderLog();};
+}
+
+function renderCov(){
+  const cov=coverage(view());
+  $("#p-cov").innerHTML=`
+  <div class="banner"><span class="dot"></span><div><strong>This is the page that decides your case.</strong> Managers don't promote the person with the most entries — they promote the one with no obvious hole. Anything marked <em>Thin</em> or <em>No evidence</em> is what a calibration room will use to defer you.</div></div>
+  <div class="card matrix">
+    <div class="mrow head"><span>Competency</span><span>Entries</span><span>Value attached</span><span>Strength</span><span>Status</span></div>
+    ${cov.map(c=>`<div class="mrow">
+      <div class="mname">${esc(c.name)}${c.status==="none"||c.status==="crit"?`<span class="gapnote">${esc(c.gap)}</span>`:`<span class="gapnote">${c.vouched} of ${c.count} vouched by name · avg evidence ${c.avg.toFixed(1)}/4</span>`}</div>
+      <div class="mono" style="font-weight:600">${c.count}</div>
+      <div class="mono" style="font-weight:600">${c.dollars?money(c.dollars):'<span style="color:var(--ink-3);font-weight:400">—</span>'}</div>
+      <div class="bar"><i style="width:${c.strength}%;background:var(--${c.status==="good"?"good":c.status==="warn"?"warn":c.status==="crit"?"crit":"line-strong"})"></i></div>
+      <div><span class="pill ${STATUS_CLASS[c.status]}"><i class="g"></i>${STATUS_LABEL[c.status]}</span></div>
+    </div>`).join("")}
+  </div>
+  <div class="card"><div class="hd"><h3>How strength is scored</h3></div><div class="bd prose-2col" style="font-size:13px;color:var(--ink-2)">
+    <p style="margin:0"><strong style="color:var(--ink)">Half of it is volume.</strong> Three or more entries against a competency maxes that half. One anecdote is a story; three is a pattern, and patterns are what get promoted.</p>
+    <p style="margin:0"><strong style="color:var(--ink)">Half of it is evidence quality</strong> — each entry earns a point for being quantified, a point for a named person who can vouch for it, a point for a link, and a point for being mapped to a competency. An unquantified, unwitnessed claim is worth almost nothing in a calibration room.</p>
+  </div></div>`;
+}
+</script>
+<script>
+"use strict";
+/* ============================ case builder ============================ */
+function rank(list){
+  return list.slice().sort((a,b)=>{
+    const s=scoreOf(b)-scoreOf(a); if(s) return s;
+    const ab=(a.above?1:0), bb=(b.above?1:0); if(bb-ab) return bb-ab;
+    return (Number(b.vamt)||0)-(Number(a.vamt)||0);
+  });
+}
+function caseMarkdown(){
+  const list=view(), r=rollup(list), cov=coverage(list);
+  const overall=Math.round(cov.reduce((a,c)=>a+c.strength,0)/COMPS.length);
+  const qs=["Q1","Q2","Q3","Q4"].filter(q=>r.byQ[q].n>0).length;
+  const L=[];
+  L.push(`# Promotion case — ${profile.name||"[your name]"}`);
+  L.push(`**${profile.currentTitle||"[current title]"} → ${profile.targetTitle||"[target title]"}**  `);
+  L.push(`Review ${fmtDate(profile.reviewDate)}${profile.manager?" · Manager: "+profile.manager:""} · ${profile.fyLabel||""}`);
+  if(isExampleMode()) L.push(`\n> Built from example entries. Replace them with your own.`);
+  L.push(`\n## The number\n`);
+  L.push(`| Measure | ${profile.fyLabel||"This year"} |`);
+  L.push(`| --- | --- |`);
+  L.push(`| Booked ARR (new, expansion, reactivated) | ${money(r.booked)} |`);
+  L.push(`| Protected ARR (renewed + saved) | ${money(r.protected)} |`);
+  L.push(`| Qualified pipeline created | ${money(r.pipeline)} |`);
+  L.push(`| Efficiency value returned | ${money(r.efficiency)} |`);
+  if(Number(profile.quota)>0) L.push(`| Against a plan of ${money(profile.quota)} | ${Math.round((r.booked+r.protected)/Number(profile.quota)*100)}% |`);
+  L.push(`| Documented contributions | ${list.length} across ${qs} quarter${qs===1?"":"s"} |`);
+  L.push(`| Contributions above current level | ${r.above} |`);
+
+  L.push(`\n## The five things I'd defend in any room\n`);
+  rank(list).slice(0,5).forEach((e,i)=>{
+    const vt=vtOf(e.vtype);
+    L.push(`**${i+1}. ${e.title}**  `);
+    L.push(`${e.account?e.account+" · ":""}${fmtDate(e.date)}${e.above?" · *above current level*":""}  `);
+    if(e.action)  L.push(`*What I did:* ${e.action}  `);
+    if(e.outcome) L.push(`*Result:* ${e.outcome}  `);
+    const v=[]; if(vt.bucket&&Number(e.vamt)) v.push(`${money(e.vamt)} ${vt.label}`); if(e.metric) v.push(e.metric);
+    if(v.length) L.push(`*Measured:* ${v.join(" · ")}  `);
+    if(e.sponsors) L.push(`*Verified by:* ${e.sponsors}  `);
+    L.push("");
+  });
+
+  L.push(`\n## Evidence by competency\n`);
+  cov.forEach(c=>{
+    L.push(`### ${c.name} — ${STATUS_LABEL[c.status]}${c.count?` (${c.count} contribution${c.count===1?"":"s"}${c.dollars?", "+money(c.dollars):""})`:""}`);
+    if(!c.count){ L.push(`_No evidence logged. ${c.gap}_\n`); return; }
+    rank(c.entries).slice(0,4).forEach(e=>{
+      L.push(`- **${e.title}** — ${e.outcome||e.action||""}${e.sponsors?` _(verified by ${e.sponsors})_`:""}`);
+    });
+    L.push("");
+  });
+
+  const gaps=cov.filter(c=>c.status==="none"||c.status==="crit");
+  if(gaps.length){
+    L.push(`\n## What I'm closing before the review\n`);
+    gaps.forEach(g=>L.push(`- **${g.name}** — ${g.gap}`));
+  }
+  L.push(`\n---\nCase strength ${overall}/100 · average evidence quality ${r.avgScore.toFixed(1)} of 4 · generated ${new Date().toLocaleDateString()}`);
+  return L.join("\n");
+}
+
+function renderCase(){
+  const list=view(), r=rollup(list), cov=coverage(list);
+  const top=rank(list).slice(0,5);
+  const qs=["Q1","Q2","Q3","Q4"].filter(q=>r.byQ[q].n>0).length;
+  $("#p-case").innerHTML=`
+  <div class="narr">
+    <h2>${esc(profile.name||"Your")} promotion case${profile.fyLabel?" · "+esc(profile.fyLabel):""}</h2>
+    <div class="mono" style="font-size:12.5px;color:var(--ink-3)">${esc(profile.currentTitle||"—")} &rarr; ${esc(profile.targetTitle||"—")} · review ${fmtDate(profile.reviewDate)}</div>
+    <p class="lede">Across ${list.length} documented contribution${list.length===1?"":"s"} in ${qs} quarter${qs===1?"":"s"}, I booked <b>${money(r.booked)}</b> in new, expansion and reactivated ARR, protected <b>${money(r.protected)}</b> through renewals and at-risk saves, and created <b>${money(r.pipeline)}</b> in qualified pipeline. ${r.above>0?`<b>${r.above}</b> of those contributions were work above my current level.`:""}</p>
+    <div class="secblk">
+      <h4>The five things I'd defend in any room</h4>
+      ${top.length?top.map(e=>{const vt=vtOf(e.vtype); return `<div class="proof">
+        <div class="ph">${esc(e.title)}</div>
+        <div class="pl mono" style="font-size:12px">${e.account?esc(e.account)+" · ":""}${fmtDate(e.date)}${e.above?" · above current level":""}</div>
+        ${e.action?`<div class="pl"><b>Did:</b> ${esc(e.action)}</div>`:""}
+        ${e.outcome?`<div class="pl"><b>Result:</b> ${esc(e.outcome)}</div>`:""}
+        ${(vt.bucket&&Number(e.vamt))||e.metric?`<div class="pl"><b>Measured:</b> ${[vt.bucket&&Number(e.vamt)?money(e.vamt)+" "+vt.label:"",e.metric?esc(e.metric):""].filter(Boolean).join(" · ")}</div>`:""}
+        ${e.sponsors?`<div class="pl"><b>Verified by:</b> ${esc(e.sponsors)}</div>`:""}
+      </div>`;}).join(""):'<p style="color:var(--ink-3)">Log entries and your strongest five surface here automatically.</p>'}
+    </div>
+    ${cov.filter(c=>c.count).map(c=>`<div class="secblk">
+      <h4>${esc(c.name)} <span class="pill ${STATUS_CLASS[c.status]}"><i class="g"></i>${STATUS_LABEL[c.status]}</span>
+      <span class="mono" style="font-size:12px;color:var(--ink-3);font-weight:400">${c.count} contribution${c.count===1?"":"s"}${c.dollars?" · "+money(c.dollars):""}</span></h4>
+      <ul style="margin:10px 0 0;padding-left:18px;color:var(--ink-2)">
+        ${rank(c.entries).slice(0,4).map(e=>`<li style="margin-bottom:6px"><b style="color:var(--ink)">${esc(e.title)}</b>${e.outcome?" — "+esc(e.outcome):""}${e.sponsors?` <span style="color:var(--ink-3)">(verified by ${esc(e.sponsors)})</span>`:""}</li>`).join("")}
+      </ul></div>`).join("")}
+  </div>
+  <div class="card">
+    <div class="hd"><h3>Paste-ready markdown</h3>
+      <div class="sub" style="display:flex;gap:8px">
+        <button class="btn sm" id="btnCopyMd">Copy</button>
+        <button class="btn sm" id="btnDlMd" hidden>Download .md</button>
+      </div></div>
+    <div class="bd"><div class="mdout" id="mdOut">${esc(caseMarkdown())}</div></div>
+  </div>`;
+  $("#btnCopyMd").onclick=async ()=>{
+    const t=caseMarkdown(), b=$("#btnCopyMd");
+    try{ await navigator.clipboard.writeText(t); b.textContent="Copied"; }
+    catch(err){ const s=window.getSelection(),rg=document.createRange(); rg.selectNodeContents($("#mdOut")); s.removeAllRanges(); s.addRange(rg); b.textContent="Selected — press Cmd/Ctrl-C"; }
+    setTimeout(()=>b.textContent="Copy",2600);
+  };
+  if(DL){ const b=$("#btnDlMd"); b.hidden=false;
+    b.onclick=()=>DL.save({filename:`promotion-case-${(profile.fyLabel||"FY").toLowerCase()}.md`,data:caseMarkdown()}).catch(()=>{}); }
+}
+
+/* ============================ setup ============================ */
+function toCSV(){
+  const head=["Date","Quarter","Headline","Activity type","Account","Segment","What I did","Result","Value type","Value USD","Metric","Competencies","Verified by","Evidence link","Above current level","Evidence score"];
+  const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`;
+  const rows=view().slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(e=>[
+    e.date, quarterOf(e.date)||"", e.title, catOf(e.cat).label, e.account, e.segment, e.action, e.outcome,
+    vtOf(e.vtype).label, (vtOf(e.vtype).bucket?(Number(e.vamt)||0):""), e.metric,
+    (e.comps||[]).map(c=>compOf(c)?compOf(c).name:c).join("; "), e.sponsors, e.link, e.above?"Yes":"No", scoreOf(e)+"/4"
+  ].map(q).join(","));
+  return [head.map(q).join(","),...rows].join("\r\n");
+}
+function renderSetup(){
+  $("#p-setup").innerHTML=`
+  <div class="card"><div class="hd"><h3>The ask</h3><span class="sub">Drives the header, the case document and the quota bar</span></div>
+    <div class="bd"><div class="fgrid">
+      <div class="f"><label for="s_name">Your name</label><input id="s_name" value="${esc(profile.name)}" placeholder="Fady Hadidy"></div>
+      <div class="f"><label for="s_mgr">Manager</label><input id="s_mgr" value="${esc(profile.manager)}" placeholder="Who writes your review"></div>
+      <div class="f"><label for="s_cur">Current title</label><input id="s_cur" value="${esc(profile.currentTitle)}"></div>
+      <div class="f"><label for="s_tgt">Target title</label><input id="s_tgt" value="${esc(profile.targetTitle)}"></div>
+      <div class="f"><label for="s_rev">Review date</label><input type="date" id="s_rev" value="${esc(profile.reviewDate)}"></div>
+      <div class="f"><label for="s_fy">Period label</label><input id="s_fy" value="${esc(profile.fyLabel)}" placeholder="FY2026"></div>
+      <div class="f full"><label for="s_quota">Annual plan / quota in USD <span class="hint">— leave blank to hide the attainment bar</span></label><input type="number" id="s_quota" min="0" step="10000" value="${Number(profile.quota)||""}" placeholder="4000000"></div>
+      <div class="f full"><button class="btn primary" id="s_save" style="justify-self:start;width:max-content">Save</button> <span class="status" id="s_status"></span></div>
+    </div></div></div>
+
+  <div class="card"><div class="hd"><h3>Your data</h3><span class="sub">${DB?"Saved to this artifact — follows you across devices":"Saved in this browser only"}</span></div>
+    <div class="bd" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button class="btn" id="s_csv">Export CSV for Excel</button>
+      <button class="btn" id="s_md">Export case document (.md)</button>
+      <button class="btn" id="s_wipe" style="margin-left:auto;color:var(--crit);border-color:color-mix(in srgb,var(--crit) 45%,transparent)">Delete all entries</button>
+    </div></div>
+
+  <div class="card"><div class="hd"><h3>How to use this so it actually works</h3></div>
+    <div class="bd" style="font-size:13px;color:var(--ink-2);max-width:72ch;display:flex;flex-direction:column;gap:11px">
+      <p style="margin:0"><b style="color:var(--ink)">Log it Friday, not December.</b> Fifteen minutes at the end of each week. The detail you lose is exactly the detail that makes a claim credible — the name of the actuary, the number before and after, the date the champion left.</p>
+      <p style="margin:0"><b style="color:var(--ink)">Write the result, not the activity.</b> "Hosted a roundtable" is an activity. "Twelve carriers attended, five opportunities sourced, Marketing scaled it nationally" is a result. Only one of those gets you promoted.</p>
+      <p style="margin:0"><b style="color:var(--ink)">Name a witness every time.</b> A claim your manager can verify in one Teams message is worth more than three they'd have to take on faith.</p>
+      <p style="margin:0"><b style="color:var(--ink)">Check the coverage tab monthly.</b> Sellers over-log revenue and under-log talent, rigor and influence — and those are the three that decide whether you're seen as a bigger seller or a bigger leader.</p>
+      <p style="margin:0"><b style="color:var(--ink)">Send the case document six weeks early.</b> Give your manager time to socialize it before calibration, not after.</p>
+    </div></div>`;
+
+  $("#s_save").onclick=async ()=>{
+    profile={...profile, name:$("#s_name").value.trim(), manager:$("#s_mgr").value.trim(),
+      currentTitle:$("#s_cur").value.trim(), targetTitle:$("#s_tgt").value.trim(),
+      reviewDate:$("#s_rev").value, fyLabel:$("#s_fy").value.trim(), quota:Number($("#s_quota").value)||0};
+    await persistProfile(); $("#s_status").textContent="Saved"; setTimeout(()=>{const n=$("#s_status"); if(n)n.textContent="";},2000);
+    renderAsk(); renderAll();
+  };
+  const fname=(profile.fyLabel||"FY").toLowerCase().replace(/[^a-z0-9]+/g,"-");
+  $("#s_csv").onclick=()=>offer(`promotion-tracker-${fname}.csv`,toCSV(),"CSV");
+  $("#s_md").onclick=()=>offer(`promotion-case-${fname}.md`,caseMarkdown(),"case document");
+  $("#s_wipe").onclick=async ()=>{
+    if(!entries.length) return;
+    if(!confirm(`Delete all ${entries.length} entries? This cannot be undone. Export a CSV first if you want a copy.`)) return;
+    if(DB){ await Promise.all(entries.map(e=>DB.collection("entries").doc(e.id).delete().catch(()=>{}))); }
+    else { entries=[]; localStorage.setItem(LS_ENTRIES,"[]"); renderAll(); }
+  };
+}
+async function offer(filename,data,what){
+  if(DL){ try{ await DL.save({filename,data}); return; }catch(err){ if(err&&err.code==="declined") return; } }
+  const w=window.open("","_blank");
+  if(w){ w.document.write("<pre style='white-space:pre-wrap;font:12px ui-monospace,monospace;padding:20px'>"+esc(data)+"</pre>"); w.document.title=filename; }
+  else alert(`Downloads aren't available in this view. Open the ${what} from the Case builder tab and copy it instead.`);
+}
+</script>
+<script>
+"use strict";
+/* ============================ storage ============================ */
+function lsGet(k,f){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+
+async function persistProfile(){
+  if(DB){ try{ await DB.doc("config/profile").set(profile); return; }catch(e){} }
+  lsSet(LS_PROFILE,profile);
+}
+async function persistEntry(obj){
+  if(DB){ try{ await DB.collection("entries").doc(obj.id).set(obj); return true; }
+          catch(e){ return handleDbErr(e); } }
+  const i=entries.findIndex(x=>x.id===obj.id);
+  if(i>-1) entries[i]=obj; else entries.push(obj);
+  lsSet(LS_ENTRIES,entries); renderAll(); return true;
+}
+async function removeEntry(id){
+  if(DB){ try{ await DB.collection("entries").doc(id).delete(); return; }catch(e){ handleDbErr(e); return; } }
+  entries=entries.filter(x=>x.id!==id); lsSet(LS_ENTRIES,entries); renderAll();
+}
+function handleDbErr(e){
+  const c=e&&e.code;
+  const msg=c==="quota_exceeded"?"Your tracker is full. Export a CSV, then delete older entries to keep logging."
+    :c==="resource_exhausted"?"Too many saves at once — wait a moment and try again."
+    :c==="revoked"?"Access to shared storage ended. Your entry wasn't saved — copy it out before reloading."
+    :"That didn't save. Check your connection and try again.";
+  alert(msg); return false;
+}
+
+/* ============================ entry form ============================ */
+function fillForm(){
+  $("#f_cat").innerHTML=["Revenue","Client","Market","Internal"].map(g=>
+    `<optgroup label="${g}">${CATS.filter(c=>c.grp===g).map(c=>`<option value="${c.id}">${esc(c.label)}</option>`).join("")}</optgroup>`).join("");
+  $("#f_segment").innerHTML=SEGMENTS.map(s=>`<option value="${s==="—"?"":esc(s)}">${esc(s)}</option>`).join("");
+  $("#f_vtype").innerHTML=VTYPES.map(v=>`<option value="${v.id}">${esc(v.label)}</option>`).join("");
+  $("#f_comps").innerHTML=COMPS.map(c=>`<button type="button" class="chip" aria-pressed="false" data-comp="${c.id}" title="${esc(c.gap)}">${esc(c.name)}</button>`).join("");
+  $("#f_comps").addEventListener("click",e=>{
+    const b=e.target.closest("[data-comp]"); if(!b) return;
+    b.setAttribute("aria-pressed", b.getAttribute("aria-pressed")==="true"?"false":"true");
+  });
+  $("#f_cat").addEventListener("change",()=>{
+    const picked=[...$("#f_comps").querySelectorAll('[aria-pressed="true"]')];
+    if(picked.length) return;
+    (CATMAP[$("#f_cat").value]||[]).forEach(id=>{
+      const b=$(`#f_comps [data-comp="${id}"]`); if(b) b.setAttribute("aria-pressed","true");
+    });
+  });
+}
+function openDlg(id){
+  editingId=id||null;
+  const e=id?entries.find(x=>x.id===id):null;
+  $("#dlgTitle").textContent=e?"Edit entry":"Log an entry";
+  $("#dlgSave").textContent=e?"Save changes":"Save entry";
+  $("#f_title").value=e?e.title||"":"";
+  $("#f_date").value=e?e.date||"":new Date().toISOString().slice(0,10);
+  $("#f_cat").value=e?e.cat||"rev_new":"rev_new";
+  $("#f_account").value=e?e.account||"":"";
+  $("#f_segment").value=e?e.segment||"":"";
+  $("#f_action").value=e?e.action||"":"";
+  $("#f_outcome").value=e?e.outcome||"":"";
+  $("#f_vtype").value=e?e.vtype||"none":"none";
+  $("#f_vamt").value=e&&Number(e.vamt)?e.vamt:"";
+  $("#f_metric").value=e?e.metric||"":"";
+  $("#f_sponsors").value=e?e.sponsors||"":"";
+  $("#f_link").value=e?e.link||"":"";
+  $("#f_above").checked=!!(e&&e.above);
+  $("#f_comps").querySelectorAll("[data-comp]").forEach(b=>
+    b.setAttribute("aria-pressed", e&&(e.comps||[]).includes(b.dataset.comp)?"true":"false"));
+  $("#dlgStatus").textContent="";
+  $("#dlg").showModal(); $("#f_title").focus();
+}
+function wireForm(){
+  fillForm();
+  $("#btnAdd").onclick=()=>openDlg(null);
+  $("#dlgX").onclick=$("#dlgCancel").onclick=()=>$("#dlg").close();
+  $("#entryForm").addEventListener("submit",async ev=>{
+    ev.preventDefault();
+    const title=$("#f_title").value.trim();
+    if(!title){ $("#f_title").focus(); return; }
+    const obj={
+      id:editingId||uid(), date:$("#f_date").value, title,
+      cat:$("#f_cat").value, account:$("#f_account").value.trim(), segment:$("#f_segment").value,
+      action:$("#f_action").value.trim(), outcome:$("#f_outcome").value.trim(),
+      vtype:$("#f_vtype").value, vamt:Number($("#f_vamt").value)||0,
+      metric:$("#f_metric").value.trim(), sponsors:$("#f_sponsors").value.trim(),
+      link:$("#f_link").value.trim(), above:$("#f_above").checked,
+      comps:[...$("#f_comps").querySelectorAll('[aria-pressed="true"]')].map(b=>b.dataset.comp),
+      updatedAt:new Date().toISOString()
+    };
+    $("#dlgStatus").textContent="Saving…"; $("#dlgSave").disabled=true;
+    const ok=await persistEntry(obj);
+    $("#dlgSave").disabled=false; $("#dlgStatus").textContent="";
+    if(ok) $("#dlg").close();
+  });
+  document.addEventListener("click",e=>{
+    const ed=e.target.closest("[data-edit]"), dl=e.target.closest("[data-del]");
+    if(ed) openDlg(ed.dataset.edit);
+    if(dl){ const en=entries.find(x=>x.id===dl.dataset.del);
+      if(en&&confirm(`Delete "${en.title}"?`)) removeEntry(dl.dataset.del); }
+  });
+}
+
+/* ============================ tabs & boot ============================ */
+const RENDERERS={dash:renderDash,log:renderLog,cov:renderCov,case:renderCase,setup:renderSetup};
+function renderAll(){ renderNotice(); (RENDERERS[activeTab]||renderDash)(); }
+function wireTabs(){
+  document.querySelectorAll("nav.tabs button").forEach(b=>{
+    b.onclick=()=>{
+      activeTab=b.dataset.tab;
+      document.querySelectorAll("nav.tabs button").forEach(x=>x.setAttribute("aria-selected",String(x===b)));
+      document.querySelectorAll("main .panel").forEach(p=>p.hidden = p.id!=="p-"+activeTab);
+      renderAll(); window.scrollTo({top:0,behavior:"instant"});
+    };
+  });
+}
+function subscribe(){
+  let migrated=false;
+  DB.collection("entries").onSnapshot(snap=>{
+    entries=snap.docs.map(d=>({id:d.id,...(d.data()||{})}));
+    if(!migrated && snap.empty){
+      migrated=true;
+      const local=lsGet(LS_ENTRIES,[]);
+      if(local.length && !lsGet(LS_MIGRATED,false)){
+        lsSet(LS_MIGRATED,true);
+        Promise.all(local.map(e=>DB.collection("entries").doc(e.id||uid()).set(e).catch(()=>{})));
+      }
+    }
+    renderAll();
+  },()=>{});
+  DB.doc("config/profile").onSnapshot(s=>{
+    if(s.exists){ profile={...DEFAULT_PROFILE,...s.data()}; renderAsk(); renderAll(); }
+    else if(lsGet(LS_PROFILE,null)) DB.doc("config/profile").set(profile).catch(()=>{});
+  },()=>{});
+}
+(function boot(){
+  profile={...DEFAULT_PROFILE,...(lsGet(LS_PROFILE,null)||{})};
+  entries=lsGet(LS_ENTRIES,[]);
+  wireForm(); wireTabs(); renderAsk(); renderAll();
+  (async()=>{
+    try{
+      if(window.claude&&typeof claude.use==="function"){
+        const [db,dl]=await Promise.all([claude.use("db").catch(()=>null),claude.use("downloads").catch(()=>null)]);
+        if(dl) DL=dl;
+        if(db){ DB=db; subscribe(); }
+      }
+    }catch(e){}
+    renderAll();
+  })();
+})();
+</script>
